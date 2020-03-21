@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Astrum</string>
+    <string name="action_settings">Settings</string>
+    <string name="orbit">Orbit</string>
+    <string name="SettingsButton">Settings</string>
+    <string name="mercury">Mercury</string>
+
+    <string-array name="Mercury">
+        <item>Sound 1</item>
+        <item>Sound 2</item>
+        <item>Sound 3</item>
+        <item>Sound 4</item>
+        <item>Sound 5</item>
+        <item>Sound 6</item>
+    </string-array>
+</resources>
