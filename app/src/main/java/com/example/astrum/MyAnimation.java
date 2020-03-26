@@ -32,7 +32,8 @@ public class MyAnimation extends Animation
     }
 
     @Override
-    public void initialize(int width, int height, int parentWidth, int parentHeight) {
+    public void initialize(int width, int height, int parentWidth, int parentHeight)
+    {
         // calculate position of image center
        // int cxImage = view.getWidth() / 2;
         //int cyImage = view.getHeight() / 2;
@@ -45,7 +46,8 @@ public class MyAnimation extends Animation
     }
 
     @Override
-    protected void applyTransformation(float interpolatedTime, Transformation t) {
+    protected void applyTransformation(float interpolatedTime, Transformation t)
+    {
         if(interpolatedTime == 0)
         {
             t.getMatrix().setTranslate(prevDx, prevDy);

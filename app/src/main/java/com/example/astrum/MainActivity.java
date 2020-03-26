@@ -96,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
         planetButtons[7] = findViewById(R.id.planetEight);
 
         //set all planets players to null and checknull value to false
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++)
+        {
             PlanetsMP[i] = null;
             CheckReady[i] = 0;
         }
@@ -129,8 +130,9 @@ public class MainActivity extends AppCompatActivity {
                     PlayUranus();
 
                     //Get volume for planets
-                    for (int i = 0; i < 8; i++) {
-                        if (AdjustVolumeFrag.volume[i] != -1)
+                    for (int i = 0; i < 8; i++)
+                    {
+                        if (PlanetsMP[i] != null)
                         {
                             PlanetsMP[i].setVolume(AdjustVolumeFrag.volume[i], AdjustVolumeFrag.volume[i]);
                         }
@@ -139,9 +141,9 @@ public class MainActivity extends AppCompatActivity {
                     //initiate animation
                     for (int i = 0; i < 8; i++)
                     {
-                        //PlanetAnimation(planetButtons[i], check, i, radiuschange, extraheight);
-                        AnimationThread animthread = new AnimationThread(planetButtons[i], check, i, radiuschange, extraheight);
-                        animthread.start();
+                        PlanetAnimation(planetButtons[i], check, i, radiuschange, extraheight);
+                        //AnimationThread animthread = new AnimationThread(planetButtons[i], check, i, radiuschange, extraheight);
+                        //animthread.start();
                         radiuschange += 44;
                         extraheight += 45;
 
@@ -150,7 +152,15 @@ public class MainActivity extends AppCompatActivity {
                         {
                             try
                             {
-                                PlanetsMP[i].start();
+                                PlanetsMP[i].setOnPreparedListener(new MediaPlayer.OnPreparedListener()
+                                {
+                                    @Override
+                                    public void onPrepared(MediaPlayer mp)
+                                    {
+                                        mp.start();
+                                    }
+                                });
+
                             } catch (NullPointerException ex) {
                                 ex.printStackTrace();
                             }
@@ -175,9 +185,9 @@ public class MainActivity extends AppCompatActivity {
                     //stop animation and reset ready value
                     for (int i = 0; i < 8; i++)
                     {
-                        //PlanetAnimation(planetButtons[i], check, i, radiuschange, extraheight);
-                        AnimationThread animthread = new AnimationThread(planetButtons[i], check, i, radiuschange, extraheight);
-                        animthread.start();
+                        PlanetAnimation(planetButtons[i], check, i, radiuschange, extraheight);
+                        //AnimationThread animthread = new AnimationThread(planetButtons[i], check, i, radiuschange, extraheight);
+                        //nimthread.start();
                     }
 
                     check = true;
@@ -230,33 +240,44 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     //takes care of playing when button pressed and then stop when button pressed again
-    public void PlayMercury() {
-        //Mercury
-        //if one is selected
-        if (ChooseSoundsMenu.PlanetsVal[0] == 0) {
-            if (check) {
+    public void PlayMercury()
+    {
+        if (ChooseSoundsMenu.PlanetsVal[0] == 0)
+        {
+            if (check)
+            {
                 PlanetsMP[0] = MediaPlayer.create(this, R.raw.mercury);
                 PlanetsMP[0].setLooping(true);
-            } else {
-                try {
+            }
+            else
+            {
+                try
+                {
                     PlanetsMP[0].reset();
                     PlanetsMP[0].release();
                     PlanetsMP[0] = null;
-                } catch (NullPointerException e) {
+                }
+                catch (NullPointerException e)
+                {
                     e.printStackTrace();
                 }
 
             }
         }
+        //Mercury
+        //if one is selected
 
     }
 
-    public void PlayVenus() {
+    public void PlayVenus()
+    {
         //Venus
         //if one is selected
         //This switch case might not be working so well.
-        if (ChooseSoundsMenu.PlanetsVal[1] == 0 || ChooseSoundsMenu.PlanetsVal[1] == 1) {
+        if (ChooseSoundsMenu.PlanetsVal[1] == 0 || ChooseSoundsMenu.PlanetsVal[1] == 1)
+        {
             if (check) {
                 switch (ChooseSoundsMenu.PlanetsVal[1]) {
                     case 0:
@@ -265,6 +286,7 @@ public class MainActivity extends AppCompatActivity {
                         PlanetsMP[1] = MediaPlayer.create(this, R.raw.venus2);
                 }
                 PlanetsMP[1].setLooping(true);
+
             } else if (!check && PlanetsMP[1] != null) {
                 PlanetsMP[1].reset();
                 PlanetsMP[1].release();
@@ -277,7 +299,8 @@ public class MainActivity extends AppCompatActivity {
         //Mercury
         //if one is selected
         if (ChooseSoundsMenu.PlanetsVal[2] == 0) {
-            if (check) {
+            if (check)
+            {
                 PlanetsMP[2] = MediaPlayer.create(this, R.raw.erde1);
                 PlanetsMP[2].setLooping(true);
             } else if (!check && PlanetsMP[2] != null) {
@@ -355,7 +378,8 @@ public class MainActivity extends AppCompatActivity {
             if (check) {
                 PlanetsMP[7] = MediaPlayer.create(this, R.raw.neptune1);
                 PlanetsMP[7].setLooping(true);
-            } else if (check == false && PlanetsMP[7] != null) {
+            } else if (check == false && PlanetsMP[7] != null)
+            {
                 PlanetsMP[7].reset();
                 PlanetsMP[7].release();
                 PlanetsMP[7] = null;
@@ -363,27 +387,32 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-/*
     private void PlanetAnimation(Button planet, boolean check, int i, int radiuschange, int extraheight) {
         Animation PlanetAnim = new MyAnimation(planet, 127 + radiuschange, extraheight);
 
-        if (check) {
+        if (check)
+        {
             //Get duration of audio file
-            if (PlanetsMP[i] != null) {
+            if (PlanetsMP[i] != null)
+            {
                 int PlanetDur = PlanetsMP[i].getDuration();
-                PlanetAnim.setDuration(PlanetDur + 80); //For now, + 80 millisecs sync the animation
 
-                //set interpolator to linear and repeat animation
+                PlanetAnim.setDuration(PlanetDur); //For now, + 80 millisecs sync the animation
+
                 PlanetAnim.setInterpolator(new LinearInterpolator());
                 PlanetAnim.setRepeatCount(Animation.INFINITE);
                 planet.startAnimation(PlanetAnim);
 
-                //Debug
-                Log.d("Duration" + i, String.valueOf(PlanetsMP[i].getDuration()));
+                Log.d("Duration" + i, String.valueOf(PlanetDur));
+                ThreadCheckDur Runnablecheckdur = new ThreadCheckDur(PlanetDur);
+                new Thread(Runnablecheckdur).start();
             }
 
-        } else {
+        }
+        else
+            {
             try {
+
                 planet.clearAnimation();
             } catch (NullPointerException e) {
                 e.printStackTrace();
@@ -391,70 +420,34 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-*/
 
-    class AnimationThread extends Thread
+    class ThreadCheckDur implements Runnable
     {
-        Button planet;
-        boolean check;
-        int i;
-        int radiuschange;
-        int extraheight;
-
-        AnimationThread(Button planet, boolean check, int i, int radiuschange, int extraheight)
+        int AudioDuration;
+        ThreadCheckDur(int AudioDuration)
         {
-            this.planet = planet;
-            this.check = check;
-            this.i = i;
-            this.radiuschange = radiuschange;
-            this.extraheight = extraheight;
+            this.AudioDuration = AudioDuration;
         }
 
         @Override
         public void run()
         {
-            final Animation PlanetAnim = new MyAnimation(planet, 127 + radiuschange, extraheight);
-
-            if (check)
+            for (int i = 0; true; i++)
             {
-                planetHandler.post(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        //Get duration of audio file
-                        if (PlanetsMP[i] != null)
-                        {
-                            int PlanetDur = PlanetsMP[i].getDuration();
-                            PlanetAnim.setDuration(PlanetDur + 80); //For now, + 80 millisecs sync the animation
-
-                            //set interpolator to linear and repeat animation
-                            PlanetAnim.setInterpolator(new LinearInterpolator());
-                            PlanetAnim.setRepeatCount(Animation.INFINITE);
-                            planet.startAnimation(PlanetAnim);
-
-
-                            Log.d("Duration" + i, String.valueOf(PlanetsMP[i].getDuration()));
-                        }
-
-                    }
-                });
-            }
-            else
-            {
+                Log.d("AudioDuration", String.valueOf(i));
                 try
                 {
-                    planet.clearAnimation();
+                    Thread.sleep(AudioDuration);
                 }
-                catch (NullPointerException e)
+                catch (InterruptedException e)
                 {
                     e.printStackTrace();
                 }
+
             }
+
         }
     }
-
-
 }
 
 //change test
