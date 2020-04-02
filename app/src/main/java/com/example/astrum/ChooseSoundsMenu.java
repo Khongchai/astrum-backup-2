@@ -7,14 +7,18 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -25,14 +29,61 @@ public class ChooseSoundsMenu extends AppCompatActivity
     private SeekBar VolumeSeekbar[] = new SeekBar[8];
     static float VolumeVal[] = new float[8];
 
+    Button CommitButton;
+    int UpdateVal;
+    EditText EnteredVal;
+
+    private Context context;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.activity_choose_sounds_menu);
+        context = this.context;
+
+        CommitButton = findViewById(R.id.commitButton);
+        UpdateVal = 0;
+        EnteredVal = findViewById(R.id.editText);
+
+        CommitButton.setOnClickListener(new View.OnClickListener()
+        {
+            //fix the bug where when no value is put in, the fragment is destroyed.
+            @Override
+            public void onClick(View v)
+            {
+                try
+                {
+                    UpdateVal = Integer.parseInt(EnteredVal.getText().toString());
+                    for (int i = 0; i < 8; i++)
+                    {
+                        if ((UpdateVal - 1) < 0 || (UpdateVal - 1) >= 7 ){
+
+                            final Toast toast = Toast.makeText(getApplicationContext(), "Value should be between 1-7", Toast.LENGTH_SHORT);
+                            toast.show();
+                            Handler StopToast = new Handler();
+                            StopToast.postDelayed(new ToastCancel(toast), 2000);
+                        }
+                        else
+                        {
+                            Spinner[i].setSelection(UpdateVal - 1);
+                        }
+                    }
+                }
+                catch (NullPointerException | NumberFormatException e)
+                {
+                    final Toast toast = Toast.makeText(getApplicationContext(),"Please enter a value" ,Toast.LENGTH_SHORT);
+                    toast.show();
+                    new ToastCancel(toast);
+                    Handler handler = new Handler();
+                    handler.postDelayed(new ToastCancel(toast), 2000);
+                }
+
+            }
+        });
+
 
         Spinner[0] = findViewById(R.id.SpinnerPlanet1);
         Spinner[1] = findViewById(R.id.SpinnerPlanet2);
@@ -77,7 +128,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
                 //If position is not "No sound", set ready status to 1
                 if (PlanetsVal[0] != 6)
                 {
-                    MainActivity.CheckReady[0] = 1;
+                   MainActivity.CheckReady[0] = 1;
                 }
 
                 Log.d("MercuryLog", String.valueOf(Spinner[0].getSelectedItemPosition()));
@@ -108,7 +159,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
             Spinner[1].setSelection(MercuryShared);
         }
 
-        initControl1();
+        //initControl1();
 
 
 //-------------------------------------------------------------------------------------------------
@@ -122,11 +173,11 @@ public class ChooseSoundsMenu extends AppCompatActivity
                 Log.d("VenusLog", String.valueOf(Spinner[1].getSelectedItemPosition()));
 
                 //If position is not "No sound", set ready status to 1
+
                 if (PlanetsVal[1] != 7)
                 {
                     MainActivity.CheckReady[1] = 1;
                 }
-
 
                 //Send it to sharedPref
                 SharedPreferences sharedPref1 = getSharedPreferences("Venus",MODE_PRIVATE);
@@ -166,7 +217,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
                 //If position is not "No sound", set ready status to 1
                 if (PlanetsVal[2] != 7)
                 {
-                    MainActivity.CheckReady[2] = 1;
+                   MainActivity.CheckReady[2] = 1;
                 }
 
                 //Send it to sharedPref
@@ -206,7 +257,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
                 //If position is not "No sound", set ready status to 1
                 if (PlanetsVal[3] != 7)
                 {
-                    MainActivity.CheckReady[3] = 1;
+                   MainActivity.CheckReady[3] = 1;
                 }
 
                 //Send it to sharedPref
@@ -286,7 +337,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
                 //If position is not "No sound", set ready status to 1
                 if (PlanetsVal[5] != 7)
                 {
-                    MainActivity.CheckReady[5] = 1;
+                   MainActivity.CheckReady[5] = 1;
                 }
 
                 //Send it to sharedPref
@@ -366,7 +417,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
                 //If position is not "No sound", set ready status to 1
                 if (PlanetsVal[7] != 7)
                 {
-                    MainActivity.CheckReady[7] = 1;
+                   MainActivity.CheckReady[7] = 1;
                 }
 
                 //Send it to sharedPref
@@ -394,9 +445,28 @@ public class ChooseSoundsMenu extends AppCompatActivity
             // set the selected value of the spinner
             Spinner[7].setSelection(NeptunegetShared);
         }
+
 //-------------------------------------------------------------------------------------------------
+
     }//onCreate
 
+    class ToastCancel implements Runnable
+    {
+        Toast toast;
+
+        ToastCancel (Toast toast)
+        {
+            this.toast = toast;
+        }
+
+        @Override
+        public void run()
+        {
+            toast.cancel();
+        }
+    }
+
+/*
     private void initControl1()
     {
         try
@@ -430,5 +500,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
         }
 
     }
+
+*/
 
 }

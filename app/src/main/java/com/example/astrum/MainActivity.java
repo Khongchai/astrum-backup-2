@@ -38,27 +38,50 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
+    final static int planetsamount = 8;
+
     //Create an undeclared button object.
     private ImageButton SettingsButton;
     private Button OrbitButton;
 
     //create objects for playing sounds of everything
-    static MediaPlayer PlanetsMP[] = new MediaPlayer[8];
+   // static MediaPlayer PlanetsMP[] = new MediaPlayer[planetsamount];
 
     //create volume control
     private SeekBar VolumeSeekbar;
     private AudioManager audioManager;
 
+    RunCheckDur Runnablecheckdur[] = new RunCheckDur[planetsamount];
+    Thread threadcheckdur[] = new Thread[planetsamount];
+
+    static AudioLoader audioUnit[] = new AudioLoader[planetsamount];
+
     private boolean check = true;
-    static int[] CheckReady = new int[8];
+    static int[] CheckReady = new int[planetsamount];
     private final static int MAX_VOLUME = 100;
 
     private Handler planetHandler = new Handler();
 
-    Button planetButtons[] = new Button[8];
+    Button planetButtons[] = new Button[planetsamount];
 
+    static float[] VolForMixerOnCreate = new float[planetsamount];
 
-    static float[] VolForMixerOnCreate = new float[8];
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        final Toast toast = Toast.makeText(this, "Test Check", Toast.LENGTH_SHORT);
+        toast.show();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                toast.cancel();
+            }
+        }, 2000);
+    }
 
 
     @Override
@@ -98,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         //set all planets players to null and checknull value to false
         for (int i = 0; i < 8; i++)
         {
-            PlanetsMP[i] = null;
+            //PlanetsMP[i] = null;
             CheckReady[i] = 0;
         }
 
@@ -132,9 +155,9 @@ public class MainActivity extends AppCompatActivity {
                     //Get volume for planets
                     for (int i = 0; i < 8; i++)
                     {
-                        if (PlanetsMP[i] != null)
+                        if (audioUnit[i] != null)
                         {
-                            PlanetsMP[i].setVolume(AdjustVolumeFrag.volume[i], AdjustVolumeFrag.volume[i]);
+                            audioUnit[i].SetVolume(AdjustVolumeFrag.volume[i], AdjustVolumeFrag.volume[i]);
                         }
                     }
 
@@ -148,6 +171,11 @@ public class MainActivity extends AppCompatActivity {
                         extraheight += 45;
 
                         //play only if file is loaded
+                        if (audioUnit[i] != null)
+                        {
+                            audioUnit[i].PlayAudio();
+                        }
+                        /*
                         if (CheckReady[i] == 1 && PlanetsMP[i] != null)
                         {
                             try
@@ -165,6 +193,8 @@ public class MainActivity extends AppCompatActivity {
                                 ex.printStackTrace();
                             }
                         }
+
+                         */
                     }
                     check = false;
                 } else {
@@ -201,15 +231,15 @@ public class MainActivity extends AppCompatActivity {
 
 //---------------------------------------------------------------------------------------------------
 
-    public void initControls() {
+    public void initControls()
+    {
         try {
             VolumeSeekbar = findViewById(R.id.seekBar1);
             //here, if you remove it, all the other lines won't work as this line specify what exactly we are exerting control over
             audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
             VolumeSeekbar.setMax(audioManager
                     .getStreamMaxVolume(AudioManager.STREAM_MUSIC));
-            VolumeSeekbar.setProgress(audioManager
-                    .getStreamVolume(AudioManager.STREAM_MUSIC) / 2);
+            VolumeSeekbar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
             audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, (audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) / 2), 0);
 
 
@@ -248,22 +278,13 @@ public class MainActivity extends AppCompatActivity {
         {
             if (check)
             {
-                PlanetsMP[0] = MediaPlayer.create(this, R.raw.mercury);
-                PlanetsMP[0].setLooping(true);
+                audioUnit[0] = new AudioLoader(this, R.raw.mercury, 0);
             }
             else
             {
-                try
-                {
-                    PlanetsMP[0].reset();
-                    PlanetsMP[0].release();
-                    PlanetsMP[0] = null;
-                }
-                catch (NullPointerException e)
-                {
-                    e.printStackTrace();
-                }
 
+                audioUnit[0].StopSound();
+                audioUnit[0] = null;
             }
         }
         //Mercury
@@ -276,113 +297,117 @@ public class MainActivity extends AppCompatActivity {
         //Venus
         //if one is selected
         //This switch case might not be working so well.
-        if (ChooseSoundsMenu.PlanetsVal[1] == 0 || ChooseSoundsMenu.PlanetsVal[1] == 1)
+        if (ChooseSoundsMenu.PlanetsVal[1] == 0)
         {
-            if (check) {
-                switch (ChooseSoundsMenu.PlanetsVal[1]) {
-                    case 0:
-                        PlanetsMP[1] = MediaPlayer.create(this, R.raw.venus1);
-                    case 1:
-                        PlanetsMP[1] = MediaPlayer.create(this, R.raw.venus2);
-                }
-                PlanetsMP[1].setLooping(true);
+            if (check)
+            {
+                audioUnit[1] = new AudioLoader(this, R.raw.venus1, 1);
+            }
+            else
+            {
 
-            } else if (!check && PlanetsMP[1] != null) {
-                PlanetsMP[1].reset();
-                PlanetsMP[1].release();
-                PlanetsMP[1] = null;
+                audioUnit[1].StopSound();
+                audioUnit[1] = null;
             }
         }
     }
 
     public void PlayEarth() {
-        //Mercury
-        //if one is selected
-        if (ChooseSoundsMenu.PlanetsVal[2] == 0) {
+        if (ChooseSoundsMenu.PlanetsVal[2] == 0)
+        {
             if (check)
             {
-                PlanetsMP[2] = MediaPlayer.create(this, R.raw.erde1);
-                PlanetsMP[2].setLooping(true);
-            } else if (!check && PlanetsMP[2] != null) {
-                PlanetsMP[2].reset();
-                PlanetsMP[2].release();
-                PlanetsMP[2] = null;
+                audioUnit[2] = new AudioLoader(this, R.raw.erde1, 2);
+            }
+            else
+            {
+
+                audioUnit[2].StopSound();
+                audioUnit[2] = null;
             }
         }
     }
 
     public void PlayMars() {
-        //Mercury
-        //if one is selected
-        if (ChooseSoundsMenu.PlanetsVal[3] == 0) {
-            if (check) {
-                PlanetsMP[3] = MediaPlayer.create(this, R.raw.mars1);
-                PlanetsMP[3].setLooping(true);
-            } else if (!check && PlanetsMP[3] != null) {
-                PlanetsMP[3].reset();
-                PlanetsMP[3].release();
-                PlanetsMP[3] = null;
+        if (ChooseSoundsMenu.PlanetsVal[3] == 0)
+        {
+            if (check)
+            {
+                audioUnit[3] = new AudioLoader(this, R.raw.mars1, 3);
+            }
+            else
+            {
+
+                audioUnit[3].StopSound();
+                audioUnit[3] = null;
             }
         }
     }
 
     public void PlayJupiter() {
-        //Mercury
-        //if one is selected
-        if (ChooseSoundsMenu.PlanetsVal[4] == 0) {
-            if (check) {
-                PlanetsMP[4] = MediaPlayer.create(this, R.raw.jupiter1);
-                PlanetsMP[4].setLooping(true);
-            } else if (!check && PlanetsMP[4] != null) {
-                PlanetsMP[4].reset();
-                PlanetsMP[4].release();
-                PlanetsMP[4] = null;
-            }
-        }
-    }
-
-    public void PlaySaturn() {
-        //Mercury
-        //if one is selected
-        if (ChooseSoundsMenu.PlanetsVal[5] == 0) {
-            if (check) {
-                PlanetsMP[5] = MediaPlayer.create(this, R.raw.saturn1);
-                PlanetsMP[5].setLooping(true);
-            } else if (!check && PlanetsMP[5] != null) {
-                PlanetsMP[5].reset();
-                PlanetsMP[5].release();
-                PlanetsMP[5] = null;
-            }
-        }
-    }
-
-    public void PlayUranus() {
-        //Mercury
-        //if one is selected
-        if (ChooseSoundsMenu.PlanetsVal[6] == 0) {
-            if (check) {
-                PlanetsMP[6] = MediaPlayer.create(this, R.raw.uranus1);
-                PlanetsMP[6].setLooping(true);
-            } else if (!check && PlanetsMP[6] != null) {
-                PlanetsMP[6].reset();
-                PlanetsMP[6].release();
-                PlanetsMP[6] = null;
-            }
-        }
-    }
-
-    public void PlayNeptune() {
-        //Mercury
-        //if one is selected
-        if (ChooseSoundsMenu.PlanetsVal[7] == 0) {
-            if (check) {
-                PlanetsMP[7] = MediaPlayer.create(this, R.raw.neptune1);
-                PlanetsMP[7].setLooping(true);
-            } else if (check == false && PlanetsMP[7] != null)
+        if (ChooseSoundsMenu.PlanetsVal[4] == 0)
+        {
+            if (check)
             {
-                PlanetsMP[7].reset();
-                PlanetsMP[7].release();
-                PlanetsMP[7] = null;
+                audioUnit[4] = new AudioLoader(this, R.raw.jupiter1, 4);
+            }
+            else
+            {
+
+                audioUnit[4].StopSound();
+                audioUnit[4] = null;
+            }
+        }
+    }
+
+    public void PlaySaturn()
+    {
+        if (ChooseSoundsMenu.PlanetsVal[5] == 0)
+        {
+            if (check)
+            {
+                audioUnit[5] = new AudioLoader(this, R.raw.saturn1, 5);
+            }
+            else
+            {
+
+                audioUnit[5].StopSound();
+                audioUnit[5] = null;
+            }
+        }
+
+    }
+
+    public void PlayUranus()
+    {
+        if (ChooseSoundsMenu.PlanetsVal[6] == 0)
+        {
+            if (check)
+            {
+                audioUnit[6] = new AudioLoader(this, R.raw.uranus1, 6);
+            }
+            else
+            {
+
+                audioUnit[6].StopSound();
+                audioUnit[6] = null;
+            }
+        }
+    }
+
+    public void PlayNeptune()
+    {
+        if (ChooseSoundsMenu.PlanetsVal[7] == 0)
+        {
+            if (check)
+            {
+                audioUnit[7] = new AudioLoader(this, R.raw.neptune1, 7);
+            }
+            else
+            {
+
+                audioUnit[7].StopSound();
+                audioUnit[7] = null;
             }
         }
     }
@@ -393,38 +418,46 @@ public class MainActivity extends AppCompatActivity {
         if (check)
         {
             //Get duration of audio file
-            if (PlanetsMP[i] != null)
+            if (audioUnit[i] != null)
             {
-                int PlanetDur = PlanetsMP[i].getDuration();
+                int PlanetDur = audioUnit[i].GetDur();
 
-                PlanetAnim.setDuration(PlanetDur); //For now, + 80 millisecs sync the animation
+                PlanetAnim.setDuration(PlanetDur-20); //for now 20 seems to be working
 
                 PlanetAnim.setInterpolator(new LinearInterpolator());
                 PlanetAnim.setRepeatCount(Animation.INFINITE);
                 planet.startAnimation(PlanetAnim);
 
-                Log.d("Duration" + i, String.valueOf(PlanetDur));
-                ThreadCheckDur Runnablecheckdur = new ThreadCheckDur(PlanetDur);
-                new Thread(Runnablecheckdur).start();
+                /*
+                Runnablecheckdur[i] = new RunCheckDur(PlanetDur);
+                Runnablecheckdur[i].checkrun = true;
+                threadcheckdur[i] = new Thread(Runnablecheckdur[i]);
+                threadcheckdur[i].start();
+                 */
             }
 
         }
         else
             {
-            try {
-
+            try
+            {
+               // Runnablecheckdur[i].checkrun = false;
                 planet.clearAnimation();
-            } catch (NullPointerException e) {
+            }
+            catch (NullPointerException e)
+            {
                 e.printStackTrace();
             }
 
         }
     }
 
-    class ThreadCheckDur implements Runnable
+    class RunCheckDur implements Runnable
     {
+        volatile boolean checkrun = false;
+
         int AudioDuration;
-        ThreadCheckDur(int AudioDuration)
+        RunCheckDur(int AudioDuration)
         {
             this.AudioDuration = AudioDuration;
         }
@@ -432,9 +465,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run()
         {
-            for (int i = 0; true; i++)
+            for (int i = 0; checkrun; i++)
             {
-                Log.d("AudioDuration", String.valueOf(i));
+                Log.d("AudioDuration", String.valueOf(i) + "Of" + String.valueOf(AudioDuration));
                 try
                 {
                     Thread.sleep(AudioDuration);
@@ -449,7 +482,3 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-
-//change test
-
-

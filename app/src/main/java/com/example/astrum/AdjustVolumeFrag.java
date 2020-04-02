@@ -17,8 +17,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import static android.content.Context.MODE_PRIVATE;
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
-import static com.example.astrum.MainActivity.PlanetsMP;
 import static com.example.astrum.MainActivity.VolForMixerOnCreate;
+import static com.example.astrum.MainActivity.audioUnit;
 
 public class AdjustVolumeFrag extends Fragment
 {
@@ -85,6 +85,7 @@ public class AdjustVolumeFrag extends Fragment
 
     }
 
+    //try to shorten this set of code
     private void LinkSounds()
     {
         seek[0].setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -93,9 +94,9 @@ public class AdjustVolumeFrag extends Fragment
             {
                 //set to scale logarithmically so it feels natural
                 volume[0] = (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
-                if (PlanetsMP[0] != null)
+                if (audioUnit[0] != null)
                 {
-                    PlanetsMP[0].setVolume(volume[0], volume[0]);
+                    audioUnit[0].SetVolume(volume[0], volume[0]);
                    // volume = VolForMixerOnCreate[0];
                 }
 
@@ -122,9 +123,9 @@ public class AdjustVolumeFrag extends Fragment
             {
                 //set to scale logarithmically so it feels natural
                 volume[1] = (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
-                if (PlanetsMP[1] != null)
+                if (audioUnit[1] != null)
                 {
-                    PlanetsMP[1].setVolume(volume[1], volume[1]);
+                    audioUnit[1].SetVolume(volume[1], volume[1]);
                 }
 
                 //Send it to sharedPref
@@ -150,9 +151,9 @@ public class AdjustVolumeFrag extends Fragment
             {
                 //set to scale logarithmically so it feels natural
                 volume[2] = (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
-                if (PlanetsMP[2] != null)
+                if (audioUnit[2] != null)
                 {
-                    PlanetsMP[2].setVolume(volume[2], volume[2]);
+                    audioUnit[2].SetVolume(volume[2], volume[2]);
                 }
 
                 //Send it to sharedPref
@@ -178,9 +179,9 @@ public class AdjustVolumeFrag extends Fragment
             {
                 //set to scale logarithmically so it feels natural
                 volume[3] = (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
-                if (PlanetsMP[3] != null)
+                if (audioUnit[3] != null)
                 {
-                    PlanetsMP[3].setVolume(volume[3], volume[3]);
+                    audioUnit[3].SetVolume(volume[3], volume[3]);
                 }
 
 
@@ -207,9 +208,9 @@ public class AdjustVolumeFrag extends Fragment
             {
                 //set to scale logarithmically so it feels natural
                 volume[4]= (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
-                if (PlanetsMP[4] != null)
+                if (audioUnit[4] != null)
                 {
-                    PlanetsMP[4].setVolume(volume[4], volume[4]);
+                    audioUnit[4].SetVolume(volume[4], volume[4]);
                 }
 
                 //Send it to sharedPref
@@ -236,9 +237,9 @@ public class AdjustVolumeFrag extends Fragment
             {
                 //set to scale logarithmically so it feels natural
                 volume[5] = (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
-                if (PlanetsMP[5] != null)
+                if (audioUnit[5] != null)
                 {
-                    PlanetsMP[5].setVolume(volume[5], volume[5]);
+                    audioUnit[5].SetVolume(volume[5], volume[5]);
                 }
 
                 //Send it to sharedPref
@@ -265,9 +266,9 @@ public class AdjustVolumeFrag extends Fragment
             {
                 //set to scale logarithmically so it feels natural
                 volume[6] = (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
-                if (PlanetsMP[6] != null)
+                if (audioUnit[6] != null)
                 {
-                    PlanetsMP[6].setVolume(volume[6], volume[6]);
+                    audioUnit[6].SetVolume(volume[6], volume[6]);
                 }
                 //Send it to sharedPref
                 SharedPreferences sharedPref6 = getContext().getSharedPreferences("progress6", MODE_PRIVATE);
@@ -292,9 +293,9 @@ public class AdjustVolumeFrag extends Fragment
             {
                 //set to scale logarithmically so it feels natural
                 volume[7] = (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
-                if (PlanetsMP[7] != null)
+                if (audioUnit[7] != null)
                 {
-                    PlanetsMP[7].setVolume(volume[7], volume[7]);
+                    audioUnit[7].SetVolume(volume[7], volume[7]);
                 }
                 //Send it to sharedPref
                 SharedPreferences sharedPref7 = getContext().getSharedPreferences("progress7", MODE_PRIVATE);
@@ -314,6 +315,8 @@ public class AdjustVolumeFrag extends Fragment
             }
         });
     }
+
+    public float getProgress(int i) {return seek[i].getProgress();}
 
 
 }

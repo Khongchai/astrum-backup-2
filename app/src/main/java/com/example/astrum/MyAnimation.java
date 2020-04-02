@@ -35,8 +35,8 @@ public class MyAnimation extends Animation
     public void initialize(int width, int height, int parentWidth, int parentHeight)
     {
         // calculate position of image center
-       // int cxImage = view.getWidth() / 2;
-        //int cyImage = view.getHeight() / 2;
+        int cxImage = view.getWidth() / 2;
+        int cyImage = view.getHeight() / 2;
         cx = 10;
         cy = 10;
 
