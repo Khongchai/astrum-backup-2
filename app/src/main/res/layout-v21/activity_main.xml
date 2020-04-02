@@ -15,7 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/FragmentsContainer"
-        />
+        >
+
+
+    </FrameLayout>
 
 
     <Button
@@ -29,7 +32,12 @@
         android:backgroundTint="#311a00"
         android:textColor="#b87333" />
 
-
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="142dp"
+        android:layout_height="143dp"
+        android:layout_marginLeft="135dp"
+        />
 
     <Button
         android:id="@+id/PlanetOne"
@@ -119,6 +127,7 @@
         android:background="@drawable/roundbutton"
         android:backgroundTint="@android:color/holo_blue_dark" />
 
+
     <ImageButton
         android:id="@+id/imageButton3"
         android:layout_width="42dp"
@@ -153,7 +162,8 @@
         android:layout_marginBottom="667dp"
         android:progressTint="@color/copper"
         android:thumb="@drawable/thumb" />
-       <!-- android:progress="50" -->
+
+    <!-- android:progress="50" -->
 
 <!--
     <LinearLayout

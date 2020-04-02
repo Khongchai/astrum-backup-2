@@ -30,9 +30,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.widget.MediaController;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import java.util.ArrayList;
 
@@ -65,23 +67,7 @@ public class MainActivity extends AppCompatActivity {
     Button planetButtons[] = new Button[planetsamount];
 
     static float[] VolForMixerOnCreate = new float[planetsamount];
-
-    @Override
-    public void onResume()
-    {
-        super.onResume();
-        final Toast toast = Toast.makeText(this, "Test Check", Toast.LENGTH_SHORT);
-        toast.show();
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                toast.cancel();
-            }
-        }, 2000);
-    }
+    VideoView[] planetsvid = new VideoView[planetsamount];
 
 
     @Override
@@ -96,6 +82,24 @@ public class MainActivity extends AppCompatActivity {
         //Tell program to add the fragment container and new openadjustvolume object programmatically
         fragmenttransaction.add(R.id.FragmentsContainer, new AdjustVolumeFrag());
         fragmenttransaction.commit();
+
+        //vid files
+        planetsvid[0] = findViewById(R.id.videoView);
+        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.sixtyframes;
+        Uri uri = Uri.parse(videoPath);
+        planetsvid[0].setVideoURI(uri);
+
+
+        /*
+        //media controller for video
+        MediaController mediaController = new MediaController(this);
+        planetsvid[0].setMediaController(mediaController);
+        mediaController.setAnchorView(planetsvid[0]);
+
+         */
+
+
+
 
         //Declare the button object.
         SettingsButton = findViewById(R.id.imageButton3);
@@ -143,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //which audio sounds get played should be decided here.
                 if (check) {
+                    planetsvid[0].start();
                     PlayMercury();
                     PlayVenus();
                     PlayEarth();
@@ -198,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     check = false;
                 } else {
+                    planetsvid[0].stopPlayback();
                     //for sounds
                     PlayMercury();
                     PlayVenus();

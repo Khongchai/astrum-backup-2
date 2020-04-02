@@ -2,33 +2,29 @@ package com.example.astrum;
 import android.content.Context;
 import android.media.MediaPlayer;
 
-public class AudioLoader
-{
-    private MediaPlayer curPlayer;
-    private MediaPlayer nextPlayer;
+public class AudioLoader {
+    private MediaPlayer curPlayer = null;
+    private MediaPlayer nextPlayer = null;
 
-    Context context = null;
-    int ResID = 0;
-    int PlanetID = 0;
+    private Context context = null;
+    private int ResID = 0;
+    private int PlanetID = 0;
 
-    AudioLoader(Context context, int ID, int PlanetID)
-    {
+    AudioLoader(Context context, int ID, int PlanetID) {
         this.PlanetID = PlanetID;
         this.context = context;
         ResID = ID;
         curPlayer = MediaPlayer.create(this.context, ResID);
     }
 
-    public void PlayAudio()
-    {
+
+     void PlayAudio() {
         curPlayer.start();
         nextPlayer = MediaPlayer.create(context, ResID);
         curPlayer.setNextMediaPlayer(nextPlayer);
-        curPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
-        {
+        curPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
-            public void onCompletion(MediaPlayer mp)
-            {
+            public void onCompletion(MediaPlayer mp) {
                 nextPlayer.setVolume(AdjustVolumeFrag.seek[PlanetID].getProgress(), AdjustVolumeFrag.seek[PlanetID].getProgress()); //this line somehow affects all audio sometimes?
                 curPlayer.release();
                 curPlayer = nextPlayer;
@@ -38,9 +34,7 @@ public class AudioLoader
         });
     }
 
-    public void StopSound()
-    {
-        //if cur is playing, next is also playing
+     void StopSound() {
         curPlayer.stop();
         curPlayer.release();
         curPlayer = null;
@@ -51,18 +45,19 @@ public class AudioLoader
 
     }
 
-    public int GetDur() {return curPlayer.getDuration();}
+     int GetDur() {
+        return curPlayer.getDuration();
+    }
 
-    public MediaPlayer CheckNull() {return curPlayer;}
+    public MediaPlayer CheckNull() {
+        return curPlayer;
+    }
 
-    public void SetVolume(float float1, float float2)
-    {
+     void SetVolume(float float1, float float2) {
 
-        if (curPlayer != null)
-        {
+        if (curPlayer != null) {
             curPlayer.setVolume(float1, float2);
         }
-
     }
 }
 
