@@ -83,23 +83,6 @@ public class MainActivity extends AppCompatActivity {
         fragmenttransaction.add(R.id.FragmentsContainer, new AdjustVolumeFrag());
         fragmenttransaction.commit();
 
-        //vid files
-        planetsvid[0] = findViewById(R.id.videoView);
-        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.sixtyframes;
-        Uri uri = Uri.parse(videoPath);
-        planetsvid[0].setVideoURI(uri);
-
-
-        /*
-        //media controller for video
-        MediaController mediaController = new MediaController(this);
-        planetsvid[0].setMediaController(mediaController);
-        mediaController.setAnchorView(planetsvid[0]);
-
-         */
-
-
-
 
         //Declare the button object.
         SettingsButton = findViewById(R.id.imageButton3);
@@ -147,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
 
                 //which audio sounds get played should be decided here.
                 if (check) {
-                    planetsvid[0].start();
                     PlayMercury();
                     PlayVenus();
                     PlayEarth();
@@ -203,7 +185,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                     check = false;
                 } else {
-                    planetsvid[0].stopPlayback();
                     //for sounds
                     PlayMercury();
                     PlayVenus();
@@ -284,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
         {
             if (check)
             {
-                audioUnit[0] = new AudioLoader(this, R.raw.mercury, 0);
+                audioUnit[0] = new AudioLoader(this, R.raw.mercurynotdone, 0);
             }
             else
             {
@@ -323,7 +304,7 @@ public class MainActivity extends AppCompatActivity {
         {
             if (check)
             {
-                audioUnit[2] = new AudioLoader(this, R.raw.erde1, 2);
+                audioUnit[2] = new AudioLoader(this, R.raw.earthnotdone, 2);
             }
             else
             {
@@ -339,7 +320,7 @@ public class MainActivity extends AppCompatActivity {
         {
             if (check)
             {
-                audioUnit[3] = new AudioLoader(this, R.raw.mars1, 3);
+                audioUnit[3] = new AudioLoader(this, R.raw.marsdone, 3);
             }
             else
             {
@@ -355,7 +336,7 @@ public class MainActivity extends AppCompatActivity {
         {
             if (check)
             {
-                audioUnit[4] = new AudioLoader(this, R.raw.jupiter1, 4);
+                audioUnit[4] = new AudioLoader(this, R.raw.jupiternotdone, 4);
             }
             else
             {
@@ -372,7 +353,7 @@ public class MainActivity extends AppCompatActivity {
         {
             if (check)
             {
-                audioUnit[5] = new AudioLoader(this, R.raw.saturn1, 5);
+                audioUnit[5] = new AudioLoader(this, R.raw.saturnnotdone, 5);
             }
             else
             {
@@ -390,7 +371,7 @@ public class MainActivity extends AppCompatActivity {
         {
             if (check)
             {
-                audioUnit[6] = new AudioLoader(this, R.raw.uranus1, 6);
+                audioUnit[6] = new AudioLoader(this, R.raw.uranusnotdone, 6);
             }
             else
             {
@@ -407,7 +388,7 @@ public class MainActivity extends AppCompatActivity {
         {
             if (check)
             {
-                audioUnit[7] = new AudioLoader(this, R.raw.neptune1, 7);
+                audioUnit[7] = new AudioLoader(this, R.raw.neptunenotdone, 7);
             }
             else
             {

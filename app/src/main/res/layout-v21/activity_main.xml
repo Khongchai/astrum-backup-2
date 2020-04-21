@@ -32,13 +32,6 @@
         android:backgroundTint="#311a00"
         android:textColor="#b87333" />
 
-    <VideoView
-        android:id="@+id/videoView"
-        android:layout_width="142dp"
-        android:layout_height="143dp"
-        android:layout_marginLeft="135dp"
-        />
-
     <Button
         android:id="@+id/PlanetOne"
         android:layout_width="10dp"
