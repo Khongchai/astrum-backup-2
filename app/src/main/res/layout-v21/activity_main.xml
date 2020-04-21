@@ -87,38 +87,6 @@
         android:background="@drawable/roundbutton"
         android:backgroundTint="@android:color/holo_blue_dark" />
 
-    <Button
-        android:id="@+id/planetSix"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:layout_above="@+id/OrbitButtonBG"
-
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="101dp"
-        android:background="@drawable/roundbutton"
-        android:backgroundTint="@android:color/holo_blue_dark" />
-
-    <Button
-        android:id="@+id/planetSeven"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:layout_above="@+id/OrbitButtonBG"
-
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="118dp"
-        android:background="@drawable/roundbutton"
-        android:backgroundTint="@android:color/holo_blue_dark" />
-
-    <Button
-        android:id="@+id/planetEight"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:layout_above="@+id/OrbitButtonBG"
-
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="136dp"
-        android:background="@drawable/roundbutton"
-        android:backgroundTint="@android:color/holo_blue_dark" />
 
 
     <ImageButton
@@ -138,6 +106,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:background="@drawable/roundbutton"
+        android:fontFamily="@font/comfortaa_bold"
         android:backgroundTint="#00000000"
         android:text="@string/orbit"
         android:textColor="#b87333" />

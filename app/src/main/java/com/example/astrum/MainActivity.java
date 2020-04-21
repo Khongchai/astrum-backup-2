@@ -40,7 +40,7 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
-    final static int planetsamount = 8;
+    final static int planetsamount = 5;
 
     //Create an undeclared button object.
     private ImageButton SettingsButton;
@@ -101,12 +101,9 @@ public class MainActivity extends AppCompatActivity {
         planetButtons[2] = findViewById(R.id.planetThree);
         planetButtons[3] = findViewById(R.id.planetFour);
         planetButtons[4] = findViewById(R.id.planetFive);
-        planetButtons[5] = findViewById(R.id.planetSix);
-        planetButtons[6] = findViewById(R.id.planetSeven);
-        planetButtons[7] = findViewById(R.id.planetEight);
 
         //set all planets players to null and checknull value to false
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < planetsamount; i++)
         {
             //PlanetsMP[i] = null;
             CheckReady[i] = 0;
@@ -129,18 +126,16 @@ public class MainActivity extends AppCompatActivity {
             {
 
                 //which audio sounds get played should be decided here.
-                if (check) {
+                if (check)
+                {
                     PlayMercury();
                     PlayVenus();
                     PlayEarth();
                     PlayJupiter();
                     PlayMars();
-                    PlayNeptune();
-                    PlaySaturn();
-                    PlayUranus();
 
                     //Get volume for planets
-                    for (int i = 0; i < 8; i++)
+                    for (int i = 0; i < planetsamount; i++)
                     {
                         if (audioUnit[i] != null)
                         {
@@ -149,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     //initiate animation
-                    for (int i = 0; i < 8; i++)
+                    for (int i = 0; i < planetsamount; i++)
                     {
                         PlanetAnimation(planetButtons[i], check, i, radiuschange, extraheight);
                         //AnimationThread animthread = new AnimationThread(planetButtons[i], check, i, radiuschange, extraheight);
@@ -191,16 +186,14 @@ public class MainActivity extends AppCompatActivity {
                     PlayEarth();
                     PlayJupiter();
                     PlayMars();
-                    PlayNeptune();
-                    PlaySaturn();
-                    PlayUranus();
+
 
                     //reset values
                     radiuschange = 0;
                     extraheight = 130;
 
                     //stop animation and reset ready value
-                    for (int i = 0; i < 8; i++)
+                    for (int i = 0; i < planetsamount; i++)
                     {
                         PlanetAnimation(planetButtons[i], check, i, radiuschange, extraheight);
                         //AnimationThread animthread = new AnimationThread(planetButtons[i], check, i, radiuschange, extraheight);
@@ -347,57 +340,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void PlaySaturn()
-    {
-        if (ChooseSoundsMenu.PlanetsVal[5] == 0)
-        {
-            if (check)
-            {
-                audioUnit[5] = new AudioLoader(this, R.raw.saturnnotdone, 5);
-            }
-            else
-            {
-
-                audioUnit[5].StopSound();
-                audioUnit[5] = null;
-            }
-        }
-
-    }
-
-    public void PlayUranus()
-    {
-        if (ChooseSoundsMenu.PlanetsVal[6] == 0)
-        {
-            if (check)
-            {
-                audioUnit[6] = new AudioLoader(this, R.raw.uranusnotdone, 6);
-            }
-            else
-            {
-
-                audioUnit[6].StopSound();
-                audioUnit[6] = null;
-            }
-        }
-    }
-
-    public void PlayNeptune()
-    {
-        if (ChooseSoundsMenu.PlanetsVal[7] == 0)
-        {
-            if (check)
-            {
-                audioUnit[7] = new AudioLoader(this, R.raw.neptunenotdone, 7);
-            }
-            else
-            {
-
-                audioUnit[7].StopSound();
-                audioUnit[7] = null;
-            }
-        }
-    }
 
     private void PlanetAnimation(Button planet, boolean check, int i, int radiuschange, int extraheight) {
         Animation PlanetAnim = new MyAnimation(planet, 127 + radiuschange, extraheight);

@@ -19,13 +19,14 @@ import static android.content.Context.MODE_PRIVATE;
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static com.example.astrum.MainActivity.VolForMixerOnCreate;
 import static com.example.astrum.MainActivity.audioUnit;
+import static com.example.astrum.MainActivity.planetsamount;
 
 public class AdjustVolumeFrag extends Fragment
 {
 
     private final static int MAX_VOLUME = 100;
-    public static SeekBar[] seek = new SeekBar[8];
-    public static float[] volume = new float[8];
+    public static SeekBar[] seek = new SeekBar[planetsamount];
+    public static float[] volume = new float[planetsamount];
 
 
 
@@ -34,7 +35,7 @@ public class AdjustVolumeFrag extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < planetsamount; i++)
         {
             volume[i] = -1;
         }
@@ -45,9 +46,7 @@ public class AdjustVolumeFrag extends Fragment
         seek[2] = view.findViewById(R.id.seekBar3);
         seek[3] = view.findViewById(R.id.seekBar4);
         seek[4] = view.findViewById(R.id.seekBar5);
-        seek[5] = view.findViewById(R.id.seekBar6);
-        seek[6] = view.findViewById(R.id.seekBar7);
-        seek[7] = view.findViewById(R.id.seekBar8);
+
         LinkSounds();
         LoadProgress();
 
@@ -70,9 +69,9 @@ public class AdjustVolumeFrag extends Fragment
 
     public void LoadProgress()
     {
-        SharedPreferences sharedPref[] = new SharedPreferences[8];
-        int seekGetShared[] = new int[8];
-        for (int i = 0; i < 8; i++)
+        SharedPreferences sharedPref[] = new SharedPreferences[planetsamount];
+        int seekGetShared[] = new int[planetsamount];
+        for (int i = 0; i < planetsamount; i++)
         {
             sharedPref[i] = getContext().getSharedPreferences(String.format("progress%d", i), MODE_PRIVATE);
             seekGetShared[i] = sharedPref[i].getInt(String.format("Progress for %d", i), -1);
@@ -231,89 +230,6 @@ public class AdjustVolumeFrag extends Fragment
             }
         });
 
-        seek[5].setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
-            {
-                //set to scale logarithmically so it feels natural
-                volume[5] = (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
-                if (audioUnit[5] != null)
-                {
-                    audioUnit[5].SetVolume(volume[5], volume[5]);
-                }
-
-                //Send it to sharedPref
-                SharedPreferences sharedPref5 = getContext().getSharedPreferences("progress5", MODE_PRIVATE);
-                SharedPreferences.Editor SharedPref5Editor = sharedPref5.edit();
-                SharedPref5Editor.putInt("Progress for 5", progress).commit();
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        seek[6].setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
-            {
-                //set to scale logarithmically so it feels natural
-                volume[6] = (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
-                if (audioUnit[6] != null)
-                {
-                    audioUnit[6].SetVolume(volume[6], volume[6]);
-                }
-                //Send it to sharedPref
-                SharedPreferences sharedPref6 = getContext().getSharedPreferences("progress6", MODE_PRIVATE);
-                SharedPreferences.Editor SharedPref6Editor = sharedPref6.edit();
-                SharedPref6Editor.putInt("Progress for 6", progress).commit();
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        seek[7].setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
-            {
-                //set to scale logarithmically so it feels natural
-                volume[7] = (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
-                if (audioUnit[7] != null)
-                {
-                    audioUnit[7].SetVolume(volume[7], volume[7]);
-                }
-                //Send it to sharedPref
-                SharedPreferences sharedPref7 = getContext().getSharedPreferences("progress7", MODE_PRIVATE);
-                SharedPreferences.Editor SharedPref6Editor = sharedPref7.edit();
-                SharedPref6Editor.putInt("Progress for 7", progress).commit();
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
     }
 
     public float getProgress(int i) {return seek[i].getProgress();}

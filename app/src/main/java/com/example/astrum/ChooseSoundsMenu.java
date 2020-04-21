@@ -19,15 +19,16 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Spinner;
 import android.widget.Toast;
+import static com.example.astrum.MainActivity.planetsamount;
 
 import static android.content.Context.MODE_PRIVATE;
 
 public class ChooseSoundsMenu extends AppCompatActivity
 {
-    public static int PlanetsVal[] = new int[8];
-    final Spinner Spinner[] = new Spinner[8];
-    private SeekBar VolumeSeekbar[] = new SeekBar[8];
-    static float VolumeVal[] = new float[8];
+    public static int PlanetsVal[] = new int[planetsamount];
+    final Spinner Spinner[] = new Spinner[planetsamount];
+    private SeekBar VolumeSeekbar[] = new SeekBar[planetsamount];
+    static float VolumeVal[] = new float[planetsamount];
 
     Button CommitButton;
     int UpdateVal;
@@ -48,6 +49,8 @@ public class ChooseSoundsMenu extends AppCompatActivity
         UpdateVal = 0;
         EnteredVal = findViewById(R.id.editText);
 
+
+
         CommitButton.setOnClickListener(new View.OnClickListener()
         {
             //fix the bug where when no value is put in, the fragment is destroyed.
@@ -57,11 +60,11 @@ public class ChooseSoundsMenu extends AppCompatActivity
                 try
                 {
                     UpdateVal = Integer.parseInt(EnteredVal.getText().toString());
-                    for (int i = 0; i < 8; i++)
+                    for (int i = 0; i < planetsamount; i++)
                     {
-                        if ((UpdateVal - 1) < 0 || (UpdateVal - 1) >= 7 ){
+                        if ((UpdateVal - 1) < 0 || (UpdateVal - 1) >= planetsamount - 1 ){
 
-                            final Toast toast = Toast.makeText(getApplicationContext(), "Value should be between 1-7", Toast.LENGTH_SHORT);
+                            final Toast toast = Toast.makeText(getApplicationContext(), "Value should be between 1-5", Toast.LENGTH_SHORT);
                             toast.show();
                             Handler StopToast = new Handler();
                             StopToast.postDelayed(new ToastCancel(toast), 2000);
@@ -90,9 +93,6 @@ public class ChooseSoundsMenu extends AppCompatActivity
         Spinner[2] = findViewById(R.id.spinnerPlanet3);
         Spinner[3] = findViewById(R.id.spinnerPlanet4);
         Spinner[4] = findViewById(R.id.spinnerPlanet5);
-        Spinner[5] = findViewById(R.id.spinnerPlanet6);
-        Spinner[6] = findViewById(R.id.spinnerPlanet7);
-        Spinner[7] = findViewById(R.id.spinnerPlanet8);
 
         String list[] = new String[]{
                 "Sound 1",
@@ -100,7 +100,6 @@ public class ChooseSoundsMenu extends AppCompatActivity
                 "Sound 3",
                 "Sound 4",
                 "Sound 5",
-                "Sound 6",
                 "No sound"
         };
 
@@ -110,7 +109,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
 
 
         //Set to drop down menus
-        for (int i = 0; 8 > i; i++)
+        for (int i = 0; planetsamount > i; i++)
         {
             Spinner[i].setAdapter(adapter);
         }
@@ -126,7 +125,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
                 PlanetsVal[0] = Spinner[0].getSelectedItemPosition();
 
                 //If position is not "No sound", set ready status to 1
-                if (PlanetsVal[0] != 6)
+                if (PlanetsVal[0] != 5)
                 {
                    MainActivity.CheckReady[0] = 1;
                 }
@@ -174,7 +173,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
 
                 //If position is not "No sound", set ready status to 1
 
-                if (PlanetsVal[1] != 7)
+                if (PlanetsVal[1] != 5)
                 {
                     MainActivity.CheckReady[1] = 1;
                 }
@@ -215,7 +214,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
                 Log.d("EarthLog", String.valueOf(Spinner[2].getSelectedItemPosition()));
 
                 //If position is not "No sound", set ready status to 1
-                if (PlanetsVal[2] != 7)
+                if (PlanetsVal[2] != 5)
                 {
                    MainActivity.CheckReady[2] = 1;
                 }
@@ -255,7 +254,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
                 Log.d("MarsLog", String.valueOf(Spinner[3].getSelectedItemPosition()));
 
                 //If position is not "No sound", set ready status to 1
-                if (PlanetsVal[3] != 7)
+                if (PlanetsVal[3] != 5)
                 {
                    MainActivity.CheckReady[3] = 1;
                 }
@@ -295,7 +294,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
                 Log.d("JupiterLog", String.valueOf(Spinner[4].getSelectedItemPosition()));
 
                 //If position is not "No sound", set ready status to 1
-                if (PlanetsVal[4] != 7)
+                if (PlanetsVal[4] != 5)
                 {
                     MainActivity.CheckReady[4] = 1;
                 }
@@ -324,126 +323,6 @@ public class ChooseSoundsMenu extends AppCompatActivity
         {
             // set the selected value of the spinner
             Spinner[4].setSelection(JupitergetShared);
-        }
-//-------------------------------------------------------------------------------------------------
-        Spinner[5].setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-            {
-                PlanetsVal[5] = Spinner[5].getSelectedItemPosition();
-                Log.d("SaturnLog", String.valueOf(Spinner[5].getSelectedItemPosition()));
-
-                //If position is not "No sound", set ready status to 1
-                if (PlanetsVal[5] != 7)
-                {
-                   MainActivity.CheckReady[5] = 1;
-                }
-
-                //Send it to sharedPref
-                SharedPreferences sharedPref5 = getSharedPreferences("Saturn",MODE_PRIVATE);
-                SharedPreferences.Editor prefEditor = sharedPref5.edit();
-
-                //Put it in to a key called NeptuneKey
-                prefEditor.putInt("SaturnKey", Spinner[5].getSelectedItemPosition());
-                prefEditor.apply();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent)
-            {
-
-            }
-
-        });
-
-        //Load Saturn value
-        SharedPreferences sharedPref5 = getSharedPreferences("Saturn",MODE_PRIVATE);
-        int SaturngetShared = sharedPref5.getInt("SaturnKey", -1);
-        if(SaturngetShared != -1)
-        {
-            // set the selected value of the spinner
-            Spinner[5].setSelection(SaturngetShared);
-        }
-//-------------------------------------------------------------------------------------------------
-        Spinner[6].setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-            {
-                PlanetsVal[6] = Spinner[6].getSelectedItemPosition();
-                Log.d("UranusLog", String.valueOf(Spinner[6].getSelectedItemPosition()));
-
-                //If position is not "No sound", set ready status to 1
-                if (PlanetsVal[6] != 7)
-                {
-                    MainActivity.CheckReady[6] = 1;
-                }
-
-                //Send it to sharedPref
-                SharedPreferences sharedPref6 = getSharedPreferences("Uranus",MODE_PRIVATE);
-                SharedPreferences.Editor prefEditor = sharedPref6.edit();
-
-                //Put it in to a key called NeptuneKey
-                prefEditor.putInt("UranusKey", Spinner[6].getSelectedItemPosition());
-                prefEditor.apply();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent)
-            {
-
-            }
-
-        });
-
-        //Load Uranus Value
-        SharedPreferences sharedPref6 = getSharedPreferences("Uranus",MODE_PRIVATE);
-        int UranusgetShared = sharedPref6.getInt("UranusKey", -1);
-        if(UranusgetShared != -1)
-        {
-            // set the selected value of the spinner
-            Spinner[6].setSelection(UranusgetShared);
-        }
-//-------------------------------------------------------------------------------------------------
-        Spinner[7].setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-            {
-                PlanetsVal[7] = Spinner[7].getSelectedItemPosition();
-                Log.d("NeptuneLog", String.valueOf(Spinner[7].getSelectedItemPosition()));
-
-                //If position is not "No sound", set ready status to 1
-                if (PlanetsVal[7] != 7)
-                {
-                   MainActivity.CheckReady[7] = 1;
-                }
-
-                //Send it to sharedPref
-                SharedPreferences sharedPref7 = getSharedPreferences("Neptune",MODE_PRIVATE);
-                SharedPreferences.Editor prefEditor = sharedPref7.edit();
-
-                //Put it in to a key called "somekey"
-                prefEditor.putInt("NeptuneKey", Spinner[7].getSelectedItemPosition());
-                prefEditor.apply();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent)
-            {
-
-            }
-
-        });
-
-        //Load Neptune value
-        SharedPreferences sharedPref7 = getSharedPreferences("Neptune",MODE_PRIVATE);
-        int NeptunegetShared = sharedPref7.getInt("NeptuneKey", -1);
-        if(NeptunegetShared != -1)
-        {
-            // set the selected value of the spinner
-            Spinner[7].setSelection(NeptunegetShared);
         }
 
 //-------------------------------------------------------------------------------------------------
