@@ -46,9 +46,6 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton SettingsButton;
     private Button OrbitButton;
 
-    //create objects for playing sounds of everything
-   // static MediaPlayer PlanetsMP[] = new MediaPlayer[planetsamount];
-
     //create volume control
     private SeekBar VolumeSeekbar;
     private AudioManager audioManager;
@@ -69,12 +66,18 @@ public class MainActivity extends AppCompatActivity {
     static float[] VolForMixerOnCreate = new float[planetsamount];
     VideoView[] planetsvid = new VideoView[planetsamount];
 
+    int SysNum;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ChooseSystems chooseSystems = new ChooseSystems();
+        SysNum = chooseSystems.getSystemVal();
+
 
         //request for fragment transaction, need supports because this one is not extending Fragment.
         FragmentTransaction fragmenttransaction = getSupportFragmentManager().beginTransaction();
@@ -105,17 +108,13 @@ public class MainActivity extends AppCompatActivity {
         //set all planets players to null and checknull value to false
         for (int i = 0; i < planetsamount; i++)
         {
-            //PlanetsMP[i] = null;
             CheckReady[i] = 0;
         }
 
-        //Declare Orbit button
         OrbitButton = findViewById(R.id.OrbitButton);
 
         //initiate master volume slider
         initControls();
-
-
         //start animation for orbit
         OrbitButton.setOnClickListener(new View.OnClickListener() {
             private int radiuschange = 0;
@@ -128,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                 //which audio sounds get played should be decided here.
                 if (check)
                 {
+                    //In functions below, use SystemSound value to decide which sound to play.
                     PlayMercury();
                     PlayVenus();
                     PlayEarth();
@@ -157,26 +157,6 @@ public class MainActivity extends AppCompatActivity {
                         {
                             audioUnit[i].PlayAudio();
                         }
-                        /*
-                        if (CheckReady[i] == 1 && PlanetsMP[i] != null)
-                        {
-                            try
-                            {
-                                PlanetsMP[i].setOnPreparedListener(new MediaPlayer.OnPreparedListener()
-                                {
-                                    @Override
-                                    public void onPrepared(MediaPlayer mp)
-                                    {
-                                        mp.start();
-                                    }
-                                });
-
-                            } catch (NullPointerException ex) {
-                                ex.printStackTrace();
-                            }
-                        }
-
-                         */
                     }
                     check = false;
                 } else {
@@ -196,8 +176,6 @@ public class MainActivity extends AppCompatActivity {
                     for (int i = 0; i < planetsamount; i++)
                     {
                         PlanetAnimation(planetButtons[i], check, i, radiuschange, extraheight);
-                        //AnimationThread animthread = new AnimationThread(planetButtons[i], check, i, radiuschange, extraheight);
-                        //nimthread.start();
                     }
 
                     check = true;
@@ -356,13 +334,6 @@ public class MainActivity extends AppCompatActivity {
                 PlanetAnim.setInterpolator(new LinearInterpolator());
                 PlanetAnim.setRepeatCount(Animation.INFINITE);
                 planet.startAnimation(PlanetAnim);
-
-                /*
-                Runnablecheckdur[i] = new RunCheckDur(PlanetDur);
-                Runnablecheckdur[i].checkrun = true;
-                threadcheckdur[i] = new Thread(Runnablecheckdur[i]);
-                threadcheckdur[i].start();
-                 */
             }
 
         }
@@ -370,7 +341,6 @@ public class MainActivity extends AppCompatActivity {
             {
             try
             {
-               // Runnablecheckdur[i].checkrun = false;
                 planet.clearAnimation();
             }
             catch (NullPointerException e)

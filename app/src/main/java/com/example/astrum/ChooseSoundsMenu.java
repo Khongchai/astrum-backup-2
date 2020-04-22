@@ -62,7 +62,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
                     UpdateVal = Integer.parseInt(EnteredVal.getText().toString());
                     for (int i = 0; i < planetsamount; i++)
                     {
-                        if ((UpdateVal - 1) < 0 || (UpdateVal - 1) >= planetsamount - 1 ){
+                        if ((UpdateVal - 1) < 0 || (UpdateVal - 1) > planetsamount - 1 ){
 
                             final Toast toast = Toast.makeText(getApplicationContext(), "Value should be between 1-5", Toast.LENGTH_SHORT);
                             toast.show();
@@ -77,9 +77,8 @@ public class ChooseSoundsMenu extends AppCompatActivity
                 }
                 catch (NullPointerException | NumberFormatException e)
                 {
-                    final Toast toast = Toast.makeText(getApplicationContext(),"Please enter a value" ,Toast.LENGTH_SHORT);
+                    final Toast toast = Toast.makeText(getApplicationContext(),"Please enter a value between 1 - 5" ,Toast.LENGTH_SHORT);
                     toast.show();
-                    new ToastCancel(toast);
                     Handler handler = new Handler();
                     handler.postDelayed(new ToastCancel(toast), 2000);
                 }

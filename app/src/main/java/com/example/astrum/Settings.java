@@ -22,6 +22,9 @@ public class Settings extends AppCompatActivity
     private ImageButton About;
     private TextView AboutText;
 
+    private ImageButton ChooseSystems;
+    private TextView ChooseSysText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -46,10 +49,29 @@ public class Settings extends AppCompatActivity
                 ChooseSounds.performClick();
             }
         });
+        //open ChooseSyspage----------------------------------------------------------------------
+        ChooseSystems = findViewById(R.id.ChooseSystemicon);
+        ChooseSysText = findViewById(R.id.ChooseSystemText);
 
-        //open about page pls---------------------------------------------------------------------------
-        About = findViewById(R.id.chooseSounds2);
-        AboutText = findViewById(R.id.About);
+        ChooseSysText.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                openChooseSysPage();
+            }
+        });
+
+        ChooseSystems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ChooseSysText.performClick();
+            }
+        });
+
+        //open about pls---------------------------------------------------------------------------
+        About = findViewById(R.id.About);
+        AboutText = findViewById(R.id.AboutText);
 
         About.setOnClickListener(new View.OnClickListener()
         {
@@ -74,13 +96,16 @@ public class Settings extends AppCompatActivity
 
     public void openChooseSounds()
     {
-        Intent intent = new Intent(this, ChooseSoundsMenu.class);
-        startActivity(intent);
+        startActivity(new Intent(this, ChooseSoundsMenu.class));
     }
     public void openAboutPage()
     {
-        Intent intent = new Intent(this, About.class);
-        startActivity(intent);
+        startActivity(new Intent(this, About.class));
+    }
+
+    public void openChooseSysPage()
+    {
+        startActivity(new Intent(this, ChooseSystems.class));
     }
 
 }

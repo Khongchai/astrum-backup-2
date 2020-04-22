@@ -37,7 +37,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13"
+        app:layout_constraintVertical_bias="0.139"
         app:srcCompat="@drawable/saturnclipart" />
 
     <TextView
@@ -46,40 +46,75 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="108dp"
         android:fontFamily="@font/comfortaa_bold"
-        android:text="Choose sounds"
+        android:text="Choose Sounds"
         android:textColor="@color/copper"
+        app:layout_constraintBottom_toTopOf="@+id/About"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/ChooseSounds"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/AboutText"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/comfortaa_bold"
+        android:text="About"
+        android:textColor="@color/copper"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/About"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.568" />
 
     <ImageButton
-        android:id="@+id/chooseSounds2"
+        android:id="@+id/About"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="224dp"
         android:background="@android:color/transparent"
         android:rotation="20"
         android:tint="@color/copper"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.144"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.569"
         app:srcCompat="@drawable/saturnclipart" />
 
     <TextView
-        android:id="@+id/About"
+        android:id="@+id/ChooseSystemText"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/comfortaa_bold"
-        android:layout_marginTop="240dp"
-        android:text="About"
+        android:text="Choose systems"
         android:textColor="@color/copper"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ChooseSystemicon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.354" />
+
+    <ImageButton
+        android:id="@+id/ChooseSystemicon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/transparent"
+        android:rotation="20"
+        android:tint="@color/copper"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toEndOf="@+id/ChooseSounds"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.144"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.349"
+        app:srcCompat="@drawable/saturnclipart" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

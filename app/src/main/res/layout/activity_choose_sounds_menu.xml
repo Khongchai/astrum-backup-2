@@ -180,10 +180,10 @@
         android:id="@+id/Explaination"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="404dp"
+        android:layout_marginTop="300dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="@font/comfortaa_bold"
-        android:text="Or choose individual sound from dropdown menu"
+        android:text="You can either set all sounds at once or choose\n         individually from the dropdown menu"
         android:textColor="@color/copper"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/commitButton" />
