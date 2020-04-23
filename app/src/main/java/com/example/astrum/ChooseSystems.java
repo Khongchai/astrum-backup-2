@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,7 +33,8 @@ public class ChooseSystems extends AppCompatActivity
                 try
                 {
                     System = Integer.parseInt(ValueField.getText().toString());
-                    if (System - 1 > 5 || System < 0)
+                    Log.d("System value:", String.valueOf(System));
+                    if (System  > 8 || System < 0)
                     {
                         final Toast toast = Toast.makeText(getApplicationContext(), "Please enter a value between 1 - 7", Toast.LENGTH_SHORT);
                         toast.show();

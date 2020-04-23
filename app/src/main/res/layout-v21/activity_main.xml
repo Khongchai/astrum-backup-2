@@ -41,7 +41,7 @@
         android:layout_centerInParent="true"
         android:layout_marginBottom="11dp"
         android:background="@drawable/roundbutton"
-        android:backgroundTint="@android:color/holo_blue_dark" />
+        android:backgroundTint="@android:color/holo_blue_bright" />
 
     <Button
         android:id="@+id/PlanetTwo"
@@ -52,7 +52,7 @@
         android:layout_centerInParent="true"
         android:layout_marginBottom="29dp"
         android:background="@drawable/roundbutton"
-        android:backgroundTint="@android:color/holo_blue_dark" />
+        android:backgroundTint="#ffffff" />
 
     <Button
         android:id="@+id/planetThree"
@@ -63,7 +63,7 @@
         android:layout_centerInParent="true"
         android:layout_marginBottom="47dp"
         android:background="@drawable/roundbutton"
-        android:backgroundTint="@android:color/holo_blue_dark" />
+        android:backgroundTint="#03fcba" />
 
     <Button
         android:id="@+id/planetFour"
@@ -74,7 +74,7 @@
         android:layout_centerInParent="true"
         android:layout_marginBottom="65dp"
         android:background="@drawable/roundbutton"
-        android:backgroundTint="@android:color/holo_blue_dark" />
+        android:backgroundTint="#913636" />
 
     <Button
         android:id="@+id/planetFive"
@@ -85,7 +85,7 @@
         android:layout_centerInParent="true"
         android:layout_marginBottom="83dp"
         android:background="@drawable/roundbutton"
-        android:backgroundTint="@android:color/holo_blue_dark" />
+        android:backgroundTint="@color/copper" />
 
 
 

@@ -37,7 +37,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.139"
+        app:layout_constraintVertical_bias="0.368"
         app:srcCompat="@drawable/saturnclipart" />
 
     <TextView
@@ -50,10 +50,10 @@
         android:textColor="@color/copper"
         app:layout_constraintBottom_toTopOf="@+id/About"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.111"
         app:layout_constraintStart_toEndOf="@+id/ChooseSounds"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.595" />
 
     <TextView
         android:id="@+id/AboutText"
@@ -87,18 +87,6 @@
         app:layout_constraintVertical_bias="0.569"
         app:srcCompat="@drawable/saturnclipart" />
 
-    <TextView
-        android:id="@+id/ChooseSystemText"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/comfortaa_bold"
-        android:text="Choose systems"
-        android:textColor="@color/copper"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ChooseSystemicon"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.354" />
-
     <ImageButton
         android:id="@+id/ChooseSystemicon"
         android:layout_width="50dp"
@@ -114,7 +102,21 @@
         app:layout_constraintHorizontal_bias="0.144"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.349"
+        app:layout_constraintVertical_bias="0.161"
         app:srcCompat="@drawable/saturnclipart" />
+
+    <TextView
+        android:id="@+id/ChooseSystemText"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/comfortaa_bold"
+        android:text="Choose System"
+        android:textColor="@color/copper"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toEndOf="@+id/ChooseSystemicon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.175" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

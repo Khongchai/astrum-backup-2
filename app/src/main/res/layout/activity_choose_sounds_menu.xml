@@ -181,12 +181,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="300dp"
-        android:layout_marginEnd="20dp"
         android:fontFamily="@font/comfortaa_bold"
-        android:text="You can either set all sounds at once or choose\n         individually from the dropdown menu"
+        android:text="You can either set all sounds at once or choose\n     individually from the dropdown menu from \n                                        1-6"
         android:textColor="@color/copper"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/commitButton" />
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/commitButton"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

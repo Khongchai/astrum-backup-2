@@ -30,8 +30,8 @@
         android:layout_marginBottom="70dp"
         android:max="100"
         android:progress="100"
-        android:progressTint="@color/copper"
-        android:thumb="@drawable/thumb" />
+        android:progressTint="#913636"
+        android:thumb="@drawable/thumbbrown" />
 
 
     <SeekBar
@@ -45,8 +45,8 @@
         android:layout_marginBottom="120dp"
         android:max="100"
         android:progress="100"
-        android:progressTint="@color/copper"
-        android:thumb="@drawable/thumb" />
+        android:progressTint="#03fcba"
+        android:thumb="@drawable/thumbgreen" />
 
     <SeekBar
         android:id="@+id/seekBar2"
@@ -59,8 +59,8 @@
         android:layout_marginBottom="170dp"
         android:max="100"
         android:progress="100"
-        android:progressTint="@color/copper"
-        android:thumb="@drawable/thumb" />
+        android:progressTint="#ffffff"
+        android:thumb="@drawable/thumbwhite" />
 
     <SeekBar
         android:id="@+id/seekBar1"
@@ -73,8 +73,8 @@
         android:layout_marginBottom="220dp"
         android:max="100"
         android:progress="1100"
-        android:progressTint="@color/copper"
-        android:thumb="@drawable/thumb" />
+        android:progressTint="@android:color/holo_blue_bright"
+        android:thumb="@drawable/thumbdark" />
 
     <Button
         android:id="@+id/closeMixer"

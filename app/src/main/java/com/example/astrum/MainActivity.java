@@ -39,12 +39,15 @@ import android.widget.VideoView;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
     final static int planetsamount = 5;
 
     //Create an undeclared button object.
     private ImageButton SettingsButton;
     private Button OrbitButton;
+
+    private int seekBarsavedProg = 0;
 
     //create volume control
     private SeekBar VolumeSeekbar;
@@ -66,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
     static float[] VolForMixerOnCreate = new float[planetsamount];
     VideoView[] planetsvid = new VideoView[planetsamount];
 
-    int SysNum;
+    int SysNum = 1;
+    ChooseSystems chooseSystems;
 
 
     @Override
@@ -75,8 +79,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ChooseSystems chooseSystems = new ChooseSystems();
-        SysNum = chooseSystems.getSystemVal();
+        chooseSystems = new ChooseSystems();
 
 
         //request for fragment transaction, need supports because this one is not extending Fragment.
@@ -116,23 +119,25 @@ public class MainActivity extends AppCompatActivity {
         //initiate master volume slider
         initControls();
         //start animation for orbit
-        OrbitButton.setOnClickListener(new View.OnClickListener() {
+        OrbitButton.setOnClickListener(new View.OnClickListener()
+        {
             private int radiuschange = 0;
             private int extraheight = 130;
 
             @Override
             public void onClick(View v)
             {
+                SysNum = chooseSystems.getSystemVal();
 
                 //which audio sounds get played should be decided here.
                 if (check)
                 {
                     //In functions below, use SystemSound value to decide which sound to play.
-                    PlayMercury();
-                    PlayVenus();
-                    PlayEarth();
-                    PlayJupiter();
-                    PlayMars();
+                    PlayOrb1();
+                    PlayOrb2();
+                    PlayOrb3();
+                    PlayOrb4();
+                    PlayOrb5();
 
                     //Get volume for planets
                     for (int i = 0; i < planetsamount; i++)
@@ -147,8 +152,6 @@ public class MainActivity extends AppCompatActivity {
                     for (int i = 0; i < planetsamount; i++)
                     {
                         PlanetAnimation(planetButtons[i], check, i, radiuschange, extraheight);
-                        //AnimationThread animthread = new AnimationThread(planetButtons[i], check, i, radiuschange, extraheight);
-                        //animthread.start();
                         radiuschange += 44;
                         extraheight += 45;
 
@@ -161,11 +164,11 @@ public class MainActivity extends AppCompatActivity {
                     check = false;
                 } else {
                     //for sounds
-                    PlayMercury();
-                    PlayVenus();
-                    PlayEarth();
-                    PlayJupiter();
-                    PlayMars();
+                    PlayOrb1();
+                    PlayOrb2();
+                    PlayOrb3();
+                    PlayOrb4();
+                    PlayOrb5();
 
 
                     //reset values
@@ -187,6 +190,14 @@ public class MainActivity extends AppCompatActivity {
 
     }//OnCreate
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        //resume master slider volume
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, seekBarsavedProg, 0);
+    }
+
 //---------------------------------------------------------------------------------------------------
 
     public void initControls()
@@ -203,8 +214,10 @@ public class MainActivity extends AppCompatActivity {
 
             VolumeSeekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
                 @Override
-                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+                {
                     audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
+                    seekBarsavedProg = progress;
                 }
 
                 @Override
@@ -230,90 +243,795 @@ public class MainActivity extends AppCompatActivity {
 
 
     //takes care of playing when button pressed and then stop when button pressed again
-    public void PlayMercury()
+    public void PlayOrb1() //audiounit[0], planetsval[0]. planetid0
     {
-        if (ChooseSoundsMenu.PlanetsVal[0] == 0)
+        final int unit = 0;
+        if (SysNum == 1)
         {
-            if (check)
-            {
-                audioUnit[0] = new AudioLoader(this, R.raw.mercurynotdone, 0);
-            }
-            else
-            {
 
-                audioUnit[0].StopSound();
-                audioUnit[0] = null;
-            }
         }
-        //Mercury
-        //if one is selected
+
+        if (SysNum == 2)
+        {
+
+        }
+
+        if (SysNum == 3)
+        {
+
+        }
+
+        if (SysNum == 4)
+        {
+
+        }
+
+        if (SysNum == 5)
+        {
+            if (ChooseSoundsMenu.PlanetsVal[unit] == 0)
+            {
+                if (check)
+                {
+                    audioUnit[unit] = new AudioLoader(this, R.raw.juporb11, 0);
+                }
+                else
+                {
+
+                    audioUnit[unit].StopSound();
+                    audioUnit[unit] = null;
+                }
+            }
+
+            if (ChooseSoundsMenu.PlanetsVal[unit] == 1)
+            {
+                if (check)
+                {
+                    audioUnit[unit] = new AudioLoader(this, R.raw.juporb12, 0);
+                }
+                else
+                {
+
+                    audioUnit[unit].StopSound();
+                    audioUnit[unit] = null;
+                }
+            }
+
+            if (ChooseSoundsMenu.PlanetsVal[unit] == 2)
+            {
+                if (check)
+                {
+                    audioUnit[unit] = new AudioLoader(this, R.raw.juporb13, 0);
+                }
+                else
+                {
+
+                    audioUnit[unit].StopSound();
+                    audioUnit[unit] = null;
+                }
+            }
+
+            if (ChooseSoundsMenu.PlanetsVal[unit] == 3)
+            {
+                if (check)
+                {
+                    audioUnit[unit] = new AudioLoader(this, R.raw.juporb14, 0);
+                }
+                else
+                {
+
+                    audioUnit[unit].StopSound();
+                    audioUnit[unit] = null;
+                }
+            }
+
+            if (ChooseSoundsMenu.PlanetsVal[unit] == 4)
+            {
+                if (check)
+                {
+                    audioUnit[unit] = new AudioLoader(this, R.raw.juporb15, 0);
+                }
+                else
+                {
+
+                    audioUnit[unit].StopSound();
+                    audioUnit[unit] = null;
+                }
+            }
+
+        }
+
+        if (SysNum == 6)
+        {
+
+        }
+
+        if (SysNum == 7)
+        {
+            if (ChooseSoundsMenu.PlanetsVal[unit] == 0)
+            {
+                if (check)
+                {
+                    audioUnit[unit] = new AudioLoader(this, R.raw.urorb11, 0);
+                }
+                else
+                {
+
+                    audioUnit[unit].StopSound();
+                    audioUnit[unit] = null;
+                }
+            }
+
+            if (ChooseSoundsMenu.PlanetsVal[unit] == 1)
+            {
+                if (check)
+                {
+                    audioUnit[unit] = new AudioLoader(this, R.raw.urorb12, 0);
+                }
+                else
+                {
+
+                    audioUnit[unit].StopSound();
+                    audioUnit[unit] = null;
+                }
+            }
+
+            if (ChooseSoundsMenu.PlanetsVal[unit] == 2)
+            {
+                if (check)
+                {
+                    audioUnit[unit] = new AudioLoader(this, R.raw.urorb13, 0);
+                }
+                else
+                {
+
+                    audioUnit[unit].StopSound();
+                    audioUnit[unit] = null;
+                }
+            }
+
+            if (ChooseSoundsMenu.PlanetsVal[unit] == 3)
+            {
+                if (check)
+                {
+                    audioUnit[unit] = new AudioLoader(this, R.raw.urorb14, 0);
+                }
+                else
+                {
+
+                    audioUnit[unit].StopSound();
+                    audioUnit[unit] = null;
+                }
+            }
+
+            if (ChooseSoundsMenu.PlanetsVal[unit] == 4)
+            {
+                if (check)
+                {
+                    audioUnit[unit] = new AudioLoader(this, R.raw.urorb15, 0);
+                }
+                else
+                {
+
+                    audioUnit[unit].StopSound();
+                    audioUnit[unit] = null;
+                }
+            }
+
+        }
+
+        if (SysNum == 8)
+        {
+
+        }
 
     }
 
-    public void PlayVenus()
+    //-------------------------------------------------------------------------------------------------------------------
+
+    public void PlayOrb2() //audiounit[1], planetsval[1]. planetid1
     {
-        //Venus
-        //if one is selected
-        //This switch case might not be working so well.
-        if (ChooseSoundsMenu.PlanetsVal[1] == 0)
+        final int unit = 1;
+        if (SysNum == 1)
         {
-            if (check)
-            {
-                audioUnit[1] = new AudioLoader(this, R.raw.venus1, 1);
-            }
-            else
-            {
 
-                audioUnit[1].StopSound();
-                audioUnit[1] = null;
+        }
+
+        if (SysNum == 2)
+        {
+
+        }
+
+        if (SysNum == 3)
+        {
+
+        }
+
+        if (SysNum == 4)
+        {
+
+        }
+
+        if (SysNum == 5)
+        {
+            if (ChooseSoundsMenu.PlanetsVal[unit] == 0)
+            {
+                if (check)
+                {
+                    audioUnit[unit] = new AudioLoader(this, R.raw.juporb21, unit);
+                }
+                else
+                {
+
+                    audioUnit[unit].StopSound();
+                    audioUnit[unit] = null;
+                }
+            }
+
+            if (ChooseSoundsMenu.PlanetsVal[unit] == 1)
+            {
+                if (check)
+                {
+                    audioUnit[unit] = new AudioLoader(this, R.raw.juporb22, unit);
+                }
+                else
+                {
+
+                    audioUnit[unit].StopSound();
+                    audioUnit[unit] = null;
+                }
+            }
+
+            if (ChooseSoundsMenu.PlanetsVal[unit] == 2)
+            {
+                if (check)
+                {
+                    audioUnit[unit] = new AudioLoader(this, R.raw.juporb23, unit);
+                }
+                else
+                {
+                    audioUnit[unit].StopSound();
+                    audioUnit[unit] = null;
+                }
+            }
+
+            if (ChooseSoundsMenu.PlanetsVal[unit] == 3)
+            {
+                if (check)
+                {
+                    audioUnit[unit] = new AudioLoader(this, R.raw.juporb24, unit);
+                }
+                else
+                {
+
+                    audioUnit[unit].StopSound();
+                    audioUnit[unit] = null;
+                }
+            }
+
+            if (ChooseSoundsMenu.PlanetsVal[unit] == 4)
+            {
+                if (check)
+                {
+                    audioUnit[unit] = new AudioLoader(this, R.raw.juporb25, unit);
+                }
+                else
+                {
+
+                    audioUnit[unit].StopSound();
+                    audioUnit[unit] = null;
+                }
+            }
+
+        }
+
+        if (SysNum == 6)
+        {
+
+        }
+
+        if (SysNum == 7)
+        {
+            if (ChooseSoundsMenu.PlanetsVal[unit] == 0)
+            {
+                if (check)
+                {
+                    audioUnit[unit] = new AudioLoader(this, R.raw.urorb21, unit);
+                }
+                else
+                {
+
+                    audioUnit[unit].StopSound();
+                    audioUnit[unit] = null;
+                }
+            }
+
+            if (ChooseSoundsMenu.PlanetsVal[unit] == 1)
+            {
+                if (check)
+                {
+                    audioUnit[unit] = new AudioLoader(this, R.raw.urorb22, unit);
+                }
+                else
+                {
+
+                    audioUnit[unit].StopSound();
+                    audioUnit[unit] = null;
+                }
+            }
+
+            if (ChooseSoundsMenu.PlanetsVal[unit] == 2)
+            {
+                if (check)
+                {
+                    audioUnit[unit] = new AudioLoader(this, R.raw.urorb23, unit);
+                }
+                else
+                {
+
+                    audioUnit[unit].StopSound();
+                    audioUnit[unit] = null;
+                }
+            }
+
+            if (ChooseSoundsMenu.PlanetsVal[unit] == 3)
+            {
+                if (check)
+                {
+                    audioUnit[unit] = new AudioLoader(this, R.raw.urorb24, unit);
+                }
+                else
+                {
+
+                    audioUnit[unit].StopSound();
+                    audioUnit[unit] = null;
+                }
+            }
+
+            if (ChooseSoundsMenu.PlanetsVal[unit] == 4)
+            {
+                if (check)
+                {
+                    audioUnit[unit] = new AudioLoader(this, R.raw.urorb25, unit);
+                }
+                else
+                {
+
+                    audioUnit[unit].StopSound();
+                    audioUnit[unit] = null;
+                }
+            }
+
+        }
+
+        if (SysNum == 8)
+        {
+
+        }
+    }
+//---------------------------------------------------------------------------------------------------------------------------
+    public void PlayOrb3()  //audiounit[2], planetsval[2]. planetid2
+    {
+        {
+            final int unit = 2;
+            if (SysNum == 1) {
+
+            }
+
+            if (SysNum == 2) {
+
+            }
+
+            if (SysNum == 3) {
+
+            }
+
+            if (SysNum == 4) {
+
+            }
+
+            if (SysNum == 5)
+            {
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 0) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.juporb31, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 1) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.juporb32, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 2) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.juporb33, unit);
+                    } else {
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 3) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.juporb34, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 4) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.juporb35, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+            }
+
+            if (SysNum == 6) {
+
+            }
+
+            if (SysNum == 7) {
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 0) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.urorb31, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 1) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.urorb32, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 2) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.urorb33, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 3) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.urorb34, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 4) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.urorb35, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+            }
+
+            if (SysNum == 8) {
+
+            }
+        }
+    }
+    //--------------------------------------------------------------------------------------------------------------------------
+
+    public void PlayOrb4() //audiounit[3], planetsval[3]. planetid3
+    {
+        {
+            final int unit = 3;
+            if (SysNum == 1) {
+
+            }
+
+            if (SysNum == 2) {
+
+            }
+
+            if (SysNum == 3) {
+
+            }
+
+            if (SysNum == 4) {
+
+            }
+
+            if (SysNum == 5)
+            {
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 0)
+                {
+                    if (check)
+                    {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.juporb41, unit);
+                    } else {
+                        try
+                        {
+                            audioUnit[unit].StopSound();
+                            audioUnit[unit] = null;
+                        }
+                        catch (NullPointerException e)
+                        {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 1) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.juporb42, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 2) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.juporb43, unit);
+                    } else {
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 3) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.juporb44, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 4) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.juporb45, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+            }
+
+            if (SysNum == 6) {
+
+            }
+
+            if (SysNum == 7) {
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 0) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.urorb41, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 1) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.urorb42, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 2) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.urorb43, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 3) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.urorb44, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 4) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.urorb45, unit);
+                    } else {
+                        try
+                        {
+                            audioUnit[unit].StopSound();
+                            audioUnit[unit] = null;
+                        }
+                        catch (NullPointerException e)
+                        {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }
+
+            }
+
+            if (SysNum == 8) {
+
             }
         }
     }
 
-    public void PlayEarth() {
-        if (ChooseSoundsMenu.PlanetsVal[2] == 0)
+    public void PlayOrb5() //audiounit[4], planetsval[4]. planetid4
+    {
         {
-            if (check)
-            {
-                audioUnit[2] = new AudioLoader(this, R.raw.earthnotdone, 2);
+            final int unit = 4;
+            if (SysNum == 1) {
+
             }
-            else
+
+            if (SysNum == 2) {
+
+            }
+
+            if (SysNum == 3) {
+
+            }
+
+            if (SysNum == 4) {
+
+            }
+
+            if (SysNum == 5)
+            {
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 0) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.juporb51, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 1) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.juporb52, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 2) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.juporb53, unit);
+                    } else {
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 3) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.juporb54, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 4) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.juporb55, unit);
+                    } else
+                        {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+            }
+
+            if (SysNum == 6) {
+
+            }
+
+            if (SysNum == 7) {
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 0) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.urorb51, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 1) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.urorb52, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 2) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.urorb53, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 3) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.urorb54, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+                if (ChooseSoundsMenu.PlanetsVal[unit] == 4) {
+                    if (check) {
+                        audioUnit[unit] = new AudioLoader(this, R.raw.urorb55, unit);
+                    } else {
+
+                        audioUnit[unit].StopSound();
+                        audioUnit[unit] = null;
+                    }
+                }
+
+            }
+
+            if (SysNum == 8)
             {
 
-                audioUnit[2].StopSound();
-                audioUnit[2] = null;
-            }
-        }
-    }
-
-    public void PlayMars() {
-        if (ChooseSoundsMenu.PlanetsVal[3] == 0)
-        {
-            if (check)
-            {
-                audioUnit[3] = new AudioLoader(this, R.raw.marsdone, 3);
-            }
-            else
-            {
-
-                audioUnit[3].StopSound();
-                audioUnit[3] = null;
-            }
-        }
-    }
-
-    public void PlayJupiter() {
-        if (ChooseSoundsMenu.PlanetsVal[4] == 0)
-        {
-            if (check)
-            {
-                audioUnit[4] = new AudioLoader(this, R.raw.jupiternotdone, 4);
-            }
-            else
-            {
-
-                audioUnit[4].StopSound();
-                audioUnit[4] = null;
             }
         }
     }
@@ -334,6 +1052,7 @@ public class MainActivity extends AppCompatActivity {
                 PlanetAnim.setInterpolator(new LinearInterpolator());
                 PlanetAnim.setRepeatCount(Animation.INFINITE);
                 planet.startAnimation(PlanetAnim);
+                Log.d("Started animation for ", String.valueOf(i));
             }
 
         }

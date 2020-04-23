@@ -34,14 +34,23 @@ public class AudioLoader {
         });
     }
 
-     void StopSound() {
-        curPlayer.stop();
-        curPlayer.release();
-        curPlayer = null;
+     void StopSound()
+     {
+         try
+         {
+             curPlayer.stop();
+             curPlayer.release();
+             curPlayer = null;
 
-        nextPlayer.stop();
-        nextPlayer.release();
-        nextPlayer = null;
+             nextPlayer.stop();
+             nextPlayer.release();
+             nextPlayer = null;
+         }
+         catch (NullPointerException e)
+         {
+             e.printStackTrace();
+         }
+
 
     }
 

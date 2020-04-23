@@ -27,6 +27,8 @@ public class AdjustVolumeFrag extends Fragment
     private final static int MAX_VOLUME = 100;
     public static SeekBar[] seek = new SeekBar[planetsamount];
     public static float[] volume = new float[planetsamount];
+    int ii;
+    SharedPreferences sharedPrefLink[] = new SharedPreferences[planetsamount];
 
 
 
@@ -69,8 +71,8 @@ public class AdjustVolumeFrag extends Fragment
 
     public void LoadProgress()
     {
-        SharedPreferences sharedPref[] = new SharedPreferences[planetsamount];
-        int seekGetShared[] = new int[planetsamount];
+        SharedPreferences[]  sharedPref= new SharedPreferences[planetsamount];
+        int[]  seekGetShared= new int[planetsamount];
         for (int i = 0; i < planetsamount; i++)
         {
             sharedPref[i] = getContext().getSharedPreferences(String.format("progress%d", i), MODE_PRIVATE);
