@@ -90,6 +90,14 @@ public class MainActivity extends AppCompatActivity
         fragmenttransaction.commit();
 
 
+
+
+
+
+
+
+
+
         //Declare the button object.
         SettingsButton = findViewById(R.id.imageButton3);
         SettingsButton.setOnClickListener(new View.OnClickListener() {
@@ -98,8 +106,8 @@ public class MainActivity extends AppCompatActivity
                 openSettings();
                 if (!check)
                 {
-                   // OrbitButton.performClick();
-                    check = true;
+                   OrbitButton.performClick();
+                   //check = true;
                 }
             }
         });
@@ -247,6 +255,7 @@ public class MainActivity extends AppCompatActivity
     public void openSettings() {
         Intent intent = new Intent(this, Settings.class);
         startActivity(intent);
+
     }
 
 

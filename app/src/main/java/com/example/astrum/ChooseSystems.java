@@ -22,6 +22,7 @@ public class ChooseSystems extends AppCompatActivity
     private static int System;
     private ImageCycler imgCyc = new ImageCycler();
     private ImageView imgView;
+    private static boolean firstStart = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -29,6 +30,8 @@ public class ChooseSystems extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_systems);
         Log.d("System: ", String.valueOf(System));
+
+
 
         imgView = findViewById(R.id.ImageView);
 
@@ -46,7 +49,7 @@ public class ChooseSystems extends AppCompatActivity
                 public void run() {
                     YoYo.with(Techniques.Pulse).duration(2000).repeat(Animation.INFINITE).playOn(imgView);
                 }
-            }, 2000);
+            }, 1600);
         }
 
 
@@ -71,19 +74,39 @@ public class ChooseSystems extends AppCompatActivity
                     }
                     else
                     {
-                        if (imgView != null)
+
+                        if (!firstStart)
                         {
-                            imgView.clearAnimation();
+                            imgCyc.setImageView(System - 1, imgView);
+                            YoYo.with(Techniques.DropOut).duration(1600).playOn(imgView);
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    YoYo.with(Techniques.Pulse).duration(2000).repeat(Animation.INFINITE).playOn(imgView);
+                                }
+                            }, 2000);
+                            firstStart = true;
                         }
-                        imgCyc.setImageView(System - 1, imgView);
-                        YoYo.with(Techniques.DropOut).duration(1600).playOn(imgView);
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                YoYo.with(Techniques.Pulse).duration(2000).repeat(Animation.INFINITE).playOn(imgView);
-                            }
-                        }, 2000);
+                        else
+                        {
+                            YoYo.with(Techniques.ZoomOut).duration(1000).playOn(imgView);
+
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    imgCyc.setImageView(System - 1, imgView);
+                                    YoYo.with(Techniques.DropOut).duration(1300).playOn(imgView);
+                                }
+                            }, 1000);
+                            //transition out animation
+                            //change image after end of out duration
+                            //transition in animation
+                            //no need for pulse because pulse set to infinite above
+                        }
+
 
 
                     }

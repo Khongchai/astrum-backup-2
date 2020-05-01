@@ -10,7 +10,7 @@ public class ImageCycler
 
     private int[] ImageIDs = new int[]
             {
-                    R.drawable.mecury,
+                    R.drawable.mercuryfix2,
                     R.drawable.venus,
                     R.drawable.earth,
                     R.drawable.mars,
@@ -23,7 +23,7 @@ public class ImageCycler
     void setImageView (int count, ImageView imgView)
     {
 
-        Log.d("countval", String.valueOf(count));
+        //Log.d("countval", String.valueOf(count));
         imgView.setBackgroundResource(ImageIDs[count]);
     }
 
