@@ -16,7 +16,7 @@
         android:layout_marginBottom="20dp"
         android:max="100"
         android:progress="100"
-        android:progressTint="@color/copper"
+        android:progressTint="#AEC6CF"
         android:thumb="@drawable/thumb" />
 
     <SeekBar
@@ -30,7 +30,7 @@
         android:layout_marginBottom="70dp"
         android:max="100"
         android:progress="100"
-        android:progressTint="#913636"
+        android:progressTint="@color/irispastel10"
         android:thumb="@drawable/thumbbrown" />
 
 
@@ -45,7 +45,7 @@
         android:layout_marginBottom="120dp"
         android:max="100"
         android:progress="100"
-        android:progressTint="#03fcba"
+        android:progressTint="#b39eb5"
         android:thumb="@drawable/thumbgreen" />
 
     <SeekBar
@@ -59,7 +59,7 @@
         android:layout_marginBottom="170dp"
         android:max="100"
         android:progress="100"
-        android:progressTint="#ffffff"
+        android:progressTint="@color/irispastel7"
         android:thumb="@drawable/thumbwhite" />
 
     <SeekBar
@@ -73,7 +73,7 @@
         android:layout_marginBottom="220dp"
         android:max="100"
         android:progress="1100"
-        android:progressTint="@android:color/holo_blue_bright"
+        android:progressTint="@color/irispastel4"
         android:thumb="@drawable/thumbdark" />
 
     <Button
@@ -82,9 +82,9 @@
         android:layout_height="wrap_content"
 
         android:layout_marginTop="660dp"
-        android:backgroundTint="@color/cardview_dark_background"
+        android:backgroundTint="@color/irispastel1"
         android:text="Hide Mixer"
-        android:textColor="@color/copper" />
+        android:textColor="#000000" />
 
 
 </RelativeLayout>

@@ -36,21 +36,25 @@ public class AudioLoader {
 
      void StopSound()
      {
-         try
-         {
-             curPlayer.stop();
-             curPlayer.release();
-             curPlayer = null;
 
-             nextPlayer.stop();
-             nextPlayer.release();
-             nextPlayer = null;
-         }
-         catch (NullPointerException e)
+         for (int i = 0; i < 2; i++)
          {
-             e.printStackTrace();
-         }
+             try
+             {
+                 curPlayer.stop();
+                 curPlayer.release();
+                 curPlayer = null;
 
+                 nextPlayer.stop();
+                 nextPlayer.release();
+                 nextPlayer = null;
+             }
+             catch (NullPointerException e)
+             {
+                 e.printStackTrace();
+             }
+
+         }
 
     }
 

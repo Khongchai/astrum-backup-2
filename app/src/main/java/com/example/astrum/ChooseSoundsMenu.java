@@ -149,8 +149,8 @@ public class ChooseSoundsMenu extends AppCompatActivity
         });
 
         //Load Venus value
-        SharedPreferences sharedPref0 = getSharedPreferences("Venus",MODE_PRIVATE);
-        int MercuryShared = sharedPref0.getInt("VenusKey", -1);
+        SharedPreferences sharedPref0 = getSharedPreferences("Mercury",MODE_PRIVATE);
+        int MercuryShared = sharedPref0.getInt("MercuryKey", -1);
         if(MercuryShared != -1)
         {
             // set the selected value of the spinner

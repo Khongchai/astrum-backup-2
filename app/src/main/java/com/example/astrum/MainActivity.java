@@ -96,8 +96,10 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 openSettings();
-                if (!check) {
-                    OrbitButton.performClick();
+                if (!check)
+                {
+                   // OrbitButton.performClick();
+                    check = true;
                 }
             }
         });
@@ -151,6 +153,7 @@ public class MainActivity extends AppCompatActivity
                     //initiate animation
                     for (int i = 0; i < planetsamount; i++)
                     {
+
                         PlanetAnimation(planetButtons[i], check, i, radiuschange, extraheight);
                         radiuschange += 44;
                         extraheight += 45;
@@ -161,7 +164,9 @@ public class MainActivity extends AppCompatActivity
                             audioUnit[i].PlayAudio();
                         }
                     }
-                    check = false;
+                  check = false;
+
+
                 } else {
                     //for sounds
                     PlayOrb1();
@@ -259,7 +264,6 @@ public class MainActivity extends AppCompatActivity
                 }
                 else
                 {
-
                     audioUnit[unit].StopSound();
                     audioUnit[unit] = null;
                 }
@@ -269,6 +273,7 @@ public class MainActivity extends AppCompatActivity
             {
                 if (check)
                 {
+
                     audioUnit[unit] = new AudioLoader(this, R.raw.mercorb12, 0);
                 }
                 else
@@ -283,6 +288,7 @@ public class MainActivity extends AppCompatActivity
             {
                 if (check)
                 {
+
                     audioUnit[unit] = new AudioLoader(this, R.raw.mercorb13, 0);
                 }
                 else
@@ -297,6 +303,7 @@ public class MainActivity extends AppCompatActivity
             {
                 if (check)
                 {
+
                     audioUnit[unit] = new AudioLoader(this, R.raw.mercorb14, 0);
                 }
                 else
@@ -311,6 +318,7 @@ public class MainActivity extends AppCompatActivity
             {
                 if (check)
                 {
+
                     audioUnit[unit] = new AudioLoader(this, R.raw.mercorb15, 0);
                 }
                 else
@@ -345,6 +353,7 @@ public class MainActivity extends AppCompatActivity
             {
                 if (check)
                 {
+
                     audioUnit[unit] = new AudioLoader(this, R.raw.juporb11, 0);
                 }
                 else
@@ -359,6 +368,7 @@ public class MainActivity extends AppCompatActivity
             {
                 if (check)
                 {
+
                     audioUnit[unit] = new AudioLoader(this, R.raw.juporb12, 0);
                 }
                 else
@@ -373,6 +383,7 @@ public class MainActivity extends AppCompatActivity
             {
                 if (check)
                 {
+
                     audioUnit[unit] = new AudioLoader(this, R.raw.juporb13, 0);
                 }
                 else
@@ -387,6 +398,7 @@ public class MainActivity extends AppCompatActivity
             {
                 if (check)
                 {
+
                     audioUnit[unit] = new AudioLoader(this, R.raw.juporb14, 0);
                 }
                 else
@@ -401,11 +413,11 @@ public class MainActivity extends AppCompatActivity
             {
                 if (check)
                 {
+                    check = false;
                     audioUnit[unit] = new AudioLoader(this, R.raw.juporb15, 0);
                 }
                 else
                 {
-
                     audioUnit[unit].StopSound();
                     audioUnit[unit] = null;
                 }

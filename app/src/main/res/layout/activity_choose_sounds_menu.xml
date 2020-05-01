@@ -168,7 +168,7 @@
         android:id="@+id/commitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/copper"
+        android:background="@color/irispastel1"
         android:layout_marginStart="108dp"
         android:layout_marginTop="24dp"
         android:text="Commit"

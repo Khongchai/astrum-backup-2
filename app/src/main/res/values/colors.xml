@@ -7,4 +7,18 @@
     <color name="copper">#b87333</color>
     <color name="crimson">#AC143C</color>
     <color name="NiceGray">#2a2727</color>
+    <color name="pastelbrown1">#d08a55</color>
+    <color name="pastelbrown2">#a1836b</color>
+    <color name ="pastelbrown3">#836953</color>
+    <color name="irispastel1">#90604C</color>
+    <color name="irispastel2">#B98E77</color>
+    <color name="irispastel3">#B8AEA4</color>
+    <color name="irispastel4">#7B7167</color>
+    <color name="irispastel5">#E1D3B6</color>
+    <color name ="irispastel6">#C0A290</color>
+    <color name ="irispastel7">#E9E6E1</color>
+    <color name="irispastel8" >#d49a89</color>
+    <color name="irispastel9" >#f7d1ba</color>
+    <color name="irispastel10" >#557571</color>
+
 </resources>

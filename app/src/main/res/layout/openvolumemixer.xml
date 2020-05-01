@@ -9,8 +9,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_margin="632dp"
-        android:backgroundTint="@color/cardview_dark_background"
-        android:textColor="@color/copper"
+        android:backgroundTint="@color/irispastel1"
+        android:textColor="#000000"
         android:onClick="OpenMixer"
         android:text="Open mixer"
         />
