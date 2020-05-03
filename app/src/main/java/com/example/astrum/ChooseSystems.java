@@ -11,6 +11,7 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
@@ -23,6 +24,19 @@ public class ChooseSystems extends AppCompatActivity
     private ImageCycler imgCyc = new ImageCycler();
     private ImageView imgView;
     private static boolean firstStart = false;
+    private TextView DisplayPlanetName;
+    private String[] PlanetNames = new String[]
+            {
+                    "Planet: Mercury",
+                    "Planet: Venus",
+                    "Planet: Earth",
+                    "Planet: Mars",
+                    "Planet: Jupiter",
+                    "Planet: Saturn",
+                    "Planet: Uranus",
+                    "Planet: Neptune",
+                    "Planet: "
+            };
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -30,8 +44,9 @@ public class ChooseSystems extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_systems);
         Log.d("System: ", String.valueOf(System));
+        DisplayPlanetName  = findViewById(R.id.PlanetNameText);
 
-
+        HandlerforToast("Enter Planet num: 1 - 8", 3000);
 
         imgView = findViewById(R.id.ImageView);
 
@@ -40,7 +55,7 @@ public class ChooseSystems extends AppCompatActivity
 
         if (System != 0)
         {
-
+            DisplayPlanetName.setText(PlanetNames[System - 1]);
             imgCyc.setImageView(System - 1, imgView);
             YoYo.with(Techniques.DropOut).duration(1600).playOn(imgView);
             Handler handler = new Handler();
@@ -51,9 +66,6 @@ public class ChooseSystems extends AppCompatActivity
                 }
             }, 1600);
         }
-
-
-
 
 
         commitButton.setOnClickListener(new View.OnClickListener()
@@ -67,16 +79,14 @@ public class ChooseSystems extends AppCompatActivity
                     Log.d("System value:", String.valueOf(System));
                     if (System  > 8 || System < 0)
                     {
-                        final Toast toast = Toast.makeText(getApplicationContext(), "Please enter a value between 1 - 8", Toast.LENGTH_SHORT);
-                        toast.show();
-                        Handler handler = new Handler();
-                        handler.postDelayed(new ToastCancel(toast), 2000);
+                        HandlerforToast("Please enter a value between 1 - 8", 2000);
                     }
                     else
                     {
 
                         if (!firstStart)
                         {
+                            DisplayPlanetName.setText(PlanetNames[System-1]);
                             imgCyc.setImageView(System - 1, imgView);
                             YoYo.with(Techniques.DropOut).duration(1600).playOn(imgView);
                             Handler handler = new Handler();
@@ -92,7 +102,7 @@ public class ChooseSystems extends AppCompatActivity
                         else
                         {
                             YoYo.with(Techniques.ZoomOut).duration(1000).playOn(imgView);
-
+                            DisplayPlanetName.setText(PlanetNames[System-1]);
                             Handler handler = new Handler();
                             handler.postDelayed(new Runnable() {
                                 @Override
@@ -114,10 +124,7 @@ public class ChooseSystems extends AppCompatActivity
                 }
                 catch (NullPointerException | NumberFormatException e )
                 {
-                    final Toast toast = Toast.makeText(getApplicationContext(), "Please enter a value between 1 - 8", Toast.LENGTH_SHORT);
-                    toast.show();
-                    Handler handler = new Handler();
-                    handler.postDelayed(new ToastCancel(toast), 2000);
+                    HandlerforToast("Please enter a value between 1-8", 2000);
                 }
 
 
@@ -141,6 +148,15 @@ public class ChooseSystems extends AppCompatActivity
         {
             toast.cancel();
         }
+
+    }
+
+    void HandlerforToast (String ToastText, int delaytime)
+    {
+        final Toast toast = Toast.makeText(getApplicationContext(), ToastText, Toast.LENGTH_SHORT);
+        toast.show();
+        Handler handler = new Handler();
+        handler.postDelayed(new ToastCancel(toast), delaytime);
 
     }
 

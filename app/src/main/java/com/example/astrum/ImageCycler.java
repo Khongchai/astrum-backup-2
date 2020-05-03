@@ -10,7 +10,7 @@ public class ImageCycler
 
     private int[] ImageIDs = new int[]
             {
-                    R.drawable.mercuryfix2,
+                    R.drawable.mercury,
                     R.drawable.venus,
                     R.drawable.earth,
                     R.drawable.mars,

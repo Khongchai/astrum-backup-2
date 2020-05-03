@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity
 
     private Handler planetHandler = new Handler();
 
+
     Button planetButtons[] = new Button[planetsamount];
 
     static float[] VolForMixerOnCreate = new float[planetsamount];
@@ -208,7 +209,11 @@ public class MainActivity extends AppCompatActivity
     {
         super.onResume();
         //resume master slider volume
-        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, seekBarsavedProg, 0);
+        if (VolumeSeekbar != null)
+        {
+            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, VolumeSeekbar.getProgress(), 0);
+        }
+
     }
 
 //---------------------------------------------------------------------------------------------------

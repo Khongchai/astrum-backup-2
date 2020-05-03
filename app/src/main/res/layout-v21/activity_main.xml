@@ -47,10 +47,10 @@
         android:id="@+id/PlanetTwo"
         android:layout_width="10dp"
         android:layout_height="10dp"
-        android:layout_above="@+id/OrbitButtonBG"
+        android:layout_above="@+id/PlanetOne"
 
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="29dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/roundbutton"
         android:backgroundTint="@color/irispastel7" />
 
@@ -58,10 +58,10 @@
         android:id="@+id/planetThree"
         android:layout_width="10dp"
         android:layout_height="10dp"
-        android:layout_above="@+id/OrbitButtonBG"
+        android:layout_above="@+id/PlanetTwo"
 
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="47dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/roundbutton"
         android:backgroundTint="#b39eb5" />
 
@@ -69,10 +69,10 @@
         android:id="@+id/planetFour"
         android:layout_width="10dp"
         android:layout_height="10dp"
-        android:layout_above="@+id/OrbitButtonBG"
+        android:layout_above="@+id/planetThree"
 
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="65dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/roundbutton"
         android:backgroundTint="@color/irispastel10" />
 
@@ -80,10 +80,10 @@
         android:id="@+id/planetFive"
         android:layout_width="10dp"
         android:layout_height="10dp"
-        android:layout_above="@+id/OrbitButtonBG"
+        android:layout_above="@+id/planetFour"
 
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="83dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/roundbutton"
         android:backgroundTint="#AEC6CF" />
 
