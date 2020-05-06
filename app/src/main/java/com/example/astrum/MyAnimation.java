@@ -1,5 +1,6 @@
 package com.example.astrum;
 
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
@@ -56,6 +57,8 @@ public class MyAnimation extends Animation
 
         float angleDeg = (interpolatedTime * 360f + 90) % 360;
         float angleRad = (float) Math.toRadians(angleDeg);
+        Log.d("Angle in Degree: ", String.valueOf(angleDeg));
+
 
         // r = radius, cx and cy = center point, a = angle (radians)
         float x = (float) (((view.getWidth()/2)) + r * Math.cos(angleRad));

@@ -11,6 +11,7 @@
 
     <include layout="@layout/content_main" />
 
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,24 +23,15 @@
 
 
     <Button
-
-        android:id="@+id/OrbitButtonBG"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/roundbutton"
-        android:backgroundTint="#311a00"
-        android:textColor="#b87333" />
-
-    <Button
         android:id="@+id/PlanetOne"
         android:layout_width="10dp"
         android:layout_height="10dp"
         android:layout_above="@+id/OrbitButtonBG"
 
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="11dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="212dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="-18dp"
         android:background="@drawable/roundbutton"
         android:backgroundTint="@color/irispastel4" />
 
@@ -48,9 +40,10 @@
         android:layout_width="10dp"
         android:layout_height="10dp"
         android:layout_above="@+id/PlanetOne"
-
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="167dp"
+        android:layout_marginBottom="-10dp"
         android:background="@drawable/roundbutton"
         android:backgroundTint="@color/irispastel7" />
 
@@ -60,10 +53,11 @@
         android:layout_height="10dp"
         android:layout_above="@+id/PlanetTwo"
 
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="-20dp"
         android:background="@drawable/roundbutton"
         android:backgroundTint="#b39eb5" />
+
 
     <Button
         android:id="@+id/planetFour"
@@ -71,8 +65,9 @@
         android:layout_height="10dp"
         android:layout_above="@+id/planetThree"
 
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="178dp"
+        android:layout_marginBottom="-149dp"
         android:background="@drawable/roundbutton"
         android:backgroundTint="@color/irispastel10" />
 
@@ -82,12 +77,11 @@
         android:layout_height="10dp"
         android:layout_above="@+id/planetFour"
 
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
+
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="-24dp"
         android:background="@drawable/roundbutton"
         android:backgroundTint="#AEC6CF" />
-
-
 
     <ImageButton
         android:id="@+id/imageButton3"
@@ -101,6 +95,7 @@
 
     <Button
         android:id="@+id/OrbitButton"
+        android:layout_margin="30dp"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_centerHorizontal="true"

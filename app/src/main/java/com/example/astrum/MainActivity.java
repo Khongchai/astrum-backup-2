@@ -1,5 +1,6 @@
 package com.example.astrum;
 
+import android.graphics.Point;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -14,8 +15,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.text.Layout;
 import android.transition.TransitionManager;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -53,6 +56,8 @@ public class MainActivity extends AppCompatActivity
     private SeekBar VolumeSeekbar;
     private AudioManager audioManager;
 
+    private boolean firststart = false;
+
     RunCheckDur Runnablecheckdur[] = new RunCheckDur[planetsamount];
     Thread threadcheckdur[] = new Thread[planetsamount];
 
@@ -63,6 +68,8 @@ public class MainActivity extends AppCompatActivity
     private final static int MAX_VOLUME = 100;
 
     private Handler planetHandler = new Handler();
+
+    private CircularMotion2[] circMo = new CircularMotion2[5];
 
 
     Button planetButtons[] = new Button[planetsamount];
@@ -82,22 +89,12 @@ public class MainActivity extends AppCompatActivity
 
         chooseSystems = new ChooseSystems();
 
-
         //request for fragment transaction, need supports because this one is not extending Fragment.
         FragmentTransaction fragmenttransaction = getSupportFragmentManager().beginTransaction();
 
         //Tell program to add the fragment container and new openadjustvolume object programmatically
         fragmenttransaction.add(R.id.FragmentsContainer, new AdjustVolumeFrag());
         fragmenttransaction.commit();
-
-
-
-
-
-
-
-
-
 
         //Declare the button object.
         SettingsButton = findViewById(R.id.imageButton3);
@@ -119,16 +116,67 @@ public class MainActivity extends AppCompatActivity
         planetButtons[3] = findViewById(R.id.planetFour);
         planetButtons[4] = findViewById(R.id.planetFive);
 
-        //set all planets players to null and checknull value to false
+
+        //space for new CircAnim
+        //get display size
+        Display mdisp = getWindowManager().getDefaultDisplay();
+        Point mdispSize = new Point();
+        mdisp.getSize(mdispSize);
+        final float MaxX = mdispSize.x;
+        final float MaxY = mdispSize.y;
+        final float MidX = MaxX/2;
+        final float MidY = MaxY/2;
+
+        final float offsetleft;
+        final float offsettop;
+
+        //calculate offset for screen smaller than 1440 (width)
+        if (1440 - MaxX > 0)
+        {
+            offsetleft = (1440 - MaxX) * 0.083f;
+        }
+        //calculate offset for sceren larger than or equals to 1440 (width)
+        else
+        {
+            offsetleft = 0;
+        }
+
+        //calculate offset for screen smaller than 1440 (height)
+        if (2621 - MaxY > 0)
+        {
+            offsettop = ((2612 - MaxY) * 0.06f) + 5;
+        }
+        //calculate offset for sceren larger than or equals to 1440 (width)
+        else
+        {
+            offsettop = 0;
+        }
+
+
+        Log.d("offsetX: ", String.valueOf(offsetleft));
+        Log.d("offsetY: ", String.valueOf(offsettop));
+
+
+
+
+        //set all planets players to null and checknull value to false and set visibility to 0
         for (int i = 0; i < planetsamount; i++)
         {
             CheckReady[i] = 0;
+            if (!firststart)
+            {
+                planetButtons[i].setVisibility(View.INVISIBLE);
+            }
+
         }
 
         OrbitButton = findViewById(R.id.OrbitButton);
 
         //initiate master volume slider
         initControls();
+
+
+
         //start animation for orbit
         OrbitButton.setOnClickListener(new View.OnClickListener()
         {
@@ -162,21 +210,55 @@ public class MainActivity extends AppCompatActivity
                     //initiate animation
                     for (int i = 0; i < planetsamount; i++)
                     {
-
+                        //planet anim
+                        /*
                         PlanetAnimation(planetButtons[i], check, i, radiuschange, extraheight);
                         radiuschange += 44;
                         extraheight += 45;
+
+                         */
 
                         //play only if file is loaded
                         if (audioUnit[i] != null)
                         {
                             audioUnit[i].PlayAudio();
+
+                            //CircMo
+                            circMo[i] = new CircularMotion2(planetButtons[i], MidX, MidY, audioUnit[i].GetDur(), i, MaxX, offsetleft, offsettop);
+                            circMo[i].LoadAnim();
+                            if (!firststart)
+                            {
+                                firststart = true;
+                                for (int q = 0; q < planetsamount; q++)
+                                {
+                                    planetButtons[q].setVisibility(View.VISIBLE);
+                                }
+
+                            }
                         }
                     }
                   check = false;
 
 
                 } else {
+
+                    //stop animation and reset ready value
+                    for (int i = 0; i < planetsamount; i++)
+                    {
+
+                        //circAnim
+                        if (audioUnit[i] != null)
+                        {
+                            circMo[i].StopAnim();
+                        }
+
+
+                        //PlanetAnim
+                        /*
+                        PlanetAnimation(planetButtons[i], check, i, radiuschange, extraheight);
+
+                         */
+                    }
                     //for sounds
                     PlayOrb1();
                     PlayOrb2();
@@ -189,11 +271,7 @@ public class MainActivity extends AppCompatActivity
                     radiuschange = 0;
                     extraheight = 130;
 
-                    //stop animation and reset ready value
-                    for (int i = 0; i < planetsamount; i++)
-                    {
-                        PlanetAnimation(planetButtons[i], check, i, radiuschange, extraheight);
-                    }
+
 
                     check = true;
                 }
@@ -1410,6 +1488,7 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
+
 
 
     private void PlanetAnimation(Button planet, boolean check, int i, int radiuschange, int extraheight) {
