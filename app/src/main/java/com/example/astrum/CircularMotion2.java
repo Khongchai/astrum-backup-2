@@ -23,17 +23,8 @@ public class CircularMotion2
     //passed
     private Button orb;
 
-
-
     //not passed
     private ObjectAnimator animator = new ObjectAnimator();
-
-
-    //formula for ratio >>>> offsetleft = 1080: 30 = 0.027*screenwidth
-    //                  >>>> offsettop = 2088: 80 = 0.383*screnheight
-
-
-
 
     CircularMotion2(Button orb, float MidX, float MidY, int duration, int i, float MaxX, float offsetleft, float offsettop)
     {

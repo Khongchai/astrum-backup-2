@@ -153,8 +153,8 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-        Log.d("offsetX: ", String.valueOf(offsetleft));
-        Log.d("offsetY: ", String.valueOf(offsettop));
+        //Log.d("offsetX: ", String.valueOf(offsetleft));
+        //Log.d("offsetY: ", String.valueOf(offsettop));
 
 
 

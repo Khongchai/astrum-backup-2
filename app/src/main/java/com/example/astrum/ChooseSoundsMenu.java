@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +19,7 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import static com.example.astrum.MainActivity.planetsamount;
 
@@ -27,6 +29,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
 {
     public static int PlanetsVal[] = new int[planetsamount];
     final Spinner Spinner[] = new Spinner[planetsamount];
+    final int alltextSize = 7;
     private SeekBar VolumeSeekbar[] = new SeekBar[planetsamount];
     static float VolumeVal[] = new float[planetsamount];
 
@@ -35,6 +38,8 @@ public class ChooseSoundsMenu extends AppCompatActivity
     EditText EnteredVal;
 
     private Context context;
+
+    private TextView allText[] = new TextView[alltextSize];
 
 
 
@@ -48,6 +53,22 @@ public class ChooseSoundsMenu extends AppCompatActivity
         CommitButton = findViewById(R.id.commitButton);
         UpdateVal = 0;
         EnteredVal = findViewById(R.id.editText);
+
+        allText[0] = findViewById(R.id.textView3);
+        allText[1] = findViewById(R.id.textView4);
+        allText[2] = findViewById(R.id.textView5);
+        allText[3] = findViewById(R.id.textView6);
+        allText[4] = findViewById(R.id.textView7);
+        allText[5] = findViewById(R.id.textView8);
+        allText[6] = findViewById(R.id.Explaination);
+
+
+        for (int i = 0; i < allText.length; i++)
+        {
+            allText[i].setTextColor(Color.parseColor("#FF90604C"));
+        }
+
+
 
 
 

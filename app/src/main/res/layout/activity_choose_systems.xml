@@ -14,7 +14,7 @@
         android:layout_marginTop="32dp"
         android:fontFamily="@font/comfortaa_bold"
         android:text="This page defines the sounds in \n                   ChooseSounds menu"
-        android:textColor="@color/copper"
+        android:textColor="@color/irispastel1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/comfortaa_bold"
         android:text="Planet: "
-        android:textColor="@color/copper"
+        android:textColor="@color/irispastel1"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
         android:id="@+id/commitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/copper"
+        android:background="@color/irispastel1"
         android:fontFamily="@font/comfortaa_bold"
         android:text="Commit"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,6 +55,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:inputType="number"
         app:layout_constraintVertical_bias="0.744" />
 
     <ImageView
