@@ -20,6 +20,7 @@ import com.daimajia.androidanimations.library.YoYo;
 public class ChooseSystems extends AppCompatActivity
 {
     private EditText ValueField;
+    private TextView explaination;
     private static int System;
     private ImageCycler imgCyc = new ImageCycler();
     private ImageView imgView;
@@ -45,6 +46,9 @@ public class ChooseSystems extends AppCompatActivity
         setContentView(R.layout.activity_choose_systems);
         Log.d("System: ", String.valueOf(System));
         DisplayPlanetName  = findViewById(R.id.PlanetNameText);
+
+        explaination = findViewById(R.id.textView9);
+        explaination.setLetterSpacing((float)0.3);
 
         HandlerforToast("Enter Planet num: 1 - 8", 3000);
 

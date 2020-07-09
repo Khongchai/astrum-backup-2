@@ -18,20 +18,25 @@ public class AudioLoader {
     }
 
 
-     void PlayAudio() {
-        curPlayer.start();
-        nextPlayer = MediaPlayer.create(context, ResID);
-        curPlayer.setNextMediaPlayer(nextPlayer);
-        curPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                nextPlayer.setVolume(AdjustVolumeFrag.seek[PlanetID].getProgress(), AdjustVolumeFrag.seek[PlanetID].getProgress()); //this line somehow affects all audio sometimes?
-                curPlayer.release();
-                curPlayer = nextPlayer;
+     void PlayAudio()
+     {
+         if (curPlayer != null)
+         {
+             curPlayer.start();
+             nextPlayer = MediaPlayer.create(context, ResID);
+             curPlayer.setNextMediaPlayer(nextPlayer);
+             curPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                 @Override
+                 public void onCompletion(MediaPlayer mp) {
+                     nextPlayer.setVolume(AdjustVolumeFrag.seek[PlanetID].getProgress(), AdjustVolumeFrag.seek[PlanetID].getProgress()); //this line somehow affects all audio sometimes?
+                     curPlayer.release();
+                     curPlayer = nextPlayer;
 
-                PlayAudio();
-            }
-        });
+                     PlayAudio();
+                 }
+             });
+         }
+
     }
 
      void StopSound()

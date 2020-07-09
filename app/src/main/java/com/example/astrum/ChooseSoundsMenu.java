@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,11 +28,12 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class ChooseSoundsMenu extends AppCompatActivity
 {
-    public static int PlanetsVal[] = new int[planetsamount];
-    final Spinner Spinner[] = new Spinner[planetsamount];
+    public static int PlanetsVal[] = new int[5];
+    final Spinner Spinner[] = new Spinner[5];
     final int alltextSize = 7;
-    private SeekBar VolumeSeekbar[] = new SeekBar[planetsamount];
-    static float VolumeVal[] = new float[planetsamount];
+    private final int nosoundVal = 4;
+   // private SeekBar VolumeSeekbar[] = new SeekBar[planetsamount];
+   // static float VolumeVal[] = new float[planetsamount];
 
     Button CommitButton;
     int UpdateVal;
@@ -67,6 +69,14 @@ public class ChooseSoundsMenu extends AppCompatActivity
         {
             allText[i].setTextColor(Color.parseColor("#FF90604C"));
         }
+        allText[6].setLetterSpacing((float)0.1);
+        allText[6].setGravity(Gravity.CENTER);
+
+        if (PlanetsVal[0] == -1)
+        {
+            PlanetsVal[0] = 0;
+        }
+
 
 
 
@@ -83,9 +93,9 @@ public class ChooseSoundsMenu extends AppCompatActivity
                     UpdateVal = Integer.parseInt(EnteredVal.getText().toString());
                     for (int i = 0; i < planetsamount; i++)
                     {
-                        if (UpdateVal <= 0 || UpdateVal > planetsamount +1  ){
+                        if (UpdateVal <= 0 || UpdateVal > (planetsamount - 2) +1  ){
 
-                            final Toast toast = Toast.makeText(getApplicationContext(), "Value should be between 1-6", Toast.LENGTH_SHORT);
+                            final Toast toast = Toast.makeText(getApplicationContext(), "Value should be between 1-4", Toast.LENGTH_SHORT);
                             toast.show();
                             Handler StopToast = new Handler();
                             StopToast.postDelayed(new ToastCancel(toast), 2000);
@@ -98,7 +108,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
                 }
                 catch (NullPointerException | NumberFormatException e)
                 {
-                    final Toast toast = Toast.makeText(getApplicationContext(),"Please enter a value between 1 - 6" ,Toast.LENGTH_SHORT);
+                    final Toast toast = Toast.makeText(getApplicationContext(),"Please enter a value between 1 - 4" ,Toast.LENGTH_SHORT);
                     toast.show();
                     Handler handler = new Handler();
                     handler.postDelayed(new ToastCancel(toast), 2000);
@@ -119,7 +129,6 @@ public class ChooseSoundsMenu extends AppCompatActivity
                 "Sound 2",
                 "Sound 3",
                 "Sound 4",
-                "Sound 5",
                 "No sound"
         };
 
@@ -145,7 +154,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
                 PlanetsVal[0] = Spinner[0].getSelectedItemPosition();
 
                 //If position is not "No sound", set ready status to 1
-                if (PlanetsVal[0] != 5)
+                if (PlanetsVal[0] != nosoundVal)
                 {
                    MainActivity.CheckReady[0] = 1;
                 }
@@ -193,7 +202,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
 
                 //If position is not "No sound", set ready status to 1
 
-                if (PlanetsVal[1] != 5)
+                if (PlanetsVal[1] != nosoundVal)
                 {
                     MainActivity.CheckReady[1] = 1;
                 }
@@ -234,7 +243,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
                 Log.d("EarthLog", String.valueOf(Spinner[2].getSelectedItemPosition()));
 
                 //If position is not "No sound", set ready status to 1
-                if (PlanetsVal[2] != 5)
+                if (PlanetsVal[2] != nosoundVal)
                 {
                    MainActivity.CheckReady[2] = 1;
                 }
@@ -274,7 +283,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
                 Log.d("MarsLog", String.valueOf(Spinner[3].getSelectedItemPosition()));
 
                 //If position is not "No sound", set ready status to 1
-                if (PlanetsVal[3] != 5)
+                if (PlanetsVal[3] != nosoundVal)
                 {
                    MainActivity.CheckReady[3] = 1;
                 }
@@ -305,6 +314,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
             Spinner[3].setSelection(MarsShared);
         }
 //-------------------------------------------------------------------------------------------------
+
         Spinner[4].setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             @Override
@@ -314,7 +324,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
                 Log.d("JupiterLog", String.valueOf(Spinner[4].getSelectedItemPosition()));
 
                 //If position is not "No sound", set ready status to 1
-                if (PlanetsVal[4] != 5)
+                if (PlanetsVal[4] != nosoundVal)
                 {
                     MainActivity.CheckReady[4] = 1;
                 }
@@ -344,6 +354,8 @@ public class ChooseSoundsMenu extends AppCompatActivity
             // set the selected value of the spinner
             Spinner[4].setSelection(JupitergetShared);
         }
+
+
 
 //-------------------------------------------------------------------------------------------------
 
