@@ -22,6 +22,8 @@ import java.util.Objects;
 
 import static android.content.Context.MODE_PRIVATE;
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static com.example.astrum.ChooseSoundsMenu.PlanetsVal;
+import static com.example.astrum.MainActivity.CheckReady;
 import static com.example.astrum.MainActivity.VolForMixerOnCreate;
 import static com.example.astrum.MainActivity.audioUnit;
 import static com.example.astrum.MainActivity.planetsamount;
@@ -90,7 +92,10 @@ public class AdjustVolumeFrag extends Fragment
         for (int i = 0; i < planetsamount; i++)
         {
             volume[i] = -1;
-            spinner[i].setSelection(4);
+            if (PlanetsVal[0] == -1)
+            {
+                spinner[i].setVisibility(View.INVISIBLE);
+            }
         }
 
 
@@ -116,9 +121,197 @@ public class AdjustVolumeFrag extends Fragment
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
+                //TODO change the audio in real time
+
                 MainActivity mainActivity = new MainActivity();
-                //if (mainActivity.first)
-                //TODO get value from choose sounds menu and set here
+                {
+
+                    PlanetsVal[0] = spinner[0].getSelectedItemPosition();
+                    if (PlanetsVal[0] == 4)
+                    {
+                        CheckReady[0] = 0;
+
+                    }
+                    else
+                    {
+                        CheckReady[0] = 1;
+                    }
+                }
+
+                //TODO change the audio in real time
+                //check if null
+                //change sound file --- pause reset play etc
+                //reset anim
+                //load new sound file
+                //start
+                //load new anim
+                //start
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+
+            }
+
+        });
+
+        spinner[1].setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                //TODO change the audio in real time
+
+                MainActivity mainActivity = new MainActivity();
+                if (mainActivity.isNotPlaying())
+                {
+
+                    PlanetsVal[1] = spinner[1].getSelectedItemPosition();
+                    if (PlanetsVal[1] == 4)
+                    {
+                        CheckReady[1] = 0;
+
+                    }
+                    else
+                    {
+                        CheckReady[1] = 1;
+                    }
+                }
+
+
+                //TODO change the audio in real time
+                //check if null
+                //change sound file --- pause reset play etc
+                //reset anim
+                //load new sound file
+                //start
+                //load new anim
+                //start
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+
+            }
+
+        });
+
+        spinner[2].setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                //TODO change the audio in real time
+
+                MainActivity mainActivity = new MainActivity();
+                if (mainActivity.isNotPlaying())
+                {
+                    PlanetsVal[2] = spinner[2].getSelectedItemPosition();
+                    if (PlanetsVal[2] == 4)
+                    {
+                        CheckReady[2] = 0;
+
+                    }
+                    else
+                    {
+                        CheckReady[2] = 1;
+                    }
+                }
+
+                //TODO change the audio in real time
+                //check if null
+                //change sound file --- pause reset play etc
+                //reset anim
+                //load new sound file
+                //start
+                //load new anim
+                //start
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+
+            }
+
+        });
+
+        spinner[3].setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                //TODO change the audio in real time
+
+                MainActivity mainActivity = new MainActivity();
+                if (mainActivity.isNotPlaying())
+                {
+                    PlanetsVal[3] = spinner[3].getSelectedItemPosition();
+                    if (PlanetsVal[3] == 4)
+                    {
+                        CheckReady[3] = 0;
+
+                    }
+                    else
+                    {
+                        CheckReady[3] = 1;
+                    }
+                }
+
+                //TODO change the audio in real time
+                //check if null
+                //change sound file --- pause reset play etc
+                //reset anim
+                //load new sound file
+                //start
+                //load new anim
+                //start
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+
+            }
+
+        });
+
+        spinner[4].setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                //TODO change the audio in real time
+
+                MainActivity mainActivity = new MainActivity();
+                if (mainActivity.isNotPlaying())
+                {
+                    PlanetsVal[4] = spinner[4].getSelectedItemPosition();
+                    if (PlanetsVal[4] == 4)
+                    {
+                        CheckReady[4] = 0;
+
+                    }
+                    else
+                    {
+                        CheckReady[4] = 1;
+                    }
+                }
+
+                //TODO change the audio in real time
+                //check if null
+                //change sound file --- pause reset play etc
+                //reset anim
+                //load new sound file
+                //start
+                //load new anim
+                //start
             }
 
             @Override
@@ -298,7 +491,22 @@ public class AdjustVolumeFrag extends Fragment
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
 
+        if (PlanetsVal[0] != -1)
+        {
+            ChooseSoundsMenu chooseSoundsMenu = new ChooseSoundsMenu();
+            int[] planetsVal = chooseSoundsMenu.getPlanetsVal();
+            for (int i = 0; i < spinner.length; i++)
+            {
+                spinner[i].setSelection(planetsVal[i]);
+                spinner[i].setVisibility(View.VISIBLE);
+            }
+        }
+
+    }
 
     public float getProgress(int i) {return seek[i].getProgress();}
 

@@ -225,7 +225,10 @@ public class MainActivity extends AppCompatActivity
                             audioUnit[i].PlayAudio();
 
                             circMo[i] = new CircularMotion2(planetButtons[i], MidX, MidY, audioUnit[i].GetDur(), i, MaxX, offsetleft, offsettop);
-                            circMo[i].LoadAnim();
+                            if (CheckReady[i] == 1)
+                            {
+                                circMo[i].LoadAnim();
+                            }
                             if (firststart)
                             {
                                 firststart = false;
@@ -373,6 +376,13 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
+
+    public boolean isNotPlaying(){return check;}
+
+
+
+
+
 
 
 
