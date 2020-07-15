@@ -13,4 +13,8 @@
         <item>Sound 5</item>
         <item>Sound 6</item>
     </string-array>
+    <string name="appDescription">
+        This app was developed as a part of the ASTRUM project for my recital, where I explore
+        the relationship between humanity, music, and astronomy.
+    </string>
 </resources>

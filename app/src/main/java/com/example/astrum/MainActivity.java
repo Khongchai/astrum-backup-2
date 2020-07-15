@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity
 
     private int seekBarsavedProg = 0;
 
+    soundsStorage audioList = new soundsStorage();
+
     //create volume control
     private SeekBar VolumeSeekbar;
     private AudioManager audioManager;
@@ -153,8 +155,8 @@ public class MainActivity extends AppCompatActivity
         //start animation for orbit
         OrbitButton.setOnClickListener(new View.OnClickListener()
         {
-            private int radiuschange = 0;
-            private int extraheight = 130;
+           // private int radiuschange = 0;
+           // private int extraheight = 130;
 
             @Override
             public void onClick(View v)
@@ -166,13 +168,12 @@ public class MainActivity extends AppCompatActivity
                 {
                     //In functions below, use SystemSound value to decide which sound to play.
                     //If a system is chosen, else
-                    if (SysNum != 0 && ChooseSoundsMenu.PlanetsVal[0] != -1)
+                    if (SysNum > -1 && ChooseSoundsMenu.PlanetsVal[0] != -1)
                     {
-                        PlayOrb1();
-                        PlayOrb2();
-                        PlayOrb3();
-                        PlayOrb4();
-                        PlayOrb5();
+                        for (int i = 0; i < planetsamount; i++)
+                        {
+                            loadAudioFiles(i, i, SysNum - 1);
+                        }
                     }
                     else
                     {
@@ -222,7 +223,6 @@ public class MainActivity extends AppCompatActivity
                         {
                             audioUnit[i].PlayAudio();
 
-                            //CircMo
                             circMo[i] = new CircularMotion2(planetButtons[i], MidX, MidY, audioUnit[i].GetDur(), i, MaxX, offsetleft, offsettop);
                             circMo[i].LoadAnim();
                             if (!firststart)
@@ -242,7 +242,6 @@ public class MainActivity extends AppCompatActivity
                     }
                   check = false;
 
-
                 } else {
 
                     //stop animation and reset ready value
@@ -256,17 +255,15 @@ public class MainActivity extends AppCompatActivity
                         }
 
                     }
-                    //for sounds
-                    PlayOrb1();
-                    PlayOrb2();
-                    PlayOrb3();
-                    PlayOrb4();
-                    PlayOrb5();
 
+                    for (int i = 0; i < planetsamount; i++)
+                    {
+                        loadAudioFiles(i, i, SysNum - 1);
+                    }
 
                     //reset values
-                    radiuschange = 0;
-                    extraheight = 130;
+                    //radiuschange = 0;
+                    //extraheight = 130;
 
 
 
@@ -339,52 +336,6 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-
-    soundsStorage audioList = new soundsStorage();
-    //takes care of playing when button pressed and then stop when button pressed again
-    public void PlayOrb1()
-    {
-        final int index = 0;
-        final int unit = 0;
-        final int arrayNum = SysNum - 1;
-        loadAudioFiles(unit, arrayNum, index);
-    }
-
-
-    //-------------------------------------------------------------------------------------------------------------------
-
-    public void PlayOrb2()
-    {
-        final int index = 1;
-        final int unit = 1;
-        final int arrayNum = SysNum - 1;
-        loadAudioFiles(unit, arrayNum, index);
-    }
-//---------------------------------------------------------------------------------------------------------------------------
-    public void PlayOrb3()  //audiounit[2], planetsval[2]. planetid2
-    {
-        final int index = 2;
-        final int unit = 2;
-        final int arrayNum = SysNum - 1;
-        loadAudioFiles(unit, arrayNum, index);
-    }
-    //--------------------------------------------------------------------------------------------------------------------------
-
-    public void PlayOrb4() //audiounit[3], planetsval[3]. planetid3
-    {
-        final int index = 3;
-        final int unit = 3;
-        final int arrayNum = SysNum - 1;
-        loadAudioFiles(unit, arrayNum, index);
-    }
-
-    public void PlayOrb5()
-    {
-        final int index = 4;
-        final int unit = 4;
-        final int arrayNum = SysNum - 1;
-        loadAudioFiles(unit, arrayNum, index);
-    }
 
     private void loadAudioFiles(int unit, int arrayNum, int index)
     {
