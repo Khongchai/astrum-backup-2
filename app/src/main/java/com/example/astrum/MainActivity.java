@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity
     private SeekBar VolumeSeekbar;
     private AudioManager audioManager;
 
-    private boolean firststart = false;
+    private boolean firststart = true;
 
     RunCheckDur Runnablecheckdur[] = new RunCheckDur[planetsamount];
     Thread threadcheckdur[] = new Thread[planetsamount];
@@ -77,9 +77,12 @@ public class MainActivity extends AppCompatActivity
         //request for fragment transaction, need supports because this one is not extending Fragment.
         FragmentTransaction fragmenttransaction = getSupportFragmentManager().beginTransaction();
 
+
         //Tell program to add the fragment container and new openadjustvolume object programmatically
         fragmenttransaction.add(R.id.FragmentsContainer, new AdjustVolumeFrag());
         fragmenttransaction.commit();
+
+
 
         //Declare the button object.
         SettingsButton = findViewById(R.id.imageButton3);
@@ -149,8 +152,6 @@ public class MainActivity extends AppCompatActivity
 
         //initiate master volume slider
         initControls();
-
-
 
         //start animation for orbit
         OrbitButton.setOnClickListener(new View.OnClickListener()
@@ -225,9 +226,9 @@ public class MainActivity extends AppCompatActivity
 
                             circMo[i] = new CircularMotion2(planetButtons[i], MidX, MidY, audioUnit[i].GetDur(), i, MaxX, offsetleft, offsettop);
                             circMo[i].LoadAnim();
-                            if (!firststart)
+                            if (firststart)
                             {
-                                firststart = true;
+                                firststart = false;
                                 for (int q = 0; q < planetsamount; q++)
                                 {
                                     if (CheckReady[q] == 1)
@@ -261,11 +262,6 @@ public class MainActivity extends AppCompatActivity
                         loadAudioFiles(i, i, SysNum - 1);
                     }
 
-                    //reset values
-                    //radiuschange = 0;
-                    //extraheight = 130;
-
-
 
                     check = true;
                 }
@@ -281,10 +277,13 @@ public class MainActivity extends AppCompatActivity
     {
         super.onResume();
         //resume master slider volume
+
         if (VolumeSeekbar != null)
         {
             audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, VolumeSeekbar.getProgress(), 0);
         }
+
+
 
     }
 
@@ -339,17 +338,19 @@ public class MainActivity extends AppCompatActivity
 
     private void loadAudioFiles(int unit, int arrayNum, int index)
     {
+
         if (arrayNum > -1) //arbitrary uninitialized value is -1
         {
-            Log.d("arrayNum: ", String.valueOf(arrayNum));
-            int[][] audioArray = audioList.getAudioArray(index);
-            for (int j = 0; j < audioArray[arrayNum].length; j++)
+
+            int[][] audioArray = audioList.getAudioArray(arrayNum);
+            for (int j = 0; j < audioArray[index].length; j++)
             {
                 if (check)
                 {
                     if (j == ChooseSoundsMenu.PlanetsVal[unit])
                     {
-                        audioUnit[unit] = new AudioLoader(this, audioArray[arrayNum][j], unit);
+                        Log.d("PlanetsVal: ", String.valueOf(ChooseSoundsMenu.PlanetsVal[unit]));
+                        audioUnit[unit] = new AudioLoader(this, audioArray[index][j], unit);
                     }
                 }
                 else

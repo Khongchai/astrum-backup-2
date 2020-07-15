@@ -15,10 +15,11 @@
         android:layout_marginEnd="632dp"
         android:layout_marginRight="632dp"
         android:layout_marginBottom="632dp"
+
         android:background="@drawable/roundedbutton"
         android:onClick="OpenMixer"
-        android:padding="10px"
-        android:text="Open mixer"
+        android:padding="15px"
+        android:text="Show Control"
         android:textColor="#000000"
         android:textSize="11dp" />
 </RelativeLayout>

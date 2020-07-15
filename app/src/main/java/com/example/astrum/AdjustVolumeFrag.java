@@ -7,13 +7,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import java.util.Objects;
 
 import static android.content.Context.MODE_PRIVATE;
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
@@ -25,10 +30,13 @@ public class AdjustVolumeFrag extends Fragment
 {
 
     private final static int MAX_VOLUME = 100;
-    public static SeekBar[] seek = new SeekBar[planetsamount];
-    public static float[] volume = new float[planetsamount];
+    static SeekBar[] seek = new SeekBar[planetsamount];
+    static float[] volume = new float[planetsamount];
     int ii;
     SharedPreferences sharedPrefLink[] = new SharedPreferences[planetsamount];
+    Spinner[] spinner = new Spinner[5];
+    ChooseSoundsMenu getSpinnerVal = new ChooseSoundsMenu();
+
 
 
 
@@ -37,10 +45,7 @@ public class AdjustVolumeFrag extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        for (int i = 0; i < planetsamount; i++)
-        {
-            volume[i] = -1;
-        }
+
         //basically just saying that volumemixerfrag layout is a fragment
         View view = inflater.inflate(R.layout.volumemixerfrag, container, false);
         seek[0] = view.findViewById(R.id.seekBar1);
@@ -48,6 +53,46 @@ public class AdjustVolumeFrag extends Fragment
         seek[2] = view.findViewById(R.id.seekBar3);
         seek[3] = view.findViewById(R.id.seekBar4);
         seek[4] = view.findViewById(R.id.seekBar5);
+
+        spinner[0] = view.findViewById(R.id.spinnerone);
+        spinner[1] = view.findViewById(R.id.spinnertwo);
+        spinner[2] = view.findViewById(R.id.spinnerthree);
+        spinner[3] = view.findViewById(R.id.spinnerfour);
+        spinner[4] = view.findViewById(R.id.spinnerfive);
+
+        String list[] = new String[]{
+                "Sound 1",
+                "Sound 2",
+                "Sound 3",
+                "Sound 4",
+                "No sound"
+        };
+
+        //Declare drop down menus
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(Objects.requireNonNull(this.getActivity()),
+                R.layout.color_spinner_dropdowntwo, list);
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(Objects.requireNonNull(this.getActivity()),
+                R.layout.color_spinner_dropdownthree, list);
+        ArrayAdapter<String> adapter4 = new ArrayAdapter<String>(Objects.requireNonNull(this.getActivity()),
+                R.layout.color_spinner_dropdownfour, list);
+        ArrayAdapter<String> adapter5 = new ArrayAdapter<String>(Objects.requireNonNull(this.getActivity()),
+                R.layout.color_spinner_dropdownfive, list);
+        ArrayAdapter<String> adapter6 = new ArrayAdapter<String>(Objects.requireNonNull(this.getActivity()),
+                R.layout.color_spinner_dropdownsix, list);
+
+        //Set to drop down menus
+        spinner[0].setAdapter(adapter2);
+        spinner[1].setAdapter(adapter3);
+        spinner[2].setAdapter(adapter4);
+        spinner[3].setAdapter(adapter5);
+        spinner[4].setAdapter(adapter6);
+
+        for (int i = 0; i < planetsamount; i++)
+        {
+            volume[i] = -1;
+            spinner[i].setSelection(4);
+        }
+
 
         LinkSounds();
         LoadProgress();
@@ -64,10 +109,29 @@ public class AdjustVolumeFrag extends Fragment
                 fr.commit();
             }
         });
+
+        spinner[0].setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                MainActivity mainActivity = new MainActivity();
+                //if (mainActivity.first)
+                //TODO get value from choose sounds menu and set here
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+
+            }
+
+        });
         return view;
+    }//oncreate
 
 
-    }
 
     public void LoadProgress()
     {
@@ -233,6 +297,8 @@ public class AdjustVolumeFrag extends Fragment
         });
 
     }
+
+
 
     public float getProgress(int i) {return seek[i].getProgress();}
 

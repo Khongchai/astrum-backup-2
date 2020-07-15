@@ -17,8 +17,13 @@
         android:layout_height="match_parent"
         android:id="@+id/FragmentsContainer"
         >
+    </FrameLayout>
 
-
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/FragmentsContainer2"
+        >
     </FrameLayout>
 
 
@@ -125,37 +130,6 @@
         android:progressTint="@color/irispastel1"
         android:thumb="@drawable/thumbmain" />
 
-    <!-- android:progress="50" -->
 
-<!--
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="385dp"
-        android:orientation="vertical"
-        android:layout_marginTop="425dp">
-
-        <fragment
-            android:id="@+id/fragment"
-            android:name="com.example.astrum.openadjustvolume"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout="@layout/openvolumemixer" />
-    </LinearLayout>
-    -->
-
-
-
-    <!--   <fragment
-           android:id="@+id/fragment3"
-           android:name="com.example.astrum.AdjustVolumeFrag"
-           android:layout_width="match_parent"
-           android:layout_height="296dp"
-
-           android:layout_alignBottom="@+id/OrbitButtonBG"
-           android:layout_alignParentEnd="true"
-           android:layout_marginEnd="0dp"
-           android:layout_marginBottom="-318dp"
-           tools:layout="@layout/volumemixerfrag" />
-   -->
 
 </RelativeLayout>

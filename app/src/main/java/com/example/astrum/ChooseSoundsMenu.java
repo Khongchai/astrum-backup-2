@@ -22,6 +22,9 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Arrays;
+
 import static com.example.astrum.MainActivity.planetsamount;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -32,8 +35,6 @@ public class ChooseSoundsMenu extends AppCompatActivity
     final Spinner Spinner[] = new Spinner[5];
     final int alltextSize = 7;
     private final int nosoundVal = 4;
-   // private SeekBar VolumeSeekbar[] = new SeekBar[planetsamount];
-   // static float VolumeVal[] = new float[planetsamount];
 
     Button CommitButton;
     int UpdateVal;
@@ -54,6 +55,10 @@ public class ChooseSoundsMenu extends AppCompatActivity
 
         CommitButton = findViewById(R.id.commitButton);
         UpdateVal = 0;
+
+        //set spinners in first page's fragment
+        AdjustVolumeFrag adjustVolumeFrag = new AdjustVolumeFrag();
+
         EnteredVal = findViewById(R.id.editText);
 
         allText[0] = findViewById(R.id.textView3);
@@ -77,11 +82,6 @@ public class ChooseSoundsMenu extends AppCompatActivity
             PlanetsVal[0] = 0;
         }
 
-
-
-
-
-
         CommitButton.setOnClickListener(new View.OnClickListener()
         {
             //fix the bug where when no value is put in, the fragment is destroyed.
@@ -93,7 +93,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
                     UpdateVal = Integer.parseInt(EnteredVal.getText().toString());
                     for (int i = 0; i < planetsamount; i++)
                     {
-                        if (UpdateVal <= 0 || UpdateVal > (planetsamount - 2) +1  ){
+                        if (UpdateVal <= 0 || UpdateVal > (planetsamount - 2) + 1  ){
 
                             final Toast toast = Toast.makeText(getApplicationContext(), "Value should be between 1-4", Toast.LENGTH_SHORT);
                             toast.show();
@@ -133,7 +133,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
         };
 
         //Declare drop down menus
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
         R.layout.color_spinner_dropdown, list);
 
 
@@ -361,6 +361,11 @@ public class ChooseSoundsMenu extends AppCompatActivity
 
     }//onCreate
 
+    public int[] getPlanetsVal()
+    {
+        return Arrays.copyOf(PlanetsVal, PlanetsVal.length);
+    }
+
     class ToastCancel implements Runnable
     {
         Toast toast;
@@ -377,41 +382,5 @@ public class ChooseSoundsMenu extends AppCompatActivity
         }
     }
 
-/*
-    private void initControl1()
-    {
-        try
-        {
-            //for controlling volume
-            VolumeSeekbar[0] = findViewById(R.id.seekBar1);
-            VolumeSeekbar[0].setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
-            {
-                @Override
-                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
-                {
-                    VolumeVal[0] = progress;
-                    Log.d("Progress", "Value"+VolumeVal[0]);
-                }
-
-                @Override
-                public void onStartTrackingTouch(SeekBar seekBar) {
-
-                }
-
-                @Override
-                public void onStopTrackingTouch(SeekBar seekBar)
-                {
-
-                }
-            });
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-
-    }
-
-*/
 
 }
