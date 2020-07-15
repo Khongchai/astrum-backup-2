@@ -47,7 +47,7 @@ public class CircularMotion2
         animator.setDuration(duration);
         animator.setRepeatCount(Animation.INFINITE);
     }
-
+//a
     void LoadAnim ()
     {
         orb.setVisibility(View.VISIBLE);
