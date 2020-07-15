@@ -63,17 +63,25 @@ public class AudioLoader {
 
     }
 
-     int GetDur() {
-        return curPlayer.getDuration();
+     int GetDur()
+     {
+         if (curPlayer != null)
+         {
+             return curPlayer.getDuration();
+         }
+         return 0;
     }
 
-    public MediaPlayer CheckNull() {
+    public MediaPlayer CheckNull()
+    {
         return curPlayer;
     }
 
-     void SetVolume(float float1, float float2) {
+     void SetVolume(float float1, float float2)
+     {
 
-        if (curPlayer != null) {
+        if (curPlayer != null)
+        {
             curPlayer.setVolume(float1, float2);
         }
     }

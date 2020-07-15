@@ -50,23 +50,16 @@ public class CircularMotion2
 
     void LoadAnim ()
     {
+        orb.setVisibility(View.VISIBLE);
         animator.start();
-        YoYo.with(Techniques.FadeIn).duration(4000).playOn(orb);
+        YoYo.with(Techniques.FadeIn).duration(2000).playOn(orb);
 
     }
 
     void StopAnim()
     {
-
-        YoYo.with(Techniques.FadeOut).duration(2000).playOn(orb);
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run()
-            {
-                animator.cancel();
-            }
-        }, 2000);
+        orb.setVisibility(View.INVISIBLE);
+        animator.cancel();
 
     }
 

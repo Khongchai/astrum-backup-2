@@ -1,45 +1,26 @@
 package com.example.astrum;
 
 import android.graphics.Point;
-import android.media.MediaMetadataRetriever;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
-import android.provider.MediaStore;
-import android.text.Layout;
-import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.content.Intent;
 import android.widget.ImageButton;
-import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
-import android.os.Bundle;
-import android.widget.MediaController;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Toast;
 import android.widget.VideoView;
-
-import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity
@@ -79,6 +60,8 @@ public class MainActivity extends AppCompatActivity
 
     int SysNum = 0;
     ChooseSystems chooseSystems;
+
+
 
 
     @Override
@@ -156,13 +139,8 @@ public class MainActivity extends AppCompatActivity
         //set all planets players to null and checknull value to false and set visibility to 0
         for (int i = 0; i < planetsamount; i++)
         {
-
             CheckReady[i] = 0;
-            if (!firststart)
-            {
-                planetButtons[i].setVisibility(View.INVISIBLE);
-            }
-
+            planetButtons[i].setVisibility(View.INVISIBLE);
         }
 
         OrbitButton = findViewById(R.id.OrbitButton);
@@ -354,625 +332,84 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public void openSettings() {
+    public void openSettings()
+    {
         Intent intent = new Intent(this, Settings.class);
         startActivity(intent);
 
     }
 
 
+    soundsStorage audioList = new soundsStorage();
     //takes care of playing when button pressed and then stop when button pressed again
-    public void PlayOrb1() //audiounit[0], planetsval[0]. planetid0
+    public void PlayOrb1()
     {
-        {
-            final int unit = 0;
-            switch (SysNum)
-            {
-                case 1:
-                    //TODO
-                    break;
-                case 2:
-                    //TODO
-                    break;
-                case 3:
-                    //TODO
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    switch (ChooseSoundsMenu.PlanetsVal[unit])
-                    {
-                        case 0:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.jupiter1v1, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                        case 1:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.jupiter1v2, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        case 2:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.jupiter1v3, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        case 3:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.jupiter1v4, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        default:
-                            //do nothing
-                    }
-                    break;
-                case 6:
-                    //TODO
-                    break;
-                case 7:
-                    //TODO
-                    break;
-                case 8:
-                    switch (ChooseSoundsMenu.PlanetsVal[unit])
-                    {
-                        case 0:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.neptune1v1, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                        case 1:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.neptune1v2, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        case 2:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.neptune1v3, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        case 3:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.neptune1v4, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        default:
-                            //do nothing
-                    }
-                    break;
-                default:
-                    //do nothing
-            }
-
-        }
+        final int index = 0;
+        final int unit = 0;
+        final int arrayNum = SysNum - 1;
+        loadAudioFiles(unit, arrayNum, index);
     }
+
 
     //-------------------------------------------------------------------------------------------------------------------
 
-    public void PlayOrb2() //audiounit[1], planetsval[1]. planetid1
+    public void PlayOrb2()
     {
-        {
-            final int unit = 1;
-            switch (SysNum)
-            {
-                case 1:
-                    //TODO
-                    break;
-                case 2:
-                    //TODO
-                    break;
-                case 3:
-                    //TODO
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    switch (ChooseSoundsMenu.PlanetsVal[unit])
-                    {
-                        case 0:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.jupiter2v1, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                        case 1:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.jupiter2v2, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        case 2:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.jupiter2v3, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        case 3:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.jupiter2v4, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        default:
-                            //do nothing
-                    }
-                    break;
-                case 6:
-                    //TODO
-                    break;
-                case 7:
-                    //TODO
-                    break;
-                case 8:
-                    switch (ChooseSoundsMenu.PlanetsVal[unit])
-                    {
-                        case 0:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.neptune2v1, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                        case 1:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.neptune2v2, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        case 2:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.neptune2v3, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        case 3:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.neptune2v4, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        default:
-                            //do nothing
-                    }
-                    break;
-                default:
-                   // do nothing
-            }
-
-        }
+        final int index = 1;
+        final int unit = 1;
+        final int arrayNum = SysNum - 1;
+        loadAudioFiles(unit, arrayNum, index);
     }
 //---------------------------------------------------------------------------------------------------------------------------
     public void PlayOrb3()  //audiounit[2], planetsval[2]. planetid2
     {
-        {
-            final int unit = 2;
-            switch (SysNum)
-            {
-                case 1:
-                    //TODO
-                    break;
-                case 2:
-                    //TODO
-                    break;
-                case 3:
-                    //TODO
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    switch (ChooseSoundsMenu.PlanetsVal[unit])
-                    {
-                        case 0:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.jupiter3v1, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                        case 1:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.jupiter3v2, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        case 2:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.jupiter3v3, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        case 3:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.jupiter3v4, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        default:
-                            //do nothing
-                    }
-                    break;
-                case 6:
-                    //TODO
-                    break;
-                case 7:
-                    //TODO
-                    break;
-                case 8:
-                    switch (ChooseSoundsMenu.PlanetsVal[unit])
-                    {
-                        case 0:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.neptune3v1, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                        case 1:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.neptune3v2, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        case 2:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.neptune3v3, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        case 3:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.neptune3v4, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        default:
-                            //do nothing
-                    }
-                    break;
-                default:
-                    // do nothing
-            }
-
-        }
+        final int index = 2;
+        final int unit = 2;
+        final int arrayNum = SysNum - 1;
+        loadAudioFiles(unit, arrayNum, index);
     }
     //--------------------------------------------------------------------------------------------------------------------------
 
     public void PlayOrb4() //audiounit[3], planetsval[3]. planetid3
     {
-        {
-            final int unit = 3;
-            switch (SysNum)
-            {
-                case 1:
-                    //TODO
-                    break;
-                case 2:
-                    //TODO
-                    break;
-                case 3:
-                    //TODO
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    switch (ChooseSoundsMenu.PlanetsVal[unit])
-                    {
-                        case 0:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.jupiter4v1, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                        case 1:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.jupiter4v2, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        case 2:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.jupiter4v3, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        case 3:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.jupiter4v4, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        default:
-                            //do nothing
-                    }
-                    break;
-                case 6:
-                    //TODO
-                    break;
-                case 7:
-                    //TODO
-                    break;
-                case 8:
-                    switch (ChooseSoundsMenu.PlanetsVal[unit])
-                    {
-                        case 0:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.neptune4v1, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                        case 1:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.neptune4v2, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        case 2:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.neptune4v3, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        case 3:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.neptune4v4, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        default:
-                            //do nothing
-                    }
-                    break;
-                default:
-                    // do nothing
-            }
-
-        }
+        final int index = 3;
+        final int unit = 3;
+        final int arrayNum = SysNum - 1;
+        loadAudioFiles(unit, arrayNum, index);
     }
 
-    public void PlayOrb5() //audiounit[4], planetsval[4]. planetid4
+    public void PlayOrb5()
     {
-        {
-            final int unit = 4;
-            switch (SysNum)
-            {
-                case 1:
-                    //TODO
-                    break;
-                case 2:
-                    //TODO
-                    break;
-                case 3:
-                    //TODO
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    switch (ChooseSoundsMenu.PlanetsVal[unit])
-                    {
-                        case 0:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.jupiter5v1, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                        case 1:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.jupiter5v2, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        case 2:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.jupiter5v3, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        case 3:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.jupiter5v4, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        default:
-                            //do nothing
-                    }
-                    break;
-                case 6:
-                    //TODO
-                    break;
-                case 7:
-                    //TODO
-                    break;
-                case 8:
-                    switch (ChooseSoundsMenu.PlanetsVal[unit])
-                    {
-                        case 0:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.neptune5v1, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                        case 1:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.neptune5v2, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        case 2:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.neptune5v3, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        case 3:
-                            if (check)
-                            {
-                                audioUnit[unit] = new AudioLoader(this, R.raw.neptune5v4, unit);
-                            }
-                            else
-                            {
-                                stopSound(audioUnit[unit]);
-                            }
-                            break;
-                        default:
-                            //do nothing
-                    }
-                    break;
-                default:
-                    // do nothing
-            }
+        final int index = 4;
+        final int unit = 4;
+        final int arrayNum = SysNum - 1;
+        loadAudioFiles(unit, arrayNum, index);
+    }
 
+    private void loadAudioFiles(int unit, int arrayNum, int index)
+    {
+        if (arrayNum > -1) //arbitrary uninitialized value is -1
+        {
+            Log.d("arrayNum: ", String.valueOf(arrayNum));
+            int[][] audioArray = audioList.getAudioArray(index);
+            for (int j = 0; j < audioArray[arrayNum].length; j++)
+            {
+                if (check)
+                {
+                    if (j == ChooseSoundsMenu.PlanetsVal[unit])
+                    {
+                        audioUnit[unit] = new AudioLoader(this, audioArray[arrayNum][j], unit);
+                    }
+                }
+                else
+                {
+                    stopSound(audioUnit[unit]);
+                }
+
+            }
         }
+
+
     }
 
     private void stopSound(AudioLoader audioforstop)
@@ -987,38 +424,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    private void PlanetAnimation(Button planet, boolean check, int i, int radiuschange, int extraheight) {
-        Animation PlanetAnim = new MyAnimation(planet, 127 + radiuschange, extraheight);
 
-        if (check)
-        {
-            //Get duration of audio file
-            if (audioUnit[i] != null)
-            {
-                int PlanetDur = audioUnit[i].GetDur();
-
-                PlanetAnim.setDuration(PlanetDur-20); //for now 20 seems to be working
-
-                PlanetAnim.setInterpolator(new LinearInterpolator());
-                PlanetAnim.setRepeatCount(Animation.INFINITE);
-                planet.startAnimation(PlanetAnim);
-                Log.d("Started animation for ", String.valueOf(i));
-            }
-
-        }
-        else
-            {
-            try
-            {
-                planet.clearAnimation();
-            }
-            catch (NullPointerException e)
-            {
-                e.printStackTrace();
-            }
-
-        }
-    }
 
     class RunCheckDur implements Runnable
     {
