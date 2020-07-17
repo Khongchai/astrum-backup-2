@@ -24,6 +24,7 @@ import static android.content.Context.MODE_PRIVATE;
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static com.example.astrum.ChooseSoundsMenu.PlanetsVal;
 import static com.example.astrum.MainActivity.CheckReady;
+import static com.example.astrum.MainActivity.SysNum;
 import static com.example.astrum.MainActivity.VolForMixerOnCreate;
 import static com.example.astrum.MainActivity.audioUnit;
 import static com.example.astrum.MainActivity.planetsamount;
@@ -37,7 +38,10 @@ public class AdjustVolumeFrag extends Fragment
     int ii;
     SharedPreferences sharedPrefLink[] = new SharedPreferences[planetsamount];
     Spinner[] spinner = new Spinner[5];
-    ChooseSoundsMenu getSpinnerVal = new ChooseSoundsMenu();
+    //ChooseSoundsMenu getSpinnerVal = new ChooseSoundsMenu();
+    MainActivity mainActivity = new MainActivity();
+
+    int noSoundValue = 4;
 
 
 
@@ -67,7 +71,7 @@ public class AdjustVolumeFrag extends Fragment
                 "Sound 2",
                 "Sound 3",
                 "Sound 4",
-                "No sound"
+                "No Sound"
         };
 
         //Declare drop down menus
@@ -89,10 +93,10 @@ public class AdjustVolumeFrag extends Fragment
         spinner[3].setAdapter(adapter5);
         spinner[4].setAdapter(adapter6);
 
-        for (int i = 0; i < planetsamount; i++)
+        for (int i = 0; i < spinner.length; i++)
         {
             volume[i] = -1;
-            if (PlanetsVal[0] == -1)
+            if (PlanetsVal[0] == -1 || mainActivity.getSysNum() == -1)
             {
                 spinner[i].setVisibility(View.INVISIBLE);
             }
@@ -117,35 +121,33 @@ public class AdjustVolumeFrag extends Fragment
 
         spinner[0].setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
+            int spinnerNo = 0;
+            int orbNo = spinnerNo;
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                //TODO change the audio in real time
 
-                MainActivity mainActivity = new MainActivity();
                 {
+                    PlanetsVal[spinnerNo] = spinner[spinnerNo].getSelectedItemPosition();
 
-                    PlanetsVal[0] = spinner[0].getSelectedItemPosition();
-                    if (PlanetsVal[0] == 4)
+                    //for checking if it should appear
+                    if (PlanetsVal[spinnerNo] == noSoundValue)
                     {
-                        CheckReady[0] = 0;
-
+                        CheckReady[spinnerNo] = 0;
                     }
                     else
                     {
-                        CheckReady[0] = 1;
+                        CheckReady[spinnerNo] = 1;
                     }
+
+
+                }
+                if (mainActivity.getcheck())
+                {
+                    mainActivity.loadAudioFilesfromFrag(spinnerNo, orbNo, mainActivity.getSysNum() - 1, PlanetsVal[spinnerNo]);
                 }
 
-                //TODO change the audio in real time
-                //check if null
-                //change sound file --- pause reset play etc
-                //reset anim
-                //load new sound file
-                //start
-                //load new anim
-                //start
             }
 
             @Override
@@ -261,6 +263,7 @@ public class AdjustVolumeFrag extends Fragment
                     {
                         CheckReady[3] = 1;
                     }
+
                 }
 
                 //TODO change the audio in real time
@@ -494,15 +497,18 @@ public class AdjustVolumeFrag extends Fragment
     @Override
     public void onResume() {
         super.onResume();
-
-        if (PlanetsVal[0] != -1)
+        if (mainActivity.getSysNum() > 0)
         {
             ChooseSoundsMenu chooseSoundsMenu = new ChooseSoundsMenu();
             int[] planetsVal = chooseSoundsMenu.getPlanetsVal();
             for (int i = 0; i < spinner.length; i++)
             {
-                spinner[i].setSelection(planetsVal[i]);
-                spinner[i].setVisibility(View.VISIBLE);
+                {
+                    spinner[i].setSelection(planetsVal[i]);
+                    spinner[i].setVisibility(View.VISIBLE);
+                }
+
+
             }
         }
 

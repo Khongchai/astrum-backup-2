@@ -23,6 +23,21 @@
         app:layout_constraintVertical_bias="0.05" />
 
     <TextView
+        android:id="@+id/textView10"
+        android:layout_width="362dp"
+        android:layout_height="65dp"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:text="Enter 1 - 8 then tap the commit button"
+        android:textColor="@color/irispastel1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.975" />
+
+    <TextView
         android:id="@+id/PlanetNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -56,6 +56,8 @@ public class ChooseSoundsMenu extends AppCompatActivity
         CommitButton = findViewById(R.id.commitButton);
         UpdateVal = 0;
 
+        Log.d("Create", "Created");
+
         //set spinners in first page's fragment
         AdjustVolumeFrag adjustVolumeFrag = new AdjustVolumeFrag();
 

@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity
     private ImageButton SettingsButton;
     private Button OrbitButton;
 
+    private Context currentAudioContext;
+
     private int seekBarsavedProg = 0;
 
     soundsStorage audioList = new soundsStorage();
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity
 
     private Handler planetHandler = new Handler();
 
-    private CircularMotion2[] circMo = new CircularMotion2[5];
+    private static CircularMotion2[] circMo = new CircularMotion2[5];
 
 
     Button planetButtons[] = new Button[planetsamount];
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity
     static float[] VolForMixerOnCreate = new float[planetsamount];
     VideoView[] planetsvid = new VideoView[planetsamount];
 
-    int SysNum = 0;
+    static int SysNum;
     ChooseSystems chooseSystems;
 
 
@@ -104,7 +106,9 @@ public class MainActivity extends AppCompatActivity
         planetButtons[3] = findViewById(R.id.planetFour);
         planetButtons[4] = findViewById(R.id.planetFive);
 
-        ChooseSoundsMenu.PlanetsVal[0] = -1;
+
+
+
 
         //space for new CircAnim
         //get display size
@@ -153,23 +157,24 @@ public class MainActivity extends AppCompatActivity
         //initiate master volume slider
         initControls();
 
+        ChooseSoundsMenu.PlanetsVal[0] = -1;
+        SysNum = -1;
+
         //start animation for orbit
         OrbitButton.setOnClickListener(new View.OnClickListener()
         {
-           // private int radiuschange = 0;
-           // private int extraheight = 130;
 
             @Override
             public void onClick(View v)
             {
-                SysNum = chooseSystems.getSystemVal();
+                setSysNum();
 
                 //which audio sounds get played should be decided here.
                 if (check)
                 {
                     //In functions below, use SystemSound value to decide which sound to play.
                     //If a system is chosen, else
-                    if (SysNum > -1 && ChooseSoundsMenu.PlanetsVal[0] != -1)
+                    if (SysNum > 0 && ChooseSoundsMenu.PlanetsVal[0] > -1)
                     {
                         for (int i = 0; i < planetsamount; i++)
                         {
@@ -193,7 +198,7 @@ public class MainActivity extends AppCompatActivity
                         }
                         else
                         {
-                            final Toast toast = Toast.makeText(getApplicationContext(), "Please choose a planet and sounds", Toast.LENGTH_SHORT);
+                            final Toast toast = Toast.makeText(getApplicationContext(), "Please choose a planet", Toast.LENGTH_SHORT);
                             toast.show();
                             Handler StopToast = new Handler();
                             StopToast.postDelayed(new Runnable() {
@@ -206,6 +211,7 @@ public class MainActivity extends AppCompatActivity
                         }
 
                     }
+
                     //Get volume for planets
                     for (int i = 0; i < planetsamount; i++)
                     {
@@ -244,7 +250,10 @@ public class MainActivity extends AppCompatActivity
                             }
                         }
                     }
-                  check = false;
+                    if (SysNum > 0)
+                    {
+                        check = false;
+                    }
 
                 } else {
 
@@ -273,12 +282,15 @@ public class MainActivity extends AppCompatActivity
         });
 
 
+
+
     }//OnCreate
 
     @Override
     protected void onResume()
     {
         super.onResume();
+        setSysNum();
         //resume master slider volume
 
         if (VolumeSeekbar != null)
@@ -337,28 +349,64 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
 
     }
+    boolean getcheck()
+    {
+        return check;
+    }
+
+    public void  loadAudioFilesfromFrag(final int spinnerNo, final int orbNo, final int planet, final int spinnerVal)
+    {
+        final int[][] audioArray = audioList.getAudioArray(orbNo);
+
+        if (audioUnit[spinnerNo] != null)
+        {
+             if (spinnerVal == 4)
+            {
+                circMo[spinnerNo].StopAnim();
+                audioUnit[spinnerNo].StopSound();
+            }
+            else if (audioUnit[spinnerNo].getResID() != audioArray[planet][spinnerVal])
+            {
+                circMo[spinnerNo].StopAnim();
+                audioUnit[spinnerNo].StopSound();
+
+                audioUnit[spinnerNo] = new AudioLoader(MyApplication.getAppContext(), audioArray[planet][spinnerVal], spinnerNo);
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run()
+                    {
+                        audioUnit[spinnerNo].PlayAudio();
+                        circMo[spinnerNo].LoadAnim();
+                    }
+
+                }, 500);
+            }
 
 
-    private void loadAudioFiles(int unit, int arrayNum, int index)
+        }
+
+    }
+    private void loadAudioFiles(int spinnerNo, int orbNo, int planet)
     {
 
-        if (arrayNum > -1) //arbitrary uninitialized value is -1
-        {
 
-            int[][] audioArray = audioList.getAudioArray(arrayNum);
-            for (int j = 0; j < audioArray[index].length; j++)
+        if (orbNo > -1) //arbitrary uninitialized value is -1
+        {
+            int[][] audioArray = audioList.getAudioArray(orbNo);
+            for (int j = 0; j < audioArray[planet].length; j++)
             {
                 if (check)
                 {
-                    if (j == ChooseSoundsMenu.PlanetsVal[unit])
+                    if (j == ChooseSoundsMenu.PlanetsVal[spinnerNo])
                     {
-                        Log.d("PlanetsVal: ", String.valueOf(ChooseSoundsMenu.PlanetsVal[unit]));
-                        audioUnit[unit] = new AudioLoader(this, audioArray[index][j], unit);
+                        audioUnit[spinnerNo] = new AudioLoader(MyApplication.getAppContext(), audioArray[planet][j], spinnerNo);
                     }
                 }
                 else
                 {
-                    stopSound(audioUnit[unit]);
+                    stopSound(audioUnit[spinnerNo]);
                 }
 
             }
@@ -372,19 +420,20 @@ public class MainActivity extends AppCompatActivity
         if (audioforstop != null)
         {
             audioforstop.StopSound();
-            audioforstop = null;
         }
 
     }
 
+
+
     public boolean isNotPlaying(){return check;}
 
+    public int getSysNum(){return SysNum;}
 
-
-
-
-
-
+    private void setSysNum()
+    {
+       SysNum = chooseSystems.getSystemVal();
+    }
 
 
 

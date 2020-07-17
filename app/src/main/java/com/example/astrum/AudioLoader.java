@@ -1,20 +1,23 @@
 package com.example.astrum;
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.util.Log;
 
 public class AudioLoader {
-    private MediaPlayer curPlayer = null;
+    private MediaPlayer curPlayer;
     private MediaPlayer nextPlayer = null;
 
-    private Context context = null;
-    private int ResID = 0;
-    private int PlanetID = 0;
+    private Context context;
+    private int ResID;
+    private int PlanetID;
 
     AudioLoader(Context context, int ID, int PlanetID) {
         this.PlanetID = PlanetID;
         this.context = context;
         ResID = ID;
-        curPlayer = MediaPlayer.create(this.context, ResID);
+        Log.d("context", String.valueOf(context));
+
+        curPlayer = MediaPlayer.create(context, ResID);
     }
 
 
@@ -63,6 +66,25 @@ public class AudioLoader {
 
     }
 
+    void resetAudioandPause()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            try
+            {
+                //resets head only
+                curPlayer.stop();
+                nextPlayer.stop();
+            }
+            catch (NullPointerException e)
+            {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+
      int GetDur()
      {
          if (curPlayer != null)
@@ -84,6 +106,10 @@ public class AudioLoader {
         {
             curPlayer.setVolume(float1, float2);
         }
+    }
+
+    public int getResID() {
+        return ResID;
     }
 }
 
