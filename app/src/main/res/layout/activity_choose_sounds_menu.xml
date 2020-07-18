@@ -156,7 +156,7 @@
         app:layout_constraintStart_toStartOf="@+id/editText" />
 
     <EditText
-
+        android:textColor="@color/irispastel2"
         android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

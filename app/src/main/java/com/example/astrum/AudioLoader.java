@@ -99,6 +99,37 @@ public class AudioLoader {
         return curPlayer;
     }
 
+    public void pauseAudio()
+    {
+        try
+        {
+            curPlayer.pause();
+            nextPlayer.pause();
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void continueAudio()
+    {
+        try
+        {
+            curPlayer.start();
+            nextPlayer.start();
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void scrollThroughTime()
+    {
+
+    }
+
      void SetVolume(float float1, float float2)
      {
 

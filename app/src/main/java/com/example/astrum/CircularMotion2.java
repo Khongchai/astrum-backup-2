@@ -6,6 +6,7 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.os.Handler;
 import android.text.Layout;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.animation.Animation;
@@ -22,6 +23,8 @@ public class CircularMotion2
 
     //passed
     private Button orb;
+
+    long currentPlayTime = 0;
 
     //not passed
     private ObjectAnimator animator = new ObjectAnimator();
@@ -46,6 +49,7 @@ public class CircularMotion2
         animator.setInterpolator(new LinearInterpolator());
         animator.setDuration(duration);
         animator.setRepeatCount(Animation.INFINITE);
+
     }
 //a
     void LoadAnim ()
@@ -56,6 +60,7 @@ public class CircularMotion2
 
     }
 
+
     void StopAnim()
     {
         orb.setVisibility(View.INVISIBLE);
@@ -63,4 +68,20 @@ public class CircularMotion2
 
     }
 
+    void pauseAnim()
+    {
+
+        currentPlayTime = animator.getCurrentPlayTime();
+        animator.pause();
+    }
+    void continueAnim()
+    {
+
+        animator.start();
+        animator.setCurrentPlayTime(currentPlayTime);
+    }
+    void scrollThroughTime()
+    {
+
+    }
 }

@@ -160,37 +160,33 @@ public class AdjustVolumeFrag extends Fragment
 
         spinner[1].setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
+            int spinnerNo = 1;
+            int orbNo = spinnerNo;
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                //TODO change the audio in real time
 
-                MainActivity mainActivity = new MainActivity();
-                if (mainActivity.isNotPlaying())
                 {
+                    PlanetsVal[spinnerNo] = spinner[spinnerNo].getSelectedItemPosition();
 
-                    PlanetsVal[1] = spinner[1].getSelectedItemPosition();
-                    if (PlanetsVal[1] == 4)
+                    //for checking if it should appear
+                    if (PlanetsVal[spinnerNo] == noSoundValue)
                     {
-                        CheckReady[1] = 0;
-
+                        CheckReady[spinnerNo] = 0;
                     }
                     else
                     {
-                        CheckReady[1] = 1;
+                        CheckReady[spinnerNo] = 1;
                     }
+
+
+                }
+                if (mainActivity.getcheck())
+                {
+                    mainActivity.loadAudioFilesfromFrag(spinnerNo, orbNo, mainActivity.getSysNum() - 1, PlanetsVal[spinnerNo]);
                 }
 
-
-                //TODO change the audio in real time
-                //check if null
-                //change sound file --- pause reset play etc
-                //reset anim
-                //load new sound file
-                //start
-                //load new anim
-                //start
             }
 
             @Override
@@ -203,35 +199,33 @@ public class AdjustVolumeFrag extends Fragment
 
         spinner[2].setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
+            int spinnerNo = 2;
+            int orbNo = spinnerNo;
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                //TODO change the audio in real time
 
-                MainActivity mainActivity = new MainActivity();
-                if (mainActivity.isNotPlaying())
                 {
-                    PlanetsVal[2] = spinner[2].getSelectedItemPosition();
-                    if (PlanetsVal[2] == 4)
-                    {
-                        CheckReady[2] = 0;
+                    PlanetsVal[spinnerNo] = spinner[spinnerNo].getSelectedItemPosition();
 
+                    //for checking if it should appear
+                    if (PlanetsVal[spinnerNo] == noSoundValue)
+                    {
+                        CheckReady[spinnerNo] = 0;
                     }
                     else
                     {
-                        CheckReady[2] = 1;
+                        CheckReady[spinnerNo] = 1;
                     }
+
+
+                }
+                if (mainActivity.getcheck())
+                {
+                    mainActivity.loadAudioFilesfromFrag(spinnerNo, orbNo, mainActivity.getSysNum() - 1, PlanetsVal[spinnerNo]);
                 }
 
-                //TODO change the audio in real time
-                //check if null
-                //change sound file --- pause reset play etc
-                //reset anim
-                //load new sound file
-                //start
-                //load new anim
-                //start
             }
 
             @Override
@@ -244,36 +238,33 @@ public class AdjustVolumeFrag extends Fragment
 
         spinner[3].setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
+            int spinnerNo = 3;
+            int orbNo = spinnerNo;
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                //TODO change the audio in real time
 
-                MainActivity mainActivity = new MainActivity();
-                if (mainActivity.isNotPlaying())
                 {
-                    PlanetsVal[3] = spinner[3].getSelectedItemPosition();
-                    if (PlanetsVal[3] == 4)
-                    {
-                        CheckReady[3] = 0;
+                    PlanetsVal[spinnerNo] = spinner[spinnerNo].getSelectedItemPosition();
 
+                    //for checking if it should appear
+                    if (PlanetsVal[spinnerNo] == noSoundValue)
+                    {
+                        CheckReady[spinnerNo] = 0;
                     }
                     else
                     {
-                        CheckReady[3] = 1;
+                        CheckReady[spinnerNo] = 1;
                     }
 
+
+                }
+                if (mainActivity.getcheck())
+                {
+                    mainActivity.loadAudioFilesfromFrag(spinnerNo, orbNo, mainActivity.getSysNum() - 1, PlanetsVal[spinnerNo]);
                 }
 
-                //TODO change the audio in real time
-                //check if null
-                //change sound file --- pause reset play etc
-                //reset anim
-                //load new sound file
-                //start
-                //load new anim
-                //start
             }
 
             @Override
@@ -286,35 +277,33 @@ public class AdjustVolumeFrag extends Fragment
 
         spinner[4].setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
+            int spinnerNo = 4;
+            int orbNo = spinnerNo;
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                //TODO change the audio in real time
 
-                MainActivity mainActivity = new MainActivity();
-                if (mainActivity.isNotPlaying())
                 {
-                    PlanetsVal[4] = spinner[4].getSelectedItemPosition();
-                    if (PlanetsVal[4] == 4)
-                    {
-                        CheckReady[4] = 0;
+                    PlanetsVal[spinnerNo] = spinner[spinnerNo].getSelectedItemPosition();
 
+                    //for checking if it should appear
+                    if (PlanetsVal[spinnerNo] == noSoundValue)
+                    {
+                        CheckReady[spinnerNo] = 0;
                     }
                     else
                     {
-                        CheckReady[4] = 1;
+                        CheckReady[spinnerNo] = 1;
                     }
+
+
+                }
+                if (mainActivity.getcheck())
+                {
+                    mainActivity.loadAudioFilesfromFrag(spinnerNo, orbNo, mainActivity.getSysNum() - 1, PlanetsVal[spinnerNo]);
                 }
 
-                //TODO change the audio in real time
-                //check if null
-                //change sound file --- pause reset play etc
-                //reset anim
-                //load new sound file
-                //start
-                //load new anim
-                //start
             }
 
             @Override

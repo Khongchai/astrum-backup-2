@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -282,9 +283,53 @@ public class MainActivity extends AppCompatActivity
         });
 
 
-
-
     }//OnCreate
+
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        if (!firststart)
+        {
+            float y = 0; //get x on touch down
+            float prevY = 0; //store previous X as first X value
+            float dy = 0; // get whe nmove
+            switch(event.getAction())
+            {
+                case (MotionEvent.ACTION_DOWN):
+                    y = event.getX();
+                    prevY = y;
+                    for (int i = 0; i < audioUnit.length; i++)
+                    {
+                        audioUnit[i].pauseAudio();
+                        circMo[i].pauseAnim();
+                    }
+                    break;
+                case (MotionEvent.ACTION_UP):
+                    for (int i = 0; i < audioUnit.length; i++)
+                    {
+                        audioUnit[i].continueAudio();
+                        circMo[i].continueAnim();
+                    }
+                    break;
+                case (MotionEvent.ACTION_MOVE):
+                    dy = y - prevY;
+                    for (int i = 0; i < audioUnit.length; i++)
+                    {
+                        audioUnit[i].scrollThroughTime();
+                        circMo[i].scrollThroughTime();
+                    }
+
+                    break;
+
+                default:
+                    //do nothing.
+
+            }
+
+
+        }
+
+        return true;
+    }
 
     @Override
     protected void onResume()
