@@ -49,7 +49,8 @@ public class MainActivity extends AppCompatActivity
 
     static AudioLoader audioUnit[] = new AudioLoader[planetsamount];
 
-    private boolean check = true;
+    private static boolean check = true;
+
     static int[] CheckReady = new int[planetsamount];
     private final static int MAX_VOLUME = 100;
 
@@ -257,7 +258,6 @@ public class MainActivity extends AppCompatActivity
                     }
 
                 } else {
-
                     //stop animation and reset ready value
                     for (int i = 0; i < planetsamount; i++)
                     {
@@ -285,47 +285,76 @@ public class MainActivity extends AppCompatActivity
 
     }//OnCreate
 
+    static float firstY = 0; //store previous X as first X value
+    static float curY = 0;
+
+    static Handler pauseDetect;
+    LogcurrentY logcurrentY = new LogcurrentY();
     public boolean onTouchEvent(MotionEvent event)
     {
-        if (!firststart)
+        int delayValue = 60;
+
+        if (!check)
         {
-            float y = 0; //get x on touch down
-            float prevY = 0; //store previous X as first X value
-            float dy = 0; // get whe nmove
+            float dy = 0;
+            curY = event.getY(); //get x on touch down
+
             switch(event.getAction())
             {
                 case (MotionEvent.ACTION_DOWN):
-                    y = event.getX();
-                    prevY = y;
+                    firstY = curY;
                     for (int i = 0; i < audioUnit.length; i++)
                     {
-                        audioUnit[i].pauseAudio();
-                        circMo[i].pauseAnim();
+                        if (audioUnit[i] != null)
+                        {
+                            audioUnit[i].pauseAudio();
+                            circMo[i].pauseAnim();
+                        }
                     }
                     break;
                 case (MotionEvent.ACTION_UP):
                     for (int i = 0; i < audioUnit.length; i++)
                     {
-                        audioUnit[i].continueAudio();
-                        circMo[i].continueAnim();
+                        if (audioUnit[i] != null)
+                        {
+                            audioUnit[i].continueAudio();
+                            circMo[i].continueAnim();
+                        }
+
                     }
                     break;
                 case (MotionEvent.ACTION_MOVE):
-                    dy = y - prevY;
+
+                    try
+                    {
+                        pauseDetect.removeCallbacks(logcurrentY);
+                    }
+                    catch (NullPointerException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    pauseDetect = new Handler();
+                    pauseDetect.postDelayed(logcurrentY, delayValue);
+
+
+                    dy = firstY - curY;
+
                     for (int i = 0; i < audioUnit.length; i++)
                     {
-                        audioUnit[i].scrollThroughTime();
-                        circMo[i].scrollThroughTime();
+                        if (audioUnit[i] != null)
+                        {
+                            audioUnit[i].scrollThroughTime(dy);
+                            circMo[i].scrollThroughTime(dy);
+                        }
+
                     }
+
 
                     break;
 
                 default:
                     //do nothing.
-
             }
-
-
         }
 
         return true;
@@ -392,8 +421,8 @@ public class MainActivity extends AppCompatActivity
     {
         Intent intent = new Intent(this, Settings.class);
         startActivity(intent);
-
     }
+
     boolean getcheck()
     {
         return check;
@@ -401,11 +430,13 @@ public class MainActivity extends AppCompatActivity
 
     public void  loadAudioFilesfromFrag(final int spinnerNo, final int orbNo, final int planet, final int spinnerVal)
     {
+
         final int[][] audioArray = audioList.getAudioArray(orbNo);
+        final int noSoundValue = 4;
 
         if (audioUnit[spinnerNo] != null)
         {
-             if (spinnerVal == 4)
+            if (spinnerVal == noSoundValue)
             {
                 circMo[spinnerNo].StopAnim();
                 audioUnit[spinnerNo].StopSound();
@@ -416,18 +447,26 @@ public class MainActivity extends AppCompatActivity
                 audioUnit[spinnerNo].StopSound();
 
                 audioUnit[spinnerNo] = new AudioLoader(MyApplication.getAppContext(), audioArray[planet][spinnerVal], spinnerNo);
-
+                //set ID
+                audioUnit[spinnerNo].setRefIDForSetSound(spinnerNo);
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run()
                     {
-                        audioUnit[spinnerNo].PlayAudio();
-                        circMo[spinnerNo].LoadAnim();
+                        if (!check)
+                        {
+                            audioUnit[spinnerNo].PlayAudio();
+                            circMo[spinnerNo].LoadAnim();
+                        }
+
+
                     }
 
                 }, 500);
             }
+
+
 
 
         }
@@ -460,11 +499,17 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    public void setVolumeForNewSounds(int audioID)
+    {
+        audioUnit[audioID].SetVolume(AdjustVolumeFrag.volume[audioID], AdjustVolumeFrag.volume[audioID]);
+    }
+
     private void stopSound(AudioLoader audioforstop)
     {
         if (audioforstop != null)
         {
             audioforstop.StopSound();
+            audioforstop = null;
         }
 
     }
@@ -479,7 +524,14 @@ public class MainActivity extends AppCompatActivity
     {
        SysNum = chooseSystems.getSystemVal();
     }
-
+    class LogcurrentY implements Runnable
+    {
+        @Override
+        public void run()
+        {
+            firstY = curY;
+        }
+    }
 
 
     class RunCheckDur implements Runnable

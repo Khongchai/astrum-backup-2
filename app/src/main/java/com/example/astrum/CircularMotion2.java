@@ -80,8 +80,11 @@ public class CircularMotion2
         animator.start();
         animator.setCurrentPlayTime(currentPlayTime);
     }
-    void scrollThroughTime()
+    void scrollThroughTime(float dy)
     {
-
+        int differenceY = (int)dy;
+        Log.d("dy", String.valueOf(dy));
+       currentPlayTime -= differenceY;
+       animator.setCurrentPlayTime(currentPlayTime);
     }
 }

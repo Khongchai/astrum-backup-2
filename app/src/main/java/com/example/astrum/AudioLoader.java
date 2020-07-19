@@ -10,14 +10,17 @@ public class AudioLoader {
     private Context context;
     private int ResID;
     private int PlanetID;
+    private int audioDuration;
+    private int refIDForSetSound;
+    MainActivity mainActivity = new MainActivity();
 
     AudioLoader(Context context, int ID, int PlanetID) {
         this.PlanetID = PlanetID;
         this.context = context;
         ResID = ID;
-        Log.d("context", String.valueOf(context));
 
         curPlayer = MediaPlayer.create(context, ResID);
+        audioDuration = curPlayer.getDuration();
     }
 
 
@@ -27,14 +30,14 @@ public class AudioLoader {
          {
              curPlayer.start();
              nextPlayer = MediaPlayer.create(context, ResID);
+
              curPlayer.setNextMediaPlayer(nextPlayer);
              curPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                  @Override
                  public void onCompletion(MediaPlayer mp) {
-                     nextPlayer.setVolume(AdjustVolumeFrag.seek[PlanetID].getProgress(), AdjustVolumeFrag.seek[PlanetID].getProgress()); //this line somehow affects all audio sometimes?
                      curPlayer.release();
                      curPlayer = nextPlayer;
-
+                     curPlayer.setVolume(AdjustVolumeFrag.seek[PlanetID].getProgress(), AdjustVolumeFrag.seek[PlanetID].getProgress());
                      PlayAudio();
                  }
              });
@@ -65,6 +68,8 @@ public class AudioLoader {
          }
 
     }
+
+
 
     void resetAudioandPause()
     {
@@ -99,6 +104,11 @@ public class AudioLoader {
         return curPlayer;
     }
 
+    public void setRefIDForSetSound(int refIDForSetSound)
+    {
+        this.refIDForSetSound = refIDForSetSound;
+    }
+
     public void pauseAudio()
     {
         try
@@ -125,8 +135,30 @@ public class AudioLoader {
         }
     }
 
-    public void scrollThroughTime()
+    public void scrollThroughTime(float dy)
     {
+        int differenceY = (int)dy;
+
+        try {
+            int currentTimeCurPlayer = curPlayer.getCurrentPosition();
+            int shiftValue = currentTimeCurPlayer - differenceY;
+            //if shift value exceed or less than duration
+            if (shiftValue > audioDuration || shiftValue < 0)
+            {
+                shiftValue = 0;
+            }
+            if (curPlayer != null)
+            {
+                curPlayer.seekTo(shiftValue);
+            }
+
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
+        }
+
+
 
     }
 

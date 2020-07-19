@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -42,6 +43,9 @@ public class AdjustVolumeFrag extends Fragment
     MainActivity mainActivity = new MainActivity();
 
     int noSoundValue = 4;
+
+    int spinnerNo = 0;
+    int orbNo = spinnerNo;
 
 
 
@@ -127,26 +131,33 @@ public class AdjustVolumeFrag extends Fragment
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-
+                try
                 {
-                    PlanetsVal[spinnerNo] = spinner[spinnerNo].getSelectedItemPosition();
-
-                    //for checking if it should appear
-                    if (PlanetsVal[spinnerNo] == noSoundValue)
-                    {
-                        CheckReady[spinnerNo] = 0;
-                    }
-                    else
-                    {
-                        CheckReady[spinnerNo] = 1;
-                    }
-
-
+                    mainActivity.setVolumeForNewSounds(spinnerNo);
                 }
-                if (mainActivity.getcheck())
+                catch (NullPointerException e)
                 {
-                    mainActivity.loadAudioFilesfromFrag(spinnerNo, orbNo, mainActivity.getSysNum() - 1, PlanetsVal[spinnerNo]);
+                    e.printStackTrace();
                 }
+
+
+                PlanetsVal[spinnerNo] = spinner[spinnerNo].getSelectedItemPosition();
+
+                //for checking if it should appear
+                if (PlanetsVal[spinnerNo] == noSoundValue)
+                {
+                    spinner[0].setEnabled(false);
+                    CheckReady[spinnerNo] = 0;
+                }
+                else
+                {
+                    spinner[0].setEnabled(true);
+                    CheckReady[spinnerNo] = 1;
+                }
+
+
+                mainActivity.loadAudioFilesfromFrag(spinnerNo, orbNo, mainActivity.getSysNum() - 1, PlanetsVal[spinnerNo]);
+
 
             }
 
@@ -166,26 +177,32 @@ public class AdjustVolumeFrag extends Fragment
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-
+                try
                 {
-                    PlanetsVal[spinnerNo] = spinner[spinnerNo].getSelectedItemPosition();
-
-                    //for checking if it should appear
-                    if (PlanetsVal[spinnerNo] == noSoundValue)
-                    {
-                        CheckReady[spinnerNo] = 0;
-                    }
-                    else
-                    {
-                        CheckReady[spinnerNo] = 1;
-                    }
-
-
+                    mainActivity.setVolumeForNewSounds(spinnerNo);
                 }
-                if (mainActivity.getcheck())
+                catch (NullPointerException e)
                 {
-                    mainActivity.loadAudioFilesfromFrag(spinnerNo, orbNo, mainActivity.getSysNum() - 1, PlanetsVal[spinnerNo]);
+                    e.printStackTrace();
                 }
+
+                PlanetsVal[spinnerNo] = spinner[spinnerNo].getSelectedItemPosition();
+
+                //for checking if it should appear
+                if (PlanetsVal[spinnerNo] == noSoundValue)
+                {
+                    spinner[1].setEnabled(false);
+                    CheckReady[spinnerNo] = 0;
+                }
+                else
+                {
+                    spinner[1].setEnabled(true);
+                    CheckReady[spinnerNo] = 1;
+                }
+
+
+                mainActivity.loadAudioFilesfromFrag(spinnerNo, orbNo, mainActivity.getSysNum() - 1, PlanetsVal[spinnerNo]);
+
 
             }
 
@@ -205,26 +222,29 @@ public class AdjustVolumeFrag extends Fragment
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-
+                try
                 {
-                    PlanetsVal[spinnerNo] = spinner[spinnerNo].getSelectedItemPosition();
-
-                    //for checking if it should appear
-                    if (PlanetsVal[spinnerNo] == noSoundValue)
-                    {
-                        CheckReady[spinnerNo] = 0;
-                    }
-                    else
-                    {
-                        CheckReady[spinnerNo] = 1;
-                    }
-
-
+                    mainActivity.setVolumeForNewSounds(spinnerNo);
                 }
-                if (mainActivity.getcheck())
+                catch (NullPointerException e)
                 {
-                    mainActivity.loadAudioFilesfromFrag(spinnerNo, orbNo, mainActivity.getSysNum() - 1, PlanetsVal[spinnerNo]);
+                    e.printStackTrace();
                 }
+                PlanetsVal[spinnerNo] = spinner[spinnerNo].getSelectedItemPosition();
+
+                //for checking if it should appear
+                if (PlanetsVal[spinnerNo] == noSoundValue)
+                {
+                    spinner[2].setEnabled(false);
+                    CheckReady[spinnerNo] = 0;
+                }
+                else
+                {
+                    spinner[2].setEnabled(true);
+                    CheckReady[spinnerNo] = 1;
+                }
+
+                mainActivity.loadAudioFilesfromFrag(spinnerNo, orbNo, mainActivity.getSysNum() - 1, PlanetsVal[spinnerNo]);
 
             }
 
@@ -244,26 +264,29 @@ public class AdjustVolumeFrag extends Fragment
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-
+                try
                 {
-                    PlanetsVal[spinnerNo] = spinner[spinnerNo].getSelectedItemPosition();
-
-                    //for checking if it should appear
-                    if (PlanetsVal[spinnerNo] == noSoundValue)
-                    {
-                        CheckReady[spinnerNo] = 0;
-                    }
-                    else
-                    {
-                        CheckReady[spinnerNo] = 1;
-                    }
-
-
+                    mainActivity.setVolumeForNewSounds(spinnerNo);
                 }
-                if (mainActivity.getcheck())
+                catch (NullPointerException e)
                 {
-                    mainActivity.loadAudioFilesfromFrag(spinnerNo, orbNo, mainActivity.getSysNum() - 1, PlanetsVal[spinnerNo]);
+                    e.printStackTrace();
                 }
+
+                PlanetsVal[spinnerNo] = spinner[spinnerNo].getSelectedItemPosition();
+
+                //for checking if it should appear
+                if (PlanetsVal[spinnerNo] == noSoundValue)
+                {
+                    CheckReady[spinnerNo] = 0;
+                    spinner[3].setEnabled(false);
+                }
+                else
+                {
+                    spinner[3].setEnabled(true);
+                    CheckReady[spinnerNo] = 1;
+                }
+                mainActivity.loadAudioFilesfromFrag(spinnerNo, orbNo, mainActivity.getSysNum() - 1, PlanetsVal[spinnerNo]);
 
             }
 
@@ -283,26 +306,30 @@ public class AdjustVolumeFrag extends Fragment
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-
+                try
                 {
-                    PlanetsVal[spinnerNo] = spinner[spinnerNo].getSelectedItemPosition();
-
-                    //for checking if it should appear
-                    if (PlanetsVal[spinnerNo] == noSoundValue)
-                    {
-                        CheckReady[spinnerNo] = 0;
-                    }
-                    else
-                    {
-                        CheckReady[spinnerNo] = 1;
-                    }
-
-
+                    mainActivity.setVolumeForNewSounds(spinnerNo);
                 }
-                if (mainActivity.getcheck())
+                catch (NullPointerException e)
                 {
-                    mainActivity.loadAudioFilesfromFrag(spinnerNo, orbNo, mainActivity.getSysNum() - 1, PlanetsVal[spinnerNo]);
+                    e.printStackTrace();
                 }
+
+                PlanetsVal[spinnerNo] = spinner[spinnerNo].getSelectedItemPosition();
+
+                //for checking if it should appear
+                if (PlanetsVal[spinnerNo] == noSoundValue)
+                {
+                    spinner[4].setEnabled(false);
+                    CheckReady[spinnerNo] = 0;
+                }
+                else
+                {
+                    spinner[4].setEnabled(true);
+                    CheckReady[spinnerNo] = 1;
+                }
+
+                mainActivity.loadAudioFilesfromFrag(spinnerNo, orbNo, mainActivity.getSysNum() - 1, PlanetsVal[spinnerNo]);
 
             }
 
@@ -313,7 +340,10 @@ public class AdjustVolumeFrag extends Fragment
             }
 
         });
+
+
         return view;
+
     }//oncreate
 
 
@@ -346,7 +376,8 @@ public class AdjustVolumeFrag extends Fragment
                 volume[0] = (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
                 if (audioUnit[0] != null)
                 {
-                    audioUnit[0].SetVolume(volume[0], volume[0]);
+                    mainActivity.setVolumeForNewSounds(0);
+
                    // volume = VolForMixerOnCreate[0];
                 }
 
@@ -375,7 +406,7 @@ public class AdjustVolumeFrag extends Fragment
                 volume[1] = (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
                 if (audioUnit[1] != null)
                 {
-                    audioUnit[1].SetVolume(volume[1], volume[1]);
+                    mainActivity.setVolumeForNewSounds(1);
                 }
 
                 //Send it to sharedPref
@@ -403,7 +434,7 @@ public class AdjustVolumeFrag extends Fragment
                 volume[2] = (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
                 if (audioUnit[2] != null)
                 {
-                    audioUnit[2].SetVolume(volume[2], volume[2]);
+                    mainActivity.setVolumeForNewSounds(2);
                 }
 
                 //Send it to sharedPref
@@ -431,7 +462,7 @@ public class AdjustVolumeFrag extends Fragment
                 volume[3] = (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
                 if (audioUnit[3] != null)
                 {
-                    audioUnit[3].SetVolume(volume[3], volume[3]);
+                    mainActivity.setVolumeForNewSounds(3);
                 }
 
 
@@ -460,7 +491,7 @@ public class AdjustVolumeFrag extends Fragment
                 volume[4]= (float) (1 - (Math.log(MAX_VOLUME - progress) / Math.log(MAX_VOLUME)));
                 if (audioUnit[4] != null)
                 {
-                    audioUnit[4].SetVolume(volume[4], volume[4]);
+                    mainActivity.setVolumeForNewSounds(4);
                 }
 
                 //Send it to sharedPref
