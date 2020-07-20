@@ -131,15 +131,6 @@ public class AdjustVolumeFrag extends Fragment
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                try
-                {
-                    mainActivity.setVolumeForNewSounds(spinnerNo);
-                }
-                catch (NullPointerException e)
-                {
-                    e.printStackTrace();
-                }
-
 
                 PlanetsVal[spinnerNo] = spinner[spinnerNo].getSelectedItemPosition();
 
@@ -157,6 +148,15 @@ public class AdjustVolumeFrag extends Fragment
 
 
                 mainActivity.loadAudioFilesfromFrag(spinnerNo, orbNo, mainActivity.getSysNum() - 1, PlanetsVal[spinnerNo]);
+
+                try
+                {
+                    mainActivity.setVolumeForNewSounds(spinnerNo);
+                }
+                catch (NullPointerException e)
+                {
+                    e.printStackTrace();
+                }
 
 
             }
@@ -177,14 +177,6 @@ public class AdjustVolumeFrag extends Fragment
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                try
-                {
-                    mainActivity.setVolumeForNewSounds(spinnerNo);
-                }
-                catch (NullPointerException e)
-                {
-                    e.printStackTrace();
-                }
 
                 PlanetsVal[spinnerNo] = spinner[spinnerNo].getSelectedItemPosition();
 
@@ -203,6 +195,14 @@ public class AdjustVolumeFrag extends Fragment
 
                 mainActivity.loadAudioFilesfromFrag(spinnerNo, orbNo, mainActivity.getSysNum() - 1, PlanetsVal[spinnerNo]);
 
+                try
+                {
+                    mainActivity.setVolumeForNewSounds(spinnerNo);
+                }
+                catch (NullPointerException e)
+                {
+                    e.printStackTrace();
+                }
 
             }
 
@@ -222,14 +222,7 @@ public class AdjustVolumeFrag extends Fragment
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                try
-                {
-                    mainActivity.setVolumeForNewSounds(spinnerNo);
-                }
-                catch (NullPointerException e)
-                {
-                    e.printStackTrace();
-                }
+
                 PlanetsVal[spinnerNo] = spinner[spinnerNo].getSelectedItemPosition();
 
                 //for checking if it should appear
@@ -246,6 +239,14 @@ public class AdjustVolumeFrag extends Fragment
 
                 mainActivity.loadAudioFilesfromFrag(spinnerNo, orbNo, mainActivity.getSysNum() - 1, PlanetsVal[spinnerNo]);
 
+                try
+                {
+                    mainActivity.setVolumeForNewSounds(spinnerNo);
+                }
+                catch (NullPointerException e)
+                {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -264,14 +265,7 @@ public class AdjustVolumeFrag extends Fragment
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                try
-                {
-                    mainActivity.setVolumeForNewSounds(spinnerNo);
-                }
-                catch (NullPointerException e)
-                {
-                    e.printStackTrace();
-                }
+
 
                 PlanetsVal[spinnerNo] = spinner[spinnerNo].getSelectedItemPosition();
 
@@ -287,6 +281,15 @@ public class AdjustVolumeFrag extends Fragment
                     CheckReady[spinnerNo] = 1;
                 }
                 mainActivity.loadAudioFilesfromFrag(spinnerNo, orbNo, mainActivity.getSysNum() - 1, PlanetsVal[spinnerNo]);
+
+                try
+                {
+                    mainActivity.setVolumeForNewSounds(spinnerNo);
+                }
+                catch (NullPointerException e)
+                {
+                    e.printStackTrace();
+                }
 
             }
 
@@ -306,14 +309,7 @@ public class AdjustVolumeFrag extends Fragment
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                try
-                {
-                    mainActivity.setVolumeForNewSounds(spinnerNo);
-                }
-                catch (NullPointerException e)
-                {
-                    e.printStackTrace();
-                }
+
 
                 PlanetsVal[spinnerNo] = spinner[spinnerNo].getSelectedItemPosition();
 
@@ -330,6 +326,15 @@ public class AdjustVolumeFrag extends Fragment
                 }
 
                 mainActivity.loadAudioFilesfromFrag(spinnerNo, orbNo, mainActivity.getSysNum() - 1, PlanetsVal[spinnerNo]);
+
+                try
+                {
+                    mainActivity.setVolumeForNewSounds(spinnerNo);
+                }
+                catch (NullPointerException e)
+                {
+                    e.printStackTrace();
+                }
 
             }
 
