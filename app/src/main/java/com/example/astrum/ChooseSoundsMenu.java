@@ -32,7 +32,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class ChooseSoundsMenu extends AppCompatActivity
 {
     public static int PlanetsVal[] = new int[5];
-    final Spinner Spinner[] = new Spinner[5];
+    final static Spinner Spinner[] = new Spinner[5];
     final int alltextSize = 7;
     private final int nosoundVal = 4;
 

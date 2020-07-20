@@ -38,7 +38,7 @@ public class AdjustVolumeFrag extends Fragment
     static float[] volume = new float[planetsamount];
     int ii;
     SharedPreferences sharedPrefLink[] = new SharedPreferences[planetsamount];
-    Spinner[] spinner = new Spinner[5];
+    static Spinner[] spinner = new Spinner[5];
     //ChooseSoundsMenu getSpinnerVal = new ChooseSoundsMenu();
     MainActivity mainActivity = new MainActivity();
 

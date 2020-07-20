@@ -11,7 +11,7 @@
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="60dp"
         android:text="Developed by:"
         android:textColor="@color/irispastel1"
         android:textSize="20sp"
@@ -20,11 +20,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
+
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="140dp"
         android:text="Art Assets by:"
         android:textColor="@color/irispastel1"
         android:textSize="20sp"
@@ -33,13 +34,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="268dp"
+        android:text="About:"
+        android:textColor="@color/irispastel1"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="40dp"
         android:text="Khongchai Greesuradej"
         android:textColor="@color/irispastel1"
         android:textSize="15sp"
@@ -52,8 +64,21 @@
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="124dp"
         android:text="Chanita Pholudom"
+        android:textColor="@color/irispastel1"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.228"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView12" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="156dp"
+        android:text="Natawan Meechai"
         android:textColor="@color/irispastel1"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -92,14 +117,13 @@
 
     <ImageView
         android:id="@+id/ASTRUMlink"
-        android:layout_width="253dp"
-        android:layout_height="126dp"
+        android:layout_width="223dp"
+        android:layout_height="223dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/description"
-        app:layout_constraintVertical_bias="0.267"
-        app:srcCompat="@drawable/astrumlogo" />
+        app:layout_constraintVertical_bias="0.529"
+        app:srcCompat="@drawable/webicontransparent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

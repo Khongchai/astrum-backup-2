@@ -25,6 +25,7 @@ public class ChooseSystems extends AppCompatActivity
     private ImageCycler imgCyc = new ImageCycler();
     private ImageView imgView;
     private static boolean firstStart = false;
+    ChooseSoundsMenu chooseSoundsMenu = new ChooseSoundsMenu();
     private TextView DisplayPlanetName;
     private String[] PlanetNames = new String[]
             {
@@ -46,6 +47,7 @@ public class ChooseSystems extends AppCompatActivity
         setContentView(R.layout.activity_choose_systems);
         Log.d("System: ", String.valueOf(System));
         DisplayPlanetName  = findViewById(R.id.PlanetNameText);
+
 
         explaination = findViewById(R.id.textView9);
         explaination.setLetterSpacing((float)0.3);

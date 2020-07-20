@@ -3,6 +3,7 @@ package com.example.astrum;
 import android.graphics.Point;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity
     //create volume control
     private SeekBar VolumeSeekbar;
     private AudioManager audioManager;
+    private boolean doOnce = false;
 
     private boolean firststart = true;
 
@@ -63,6 +65,8 @@ public class MainActivity extends AppCompatActivity
 
     static int SysNum;
     ChooseSystems chooseSystems;
+
+    ChooseSoundsMenu chooseSoundsMenu = new ChooseSoundsMenu();
 
 
 
@@ -149,6 +153,7 @@ public class MainActivity extends AppCompatActivity
         {
             CheckReady[i] = 0;
             planetButtons[i].setVisibility(View.INVISIBLE);
+
         }
 
         OrbitButton = findViewById(R.id.OrbitButton);
@@ -230,7 +235,7 @@ public class MainActivity extends AppCompatActivity
                             audioUnit[i].PlayAudio();
 
                             circMo[i] = new CircularMotion2(planetButtons[i], MidX, MidY, audioUnit[i].GetDur(), i, MaxX, offsetleft, offsettop);
-                            if (CheckReady[i] == 1)
+                            if (CheckReady[i] == 1 && audioUnit[i].GetDur() != 0)
                             {
                                 circMo[i].LoadAnim();
                             }
@@ -239,9 +244,19 @@ public class MainActivity extends AppCompatActivity
                                 firststart = false;
                                 for (int q = 0; q < planetsamount; q++)
                                 {
-                                    if (CheckReady[q] == 1)
+                                    try
                                     {
-                                        planetButtons[q].setVisibility(View.VISIBLE);
+                                        if ( ChooseSoundsMenu.Spinner[q].getSelectedItemPosition() != 4)
+                                        {
+                                            planetButtons[q].setVisibility(View.VISIBLE);
+                                        }
+                                    }
+                                    catch (NullPointerException e)
+                                    {
+                                        if ( AdjustVolumeFrag.spinner[q].getSelectedItemPosition() != 4)
+                                        {
+                                            planetButtons[q].setVisibility(View.VISIBLE);
+                                        }
                                     }
 
                                 }
@@ -362,6 +377,9 @@ public class MainActivity extends AppCompatActivity
     {
         super.onResume();
         setSysNum();
+
+
+
         //resume master slider volume
 
         if (VolumeSeekbar != null)

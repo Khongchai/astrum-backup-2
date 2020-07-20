@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="LockedOrientationActivity">
-        <activity android:name=".ChooseSystems"></activity>
+        <activity android:name=".ChooseSystems"
+            ></activity>
         <activity android:name=".About" />
         <activity android:name=".ChooseSoundsMenu" />
         <activity android:name=".Settings" />
