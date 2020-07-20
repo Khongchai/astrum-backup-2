@@ -29,6 +29,7 @@ public class CircularMotion2
     //not passed
     private ObjectAnimator animator = new ObjectAnimator();
 
+
     CircularMotion2(Button orb, float MidX, float MidY, int duration, int i, float MaxX, float offsetleft, float offsettop)
     {
 
@@ -86,5 +87,11 @@ public class CircularMotion2
         Log.d("dy", String.valueOf(dy));
        currentPlayTime -= differenceY;
        animator.setCurrentPlayTime(currentPlayTime);
+    }
+
+    void setDuration (int duration)
+    {
+        animator.setDuration(duration);
+
     }
 }

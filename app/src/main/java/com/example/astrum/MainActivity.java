@@ -44,9 +44,6 @@ public class MainActivity extends AppCompatActivity
 
     private boolean firststart = true;
 
-    RunCheckDur Runnablecheckdur[] = new RunCheckDur[planetsamount];
-    Thread threadcheckdur[] = new Thread[planetsamount];
-
     static AudioLoader audioUnit[] = new AudioLoader[planetsamount];
 
     private static boolean check = true;
@@ -288,11 +285,11 @@ public class MainActivity extends AppCompatActivity
     static float firstY = 0; //store previous X as first X value
     static float curY = 0;
 
-    static Handler pauseDetect;
-    LogcurrentY logcurrentY = new LogcurrentY();
+    private static Handler pauseDetect;
+    private LogcurrentY logcurrentY = new LogcurrentY();
+    private final int delayValue = 60;
     public boolean onTouchEvent(MotionEvent event)
     {
-        int delayValue = 60;
 
         if (!check)
         {
@@ -301,27 +298,30 @@ public class MainActivity extends AppCompatActivity
 
             switch(event.getAction())
             {
+
                 case (MotionEvent.ACTION_DOWN):
-                    firstY = curY;
-                    for (int i = 0; i < audioUnit.length; i++)
                     {
-                        if (audioUnit[i] != null)
+                        firstY = curY;
+                        for (int i = 0; i < audioUnit.length; i++)
                         {
-                            audioUnit[i].pauseAudio();
-                            circMo[i].pauseAnim();
+                            if (audioUnit[i] != null)
+                            {
+                                audioUnit[i].pauseAudio();
+                                circMo[i].pauseAnim();
+                            }
                         }
                     }
                     break;
                 case (MotionEvent.ACTION_UP):
-                    for (int i = 0; i < audioUnit.length; i++)
-                    {
-                        if (audioUnit[i] != null)
+                        for (int i = 0; i < audioUnit.length; i++)
                         {
-                            audioUnit[i].continueAudio();
-                            circMo[i].continueAnim();
-                        }
+                            if (audioUnit[i] != null)
+                            {
+                                audioUnit[i].continueAudio();
+                                circMo[i].continueAnim();
+                            }
 
-                    }
+                        }
                     break;
                 case (MotionEvent.ACTION_MOVE):
 
@@ -335,8 +335,6 @@ public class MainActivity extends AppCompatActivity
                     }
                     pauseDetect = new Handler();
                     pauseDetect.postDelayed(logcurrentY, delayValue);
-
-
                     dy = firstY - curY;
 
                     for (int i = 0; i < audioUnit.length; i++)
@@ -348,7 +346,6 @@ public class MainActivity extends AppCompatActivity
                         }
 
                     }
-
 
                     break;
 
@@ -457,6 +454,9 @@ public class MainActivity extends AppCompatActivity
                         if (!check)
                         {
                             audioUnit[spinnerNo].PlayAudio();
+
+                            //load new duration to animation
+                            circMo[spinnerNo].setDuration(audioUnit[spinnerNo].GetDur());
                             circMo[spinnerNo].LoadAnim();
                         }
 
@@ -534,33 +534,4 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    class RunCheckDur implements Runnable
-    {
-        volatile boolean checkrun = false;
-
-        int AudioDuration;
-        RunCheckDur(int AudioDuration)
-        {
-            this.AudioDuration = AudioDuration;
-        }
-
-        @Override
-        public void run()
-        {
-            for (int i = 0; checkrun; i++)
-            {
-                Log.d("AudioDuration", String.valueOf(i) + "Of" + String.valueOf(AudioDuration));
-                try
-                {
-                    Thread.sleep(AudioDuration);
-                }
-                catch (InterruptedException e)
-                {
-                    e.printStackTrace();
-                }
-
-            }
-
-        }
-    }
 }

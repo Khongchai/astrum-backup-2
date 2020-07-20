@@ -37,8 +37,8 @@ public class AudioLoader {
                  public void onCompletion(MediaPlayer mp) {
                      curPlayer.release();
                      curPlayer = nextPlayer;
-                     curPlayer.setVolume(AdjustVolumeFrag.seek[PlanetID].getProgress(), AdjustVolumeFrag.seek[PlanetID].getProgress());
                      PlayAudio();
+                     mainActivity.setVolumeForNewSounds(PlanetID);
                  }
              });
          }

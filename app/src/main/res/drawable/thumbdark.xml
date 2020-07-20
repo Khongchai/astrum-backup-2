@@ -7,8 +7,8 @@
         android:startColor="@color/NiceGray"/>
 
     <size
-        android:height="10dp"
-        android:width="10dp" />
+        android:height="@dimen/thumbSize"
+        android:width="@dimen/thumbSize" />
 
 </shape>
 
