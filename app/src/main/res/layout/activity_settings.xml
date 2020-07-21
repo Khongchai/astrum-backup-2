@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/NiceGray"
 
-    tools:context=".Settings">
+    tools:context="com.khongthefork.astrum.Settings">
 
     <TextView
         android:id="@+id/textView"

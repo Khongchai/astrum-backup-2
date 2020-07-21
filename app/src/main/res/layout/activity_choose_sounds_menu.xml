@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/NiceGray"
-    tools:context=".ChooseSoundsMenu">
+    tools:context="com.khongthefork.astrum.ChooseSoundsMenu">
 
 
     <Spinner
@@ -216,8 +216,8 @@
 
     <TextView
         android:id="@+id/Explaination"
-        android:layout_width="356dp"
-        android:layout_height="106dp"
+        android:layout_width="383dp"
+        android:layout_height="118dp"
         android:layout_marginTop="300dp"
 
         android:fontFamily="sans-serif-thin"
@@ -226,10 +226,10 @@
         android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.709"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.84" />
+        app:layout_constraintVertical_bias="0.843" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

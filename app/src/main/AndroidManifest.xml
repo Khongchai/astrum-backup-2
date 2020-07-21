@@ -2,27 +2,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.astrum">
+    package="com.khongthefork.astrum">
+
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:name="com.example.astrum.MyApplication"
+        android:name="com.khongthefork.astrum.MyApplication"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="LockedOrientationActivity">
-        <activity android:name=".ChooseSystems"
+        <activity android:name="com.khongthefork.astrum.ChooseSystems"
             ></activity>
-        <activity android:name=".About" />
-        <activity android:name=".ChooseSoundsMenu" />
-        <activity android:name=".Settings" />
+        <activity android:name="com.khongthefork.astrum.About" />
+        <activity android:name="com.khongthefork.astrum.ChooseSoundsMenu" />
+        <activity android:name="com.khongthefork.astrum.Settings" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.khongthefork.astrum.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
