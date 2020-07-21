@@ -4,6 +4,9 @@
     <string name="orbit">Orbit</string>
     <string name="SettingsButton">Settings</string>
     <string name="mercury">Mercury</string>
+    <string name="planetNames">%s:</string>
+    <string name="setNames">%s</string>
+    <string name="warning">PLANET NOT SET</string>
 
     <string-array name="Mercury">
         <item>Sound 1</item>

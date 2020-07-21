@@ -9,12 +9,12 @@
 
 
     <Spinner
-        android:layout_marginLeft="20px"
-
         android:id="@+id/SpinnerPlanet1"
+
         style="@style/Widget.AppCompat.Spinner.DropDown"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20px"
         android:layout_marginTop="48dp"
         android:background="@android:drawable/dark_header"
         android:spinnerMode="dropdown"
@@ -24,10 +24,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:layout_marginLeft="20px"
         android:id="@+id/spinnerPlanet5"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20px"
         android:layout_marginTop="452dp"
         android:background="@android:drawable/dark_header"
         android:spinnerMode="dropdown"
@@ -64,10 +64,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:layout_marginLeft="20px"
         android:id="@+id/spinnerPlanet3"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20px"
         android:layout_marginTop="252dp"
         android:background="@android:drawable/dark_header"
         android:spinnerMode="dropdown"
@@ -90,10 +90,10 @@
         app:layout_constraintTop_toTopOf="@+id/textView3" />
 
     <Spinner
-        android:layout_marginLeft="20px"
         android:id="@+id/SpinnerPlanet2"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20px"
         android:layout_marginTop="152dp"
         android:background="@android:drawable/dark_header"
         android:spinnerMode="dropdown"
@@ -116,10 +116,10 @@
         app:layout_constraintTop_toTopOf="@+id/textView3" />
 
     <Spinner
-        android:layout_marginLeft="20px"
         android:id="@+id/spinnerPlanet4"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20px"
         android:layout_marginTop="352dp"
         android:background="@android:drawable/dark_header"
         android:spinnerMode="dropdown"
@@ -146,17 +146,51 @@
         android:id="@+id/textView8"
         android:layout_width="196dp"
         android:layout_height="41dp"
-        android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-light"
         android:text="Set all values to: "
         android:textColor="@color/copper"
         android:textSize="25dp"
         app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintEnd_toEndOf="@+id/editText"
         app:layout_constraintStart_toStartOf="@+id/editText" />
 
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:fontFamily="sans-serif-light"
+        android:textStyle="italic"
+        android:letterSpacing="0.2"
+        android:text=""
+        android:textColor="@color/copper"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/Explaination"
+        app:layout_constraintEnd_toEndOf="@+id/editText"
+        app:layout_constraintStart_toStartOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/commitButton"
+        app:layout_constraintVertical_bias="0.018" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:fontFamily="sans-serif-light"
+        android:letterSpacing="0.2"
+        android:text=""
+        android:textColor="@color/copper"
+        android:textSize="20dp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/Explaination"
+        app:layout_constraintEnd_toEndOf="@+id/editText"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/commitButton"
+        app:layout_constraintVertical_bias="0.3" />
+
     <EditText
-        android:textColor="@color/irispastel2"
         android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -164,6 +198,7 @@
         android:layout_marginTop="176dp"
         android:ems="10"
         android:inputType="number"
+        android:textColor="@color/irispastel2"
         app:layout_constraintStart_toEndOf="@+id/spinnerPlanet3"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -171,12 +206,12 @@
         android:id="@+id/commitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/roundedbutton2"
-        android:layout_marginStart="108dp"
         android:layout_marginTop="24dp"
-        android:text="Commit"
+        android:background="@drawable/roundedbutton2"
         android:fontFamily="@font/comfortaa_bold"
-        app:layout_constraintStart_toEndOf="@+id/spinnerPlanet3"
+        android:text="Commit"
+        app:layout_constraintEnd_toEndOf="@+id/editText"
+        app:layout_constraintStart_toStartOf="@+id/editText"
         app:layout_constraintTop_toBottomOf="@+id/editText" />
 
     <TextView

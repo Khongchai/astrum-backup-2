@@ -27,6 +27,7 @@ public class ChooseSystems extends AppCompatActivity
     private static boolean firstStart = false;
     ChooseSoundsMenu chooseSoundsMenu = new ChooseSoundsMenu();
     private TextView DisplayPlanetName;
+    static boolean  enteredChooseSystem = false;
     private String[] PlanetNames = new String[]
             {
                     "Planet: Mercury",
@@ -44,12 +45,12 @@ public class ChooseSystems extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        enteredChooseSystem = true;
         setContentView(R.layout.activity_choose_systems);
-        Log.d("System: ", String.valueOf(System));
+
         DisplayPlanetName  = findViewById(R.id.PlanetNameText);
-
-
         explaination = findViewById(R.id.textView9);
+
         explaination.setLetterSpacing((float)0.3);
 
         HandlerforToast("Enter Planet num: 1 - 8", 3000);

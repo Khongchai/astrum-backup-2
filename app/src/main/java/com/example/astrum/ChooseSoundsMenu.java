@@ -1,6 +1,7 @@
 package com.example.astrum;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -33,11 +34,11 @@ public class ChooseSoundsMenu extends AppCompatActivity
 {
     public static int PlanetsVal[] = new int[5];
     final static Spinner Spinner[] = new Spinner[5];
-    final int alltextSize = 7;
+    final int alltextSize = 9;
     private final int nosoundVal = 4;
 
     Button CommitButton;
-    int UpdateVal;
+    static int UpdateVal;
     EditText EnteredVal;
 
     private Context context;
@@ -70,6 +71,8 @@ public class ChooseSoundsMenu extends AppCompatActivity
         allText[4] = findViewById(R.id.textView7);
         allText[5] = findViewById(R.id.textView8);
         allText[6] = findViewById(R.id.Explaination);
+        allText[7] = findViewById(R.id.textView9);
+        allText[8] = findViewById(R.id.textView10);
 
 
         for (int i = 0; i < allText.length; i++)
@@ -104,7 +107,16 @@ public class ChooseSoundsMenu extends AppCompatActivity
                         }
                         else
                         {
-                            Spinner[i].setSelection(UpdateVal - 1);
+                            if (!ChooseSystems.enteredChooseSystem)
+                            {
+                                setNameofSet(-1);
+                            }
+                            else
+                            {
+                                Spinner[i].setSelection(UpdateVal - 1);
+                                setNameofSet(UpdateVal - 1);
+                            }
+
                         }
                     }
                 }
@@ -381,6 +393,27 @@ public class ChooseSoundsMenu extends AppCompatActivity
         public void run()
         {
             toast.cancel();
+        }
+    }
+
+
+    private void setNameofSet(int setNumber)
+    {
+        Log.d("Test", "entered0");
+        if (setNumber == -1)
+        {
+            allText[7].setText(getString(R.string.warning));
+        }
+        else
+        {
+            ChooseSystems chooseSystems = new ChooseSystems();
+            int SysNum = chooseSystems.getSystemVal() - 1;
+            String setName = getString(R.string.setNames, NamesforSoundsSet.setNames[SysNum][setNumber]);
+            String chosenPlanetName = getString(R.string.planetNames, NamesforSoundsSet.planetNames[SysNum]);
+            allText[7].setText(chosenPlanetName);
+            allText[8].setText(setName);
+
+
         }
     }
 

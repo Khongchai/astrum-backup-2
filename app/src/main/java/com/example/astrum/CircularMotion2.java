@@ -91,7 +91,9 @@ public class CircularMotion2
 
     void setDuration (int duration)
     {
-        animator.setDuration(duration);
-
+        if (duration >= 0)
+        {
+            animator.setDuration(duration);
+        }
     }
 }
