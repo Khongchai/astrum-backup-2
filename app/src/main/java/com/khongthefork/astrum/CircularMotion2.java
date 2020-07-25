@@ -25,6 +25,7 @@ public class CircularMotion2
     private Button orb;
 
     long currentPlayTime = 0;
+    private int duration;
 
     //not passed
     private ObjectAnimator animator = new ObjectAnimator();
@@ -48,6 +49,7 @@ public class CircularMotion2
         path.arcTo(MidX - radius, MidY - radius, MidX + radius, MidY + radius, 270f, 359f, true);
         animator = ObjectAnimator.ofFloat(orb, View.X, View.Y, path);
         animator.setInterpolator(new LinearInterpolator());
+        this.duration = duration;
         animator.setDuration(duration);
         animator.setRepeatCount(Animation.INFINITE);
 
@@ -84,16 +86,21 @@ public class CircularMotion2
     void scrollThroughTime(float dy)
     {
         int differenceY = (int)dy;
-        Log.d("dy", String.valueOf(dy));
        currentPlayTime -= differenceY;
-       animator.setCurrentPlayTime(currentPlayTime);
+       if (currentPlayTime < 0)
+       {
+           currentPlayTime = this.duration;
+
+       }
+        animator.setCurrentPlayTime(currentPlayTime);
     }
 
     void setDuration (int duration)
     {
-        if (duration >= 0)
+        this.duration = duration;
+        if (this.duration >= 0)
         {
-            animator.setDuration(duration);
+            animator.setDuration(this.duration);
         }
     }
 }

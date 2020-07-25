@@ -191,7 +191,7 @@ public class ChooseSoundsMenu extends AppCompatActivity
         if(MercuryShared != -1)
         {
             // set the selected value of the spinner
-            Spinner[1].setSelection(MercuryShared);
+            Spinner[0].setSelection(MercuryShared);
         }
 
         //initControl1();

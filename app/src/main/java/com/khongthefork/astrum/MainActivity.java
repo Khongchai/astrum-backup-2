@@ -474,18 +474,11 @@ public class MainActivity extends AppCompatActivity
                             circMo[spinnerNo].setDuration(audioUnit[spinnerNo].GetDur());
                             circMo[spinnerNo].LoadAnim();
                         }
-
-
                     }
 
                 }, 500);
             }
-
-
-
-
         }
-
     }
     private void loadAudioFiles(int spinnerNo, int orbNo, int planet)
     {

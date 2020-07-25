@@ -1,6 +1,7 @@
 package com.khongthefork.astrum;
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.util.Log;
 
 public class AudioLoader {
     private MediaPlayer curPlayer;
@@ -142,28 +143,27 @@ public class AudioLoader {
             int currentTimeCurPlayer = curPlayer.getCurrentPosition();
             int shiftValue = currentTimeCurPlayer - differenceY;
             //if shift value exceed or less than duration
-            if (shiftValue > audioDuration || shiftValue < 0)
+            if (shiftValue > audioDuration)
             {
                 shiftValue = 0;
+            }
+            else if (shiftValue < 0)
+            {
+                shiftValue = audioDuration;
             }
             if (curPlayer != null)
             {
                 curPlayer.seekTo(shiftValue);
             }
-
         }
         catch (NullPointerException e)
         {
             e.printStackTrace();
         }
-
-
-
     }
 
      void SetVolume(float float1, float float2)
      {
-
         if (curPlayer != null)
         {
             curPlayer.setVolume(float1, float2);
