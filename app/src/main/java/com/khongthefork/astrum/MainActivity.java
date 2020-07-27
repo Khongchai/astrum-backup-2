@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity
         OrbitButton = findViewById(R.id.OrbitButton);
 
         //initiate master volume slider
-        initControls();
+        //initControls();
 
         ChooseSoundsMenu.PlanetsVal[0] = -1;
         SysNum = -1;
@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity
                     {
                         if (ChooseSoundsMenu.PlanetsVal[0] == -1)
                         {
-                            final Toast toast = Toast.makeText(getApplicationContext(), "Please choose sounds", Toast.LENGTH_SHORT);
+                            final Toast toast = Toast.makeText(getApplicationContext(), "Go to settings and choose sounds", Toast.LENGTH_SHORT);
                             toast.show();
                             Handler StopToast = new Handler();
                             StopToast.postDelayed(new Runnable() {
@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity
                         }
                         else
                         {
-                            final Toast toast = Toast.makeText(getApplicationContext(), "Please choose a planet", Toast.LENGTH_SHORT);
+                            final Toast toast = Toast.makeText(getApplicationContext(), "Go to settings and choose a planet", Toast.LENGTH_SHORT);
                             toast.show();
                             Handler StopToast = new Handler();
                             StopToast.postDelayed(new Runnable() {
@@ -379,17 +379,20 @@ public class MainActivity extends AppCompatActivity
 
         //resume master slider volume
 
+        /*
         if (VolumeSeekbar != null)
         {
             audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, VolumeSeekbar.getProgress(), 0);
         }
+
+         */
 
 
 
     }
 
 //---------------------------------------------------------------------------------------------------
-
+/*
     public void initControls()
     {
         try {
@@ -427,6 +430,8 @@ public class MainActivity extends AppCompatActivity
             ex.printStackTrace();
         }
     }
+
+ */
 
 
     public void openSettings()

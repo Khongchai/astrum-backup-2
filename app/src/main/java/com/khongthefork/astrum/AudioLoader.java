@@ -94,9 +94,11 @@ public class AudioLoader {
      {
          if (curPlayer != null)
          {
+             Log.d("DurationforCurplayer", String.valueOf(curPlayer.getDuration()));
              return curPlayer.getDuration();
          }
          return 0;
+
     }
 
     public MediaPlayer CheckNull()
@@ -141,7 +143,9 @@ public class AudioLoader {
 
         try {
             int currentTimeCurPlayer = curPlayer.getCurrentPosition();
+            Log.d("CurValueAudio", String.valueOf(currentTimeCurPlayer));
             int shiftValue = currentTimeCurPlayer - differenceY;
+
             //if shift value exceed or less than duration
             if (shiftValue > audioDuration)
             {

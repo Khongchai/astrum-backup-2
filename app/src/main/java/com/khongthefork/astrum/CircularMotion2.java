@@ -50,6 +50,7 @@ public class CircularMotion2
         animator = ObjectAnimator.ofFloat(orb, View.X, View.Y, path);
         animator.setInterpolator(new LinearInterpolator());
         this.duration = duration;
+        Log.d("animatorDuration", String.valueOf(duration));
         animator.setDuration(duration);
         animator.setRepeatCount(Animation.INFINITE);
 
@@ -86,6 +87,7 @@ public class CircularMotion2
     void scrollThroughTime(float dy)
     {
         int differenceY = (int)dy;
+        Log.d("CurValueAnim", String.valueOf(currentPlayTime));
        currentPlayTime -= differenceY;
        if (currentPlayTime < 0)
        {
@@ -97,10 +99,9 @@ public class CircularMotion2
 
     void setDuration (int duration)
     {
-        this.duration = duration;
-        if (this.duration >= 0)
+        if (duration >= 0)
         {
-            animator.setDuration(this.duration);
+            animator.setDuration(duration);
         }
     }
 }

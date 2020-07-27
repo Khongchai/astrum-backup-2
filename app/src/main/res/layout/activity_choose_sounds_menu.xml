@@ -146,13 +146,14 @@
         android:id="@+id/textView8"
         android:layout_width="196dp"
         android:layout_height="41dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="sans-serif-light"
         android:text="Set all values to: "
         android:textColor="@color/copper"
         android:textSize="25dp"
         app:layout_constraintBottom_toTopOf="@+id/editText"
-        app:layout_constraintEnd_toEndOf="@+id/editText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.163"
         app:layout_constraintStart_toStartOf="@+id/editText" />
 
     <TextView
@@ -216,8 +217,8 @@
 
     <TextView
         android:id="@+id/Explaination"
-        android:layout_width="383dp"
-        android:layout_height="118dp"
+        android:layout_width="364dp"
+        android:layout_height="112dp"
         android:layout_marginTop="300dp"
 
         android:fontFamily="sans-serif-thin"
