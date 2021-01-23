@@ -1,5 +1,5 @@
 <p align="center">
-    <img alt="Astrum Logo" src="https://github.com/Khongchai/ASTRUM-2020/blob/master/pictures/webicontransparent.png?raw=true" width="60" />
+    <img alt="Astrum Logo" src="https://github.com/Khongchai/ASTRUM-2020/blob/master/pictures/webicontransparent.png?raw=true" width="200" />
 </p>
 
 <h1 align="center">
