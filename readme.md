@@ -1,4 +1,4 @@
-<h1 style="align: center">
+<h1 align="center">
   A Binaural Application Written in Java
 </h1>
 
